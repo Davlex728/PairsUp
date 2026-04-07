@@ -129,7 +129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 14099436}
   - component: {fileID: 14099435}
-  - component: {fileID: 14099434}
   - component: {fileID: 14099437}
   - component: {fileID: 14099438}
   - component: {fileID: 14099439}
@@ -141,19 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &14099434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14099433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc9786cf77144c04683297363e1923f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Raycast
-  rayLength: 0
 --- !u!212 &14099435
 SpriteRenderer:
   serializedVersion: 2
@@ -245,6 +231,7 @@ MonoBehaviour:
   newVelocity: {x: 0, y: 0}
   speedIncreasePercentage: 10
   maxSpeed: 50
+  spawnPoint: {fileID: 1955173407}
 --- !u!50 &14099438
 Rigidbody2D:
   serializedVersion: 5
@@ -1162,7 +1149,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -1290,7 +1277,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -1501,6 +1488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1054439281}
   - component: {fileID: 1054439282}
+  - component: {fileID: 1054439283}
   m_Layer: 0
   m_Name: LimiteIzquierda
   m_TagString: Untagged
@@ -1569,6 +1557,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 16.523891}
   m_EdgeRadius: 0
+--- !u!114 &1054439283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054439280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cecd739dc502c084c8526baaea82a5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BallLimits
+  player: {fileID: 361386818}
+  bomb: {fileID: 14099437}
 --- !u!1 &1350971436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1634,7 +1636,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -1753,6 +1755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1825239624}
   - component: {fileID: 1825239625}
+  - component: {fileID: 1825239626}
   m_Layer: 0
   m_Name: LimiteArriba
   m_TagString: Untagged
@@ -1809,7 +1812,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -3.063433}
+  m_Offset: {x: 0, y: -3.2458954}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1819,8 +1822,22 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 16.523891}
+  m_Size: {x: 1, y: 128.91702}
   m_EdgeRadius: 0
+--- !u!114 &1825239626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825239623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cecd739dc502c084c8526baaea82a5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BallLimits
+  player: {fileID: 1371375877}
+  bomb: {fileID: 14099437}
 --- !u!1 &1886736961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1831,6 +1848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1886736962}
   - component: {fileID: 1886736963}
+  - component: {fileID: 1886736964}
   m_Layer: 0
   m_Name: LimiteDerecha
   m_TagString: Untagged
@@ -1899,6 +1917,51 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 16.523891}
   m_EdgeRadius: 0
+--- !u!114 &1886736964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886736961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cecd739dc502c084c8526baaea82a5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BallLimits
+  player: {fileID: 249846615}
+  bomb: {fileID: 14099437}
+--- !u!1 &1955173406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1955173407}
+  m_Layer: 0
+  m_Name: BombSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1955173407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955173406}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.27, y: -1.2409, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1914,3 +1977,4 @@ SceneRoots:
   - {fileID: 1371375879}
   - {fileID: 14099436}
   - {fileID: 495703523}
+  - {fileID: 1955173407}

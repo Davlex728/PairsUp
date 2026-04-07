@@ -18,7 +18,8 @@ public class BombMovement : MonoBehaviour
 
     [SerializeField] private float maxSpeed;
 
-
+    public Transform spawnPoint;
+    
 // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,7 +28,7 @@ public class BombMovement : MonoBehaviour
         speedIncreasePerHit =  speedIncreasePercentage / 100f; 
         angle = Random.Range(0, 361);
         angle = Mathf.Abs(angle);
-        transform.eulerAngles = new Vector3(0, 0, 0);
+        transform.eulerAngles = new Vector3(0, 0, angle);
         rb = GetComponent<Rigidbody2D>();
 
 //Como lo has rotado, ahora hay que ir a la derecha
@@ -63,9 +64,20 @@ public class BombMovement : MonoBehaviour
         direction = rb.linearVelocity.normalized;
     }
 
-    public void CalculateNewDirection()
+    public void RespawnBomb()
     {
-        //bomb.localPosition= (2 * transform.localPosition);
+        transform.position = spawnPoint.position;
+
+        currentSpeed = speed;
+        
+        angle = Random.Range(0, 361);
+        Debug.Log(angle);
+        angle = Mathf.Abs(angle);
+        transform.eulerAngles = new Vector3(0, 0, angle);
+        
+        direction = transform.right;
+
+        rb.linearVelocity = direction * currentSpeed;
     }
 }
 
