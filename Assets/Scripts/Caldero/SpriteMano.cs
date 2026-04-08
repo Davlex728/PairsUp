@@ -7,9 +7,15 @@ public class SpriteMano : MonoBehaviour
     public float flySpeed = 8f;
     public float limiteY = 2f;
 
+    [Header("Configuración Agarre")]
+    public float radioDeAgarre = 1.5f;
+    public LayerMask capaIngredientes;
+
     [Header("Referencias")]
     public PlayerInputHandler miMando;
     private Rigidbody2D rb;
+
+    private Rigidbody2D objetoAgarrado;
 
     private void Awake()
     {
@@ -20,7 +26,6 @@ public class SpriteMano : MonoBehaviour
     public void ConectarMando(PlayerInputHandler mando)
     {
         miMando = mando;
-        Debug.Log($"[ManoSprite] Mando de {mando.gameObject.name} conectado.");
     }
 
     private void Update()
@@ -29,7 +34,21 @@ public class SpriteMano : MonoBehaviour
 
         if (miMando.isGrabbing)
         {
-            Debug.Log("Agarrar");
+            if (objetoAgarrado == null)
+            {
+                IntentarAgarrar();
+            }
+            else
+            {
+                objetoAgarrado.position = transform.position;
+            }
+        }
+        else
+        {
+            if (objetoAgarrado != null)
+            {
+                SoltarObjeto();
+            }
         }
     }
 
@@ -48,5 +67,47 @@ public class SpriteMano : MonoBehaviour
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
             }
         }
+    }
+
+    private void IntentarAgarrar()
+    {
+        // para saber  si el botón funciona quitar al final
+        Debug.Log("Intentando agarrar... El botón funciona.");
+
+        Collider2D colision = Physics2D.OverlapCircle(transform.position, radioDeAgarre, capaIngredientes);
+
+        if (colision != null)
+        {
+            // detectar si ha tocado algo quitar al final si eso
+            Debug.Log($"¡He tocado algo llamado {colision.gameObject.name}!");
+
+            objetoAgarrado = colision.GetComponent<Rigidbody2D>();
+
+            if (objetoAgarrado != null)
+            {
+                // si lo agarra en algun momento lo mismo es debug
+                Debug.Log("¡Objeto agarrado con éxito!");
+                objetoAgarrado.gravityScale = 0f;
+                objetoAgarrado.linearVelocity = Vector2.zero;
+            }
+            else
+            {
+                Debug.LogWarning("He tocado la fruta, pero NO tiene Rigidbody2D.");
+            }
+        }
+    }
+
+    private void SoltarObjeto()
+    {
+        Debug.Log("Soltando objeto...");
+        objetoAgarrado.gravityScale = 1f;
+        objetoAgarrado.linearVelocity = rb.linearVelocity * 0.5f;
+        objetoAgarrado = null;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radioDeAgarre);
     }
 }
