@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 434736100}
   - component: {fileID: 434736099}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: ManagerCestas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -639,6 +639,7 @@ MonoBehaviour:
   - {fileID: 6236013180209319294, guid: c1a939cb8af24184dafc434f3ca2ffa1, type: 3}
   - {fileID: 8096548412609292186, guid: e03ee0e7154efee428303ba20a615e39, type: 3}
   - {fileID: 5479003860347656137, guid: e8ba2a98c2ffef9429b5ecb5a737bcdc, type: 3}
+  - {fileID: 2266789844381174005, guid: 5ce5ce234b13e4e4eba7369fa62f7b7f, type: 3}
   tiempoEntreSpawns: 0.5
   limiteAnchoX: 7
 --- !u!4 &1902314004

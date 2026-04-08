@@ -9,9 +9,8 @@ public class PlayerInputHandler : MonoBehaviour
     public bool isJumping;
     public bool isGrabbing;
 
-    // --- MÉTODOS PARA CONECTAR EN EL INSPECTOR (Invoke Unity Events) ---
 
-    // Conecta esto al evento "Move" (o MoveCursor) en el Inspector del PlayerInput
+
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
