@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Caldero.unity
     guid: da2fb7c9bb496a84b840581b1b55dec9
+  - enabled: 1
+    path: Assets/Fran/LaserTag/Scenes/Juego.unity
+    guid: 51281ec365083384e899977b0392d387
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

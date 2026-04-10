@@ -3510,7 +3510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LobbyManager
   requiredPlayers: 2
-  nextSceneName: Caldero
+  nextSceneName: Juego
   playerSlots:
   - {fileID: 2143192389}
   - {fileID: 639829378}

@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7138761333772788134}
+  - component: {fileID: 10015138278376287}
+  - component: {fileID: 166463125330212189}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -32,6 +34,35 @@ Transform:
   - {fileID: 7614562281251564874}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &10015138278376287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108101235688593767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93076f2877f2ade438e32925cb9d390f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Aiming
+--- !u!114 &166463125330212189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108101235688593767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac43a7acf7b51545b410a4c397e96b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shoot
+  bulletPrefab: {fileID: 7183448901356981602, guid: cae2f034eb1ba2846977bc597c4ccebd, type: 3}
+  firePoint: {fileID: 7327434765709078320}
+  speed: 8
+  fireRate: 0.7
+  bulletTime: 3
 --- !u!1 &719011016900692014
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,9 +239,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7156391178056587703}
-  - component: {fileID: 3232635416364617761}
-  - component: {fileID: 8238571039293367840}
-  - component: {fileID: 3233158693974461218}
   m_Layer: 0
   m_Name: Flecha Apuntado
   m_TagString: Untagged
@@ -237,101 +265,6 @@ Transform:
   - {fileID: 5131961091216608936}
   m_Father: {fileID: 7614562281251564874}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3232635416364617761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5948858379917817131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 7e095c95e6777044e91da81df0dd04f6, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8238571039293367840}
-        m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: OnLook
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 87407dfd-f2b5-425f-95df-31ef6a8ece2e
-    m_ActionName: Player/Look
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ce9eb071-f043-4e01-8c97-58c5eed4908a
-    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 451f0621-7a10-4ed9-a91d-11ca579cdacd
-    m_ActionName: 'Player/Fire[/Keyboard/space]'
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &8238571039293367840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5948858379917817131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb0dbdd7c8c09548a52942071742508, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Movement
-  speed: 4
-  sensitivity: 1.88
---- !u!50 &3233158693974461218
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5948858379917817131}
-  m_BodyType: 0
-  m_Simulated: 0
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
 --- !u!1 &5964869631425344806
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,8 +365,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5009051686602242849}
-  - component: {fileID: 5865076219634335296}
-  - component: {fileID: 5782883238000462339}
   m_Layer: 0
   m_Name: Zona Disparo
   m_TagString: Untagged
@@ -457,78 +388,6 @@ Transform:
   - {fileID: 7327434765709078320}
   m_Father: {fileID: 7156391178056587703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5865076219634335296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6569541647860270693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ac43a7acf7b51545b410a4c397e96b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Shoot
-  BulletPrefab: {fileID: 7183448901356981602, guid: cae2f034eb1ba2846977bc597c4ccebd, type: 3}
-  firePoint: {fileID: 7327434765709078320}
-  speed: 8
-  contador: 0
-  fireRate: 0.5
-  bulletTime: 3
---- !u!114 &5782883238000462339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6569541647860270693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 7e095c95e6777044e91da81df0dd04f6, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 87407dfd-f2b5-425f-95df-31ef6a8ece2e
-    m_ActionName: 'Player/Look[/XInputControllerWindows/rightStick]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ce9eb071-f043-4e01-8c97-58c5eed4908a
-    m_ActionName: 'Player/Move[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5865076219634335296}
-        m_TargetAssemblyTypeName: Shoot, Assembly-CSharp
-        m_MethodName: OnShoot
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 451f0621-7a10-4ed9-a91d-11ca579cdacd
-    m_ActionName: 'Player/Fire[/XInputControllerWindows/rightTrigger]'
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: DualGamepad
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &6890745567518420137
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,10 +397,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7614562281251564874}
-  - component: {fileID: 8353876122169012264}
-  - component: {fileID: 9000502733576355382}
-  - component: {fileID: 8845791400094300002}
-  - component: {fileID: 3502557130165123264}
   - component: {fileID: 2496835564212505546}
   m_Layer: 0
   m_Name: Player
@@ -566,137 +421,6 @@ Transform:
   - {fileID: 7156391178056587703}
   m_Father: {fileID: 7138761333772788134}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &8353876122169012264
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6890745567518420137}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!114 &9000502733576355382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6890745567518420137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 7e095c95e6777044e91da81df0dd04f6, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 87407dfd-f2b5-425f-95df-31ef6a8ece2e
-    m_ActionName: Player/Look
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8845791400094300002}
-        m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ce9eb071-f043-4e01-8c97-58c5eed4908a
-    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 451f0621-7a10-4ed9-a91d-11ca579cdacd
-    m_ActionName: 'Player/Fire[/Keyboard/space]'
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: DualGamepad
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &8845791400094300002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6890745567518420137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb0dbdd7c8c09548a52942071742508, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Movement
-  speed: 4
-  sensitivity: 1.88
---- !u!58 &3502557130165123264
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6890745567518420137}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
 --- !u!212 &2496835564212505546
 SpriteRenderer:
   serializedVersion: 2

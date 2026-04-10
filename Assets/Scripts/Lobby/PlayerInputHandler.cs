@@ -8,8 +8,8 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 moveInput;
     public bool isJumping;
     public bool isGrabbing;
-
-
+    public bool isShooting;
+    public Vector2 lookInput;
 
     public void OnMoveInput(InputAction.CallbackContext context)
     {
@@ -30,5 +30,17 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (context.performed) isGrabbing = true;
         else if (context.canceled) isGrabbing = false;
+    }
+
+    public void OnShootInput(InputAction.CallbackContext context)
+    {
+        Debug.Log($"[OnShootInput] llamado! performed={context.performed} | canceled={context.canceled}");
+        if (context.performed) isShooting = true;
+        else if (context.canceled) isShooting = false;
+    }
+    
+    public void OnLookInput(InputAction.CallbackContext context)
+    {
+        lookInput = context.ReadValue<Vector2>();
     }
 }
