@@ -22,6 +22,10 @@ public class SpriteCesta : MonoBehaviour
     private int pasoActual = 0;              // Por qué paso de la receta vamos
     public int recetasCompletadas = 0;       // mas de una combinacion cuenta
 
+    // --- AÑADIDO PARA LA UI ---
+    [HideInInspector]
+    public UIReceta miUI; // El Manager nos pasará esta referencia automáticamente
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,6 +34,15 @@ public class SpriteCesta : MonoBehaviour
     public void ConectarMando(PlayerInputHandler mando)
     {
         miMando = mando;
+    }
+
+    // --- AÑADIDO PARA LA UI: Fuerza el texto a aparecer al empezar ---
+    public void IniciarUI()
+    {
+        if (miUI != null)
+        {
+            miUI.ActualizarTexto(recetaObjetivo, pasoActual, recetasCompletadas);
+        }
     }
 
     private void Update()
@@ -82,6 +95,12 @@ public class SpriteCesta : MonoBehaviour
                 // el juagdor ha fallado, ha cogido un ingrediente que no era el que necesitaba
                 Debug.Log($"¡Error! Has cogido {ingrediente.miTipo} pero necesitabas {ingredienteQueNecesito}. ¡Receta arruinada!");
                 pasoActual = 0; // vuelta al paso 0 se podria hacer reroll en el futuro para que no sea siempre la misma receta
+            }
+
+            // Temporal para alpha
+            if (miUI != null)
+            {
+                miUI.ActualizarTexto(recetaObjetivo, pasoActual, recetasCompletadas);
             }
 
             // Destruimos el ingrediente al chocar
