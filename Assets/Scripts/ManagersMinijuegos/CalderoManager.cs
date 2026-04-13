@@ -19,7 +19,7 @@ public class CalderoManager : MonoBehaviour
     public Transform[] spawnPointsCestas; // Dónde aparecen los P1 (abajo)
     public Transform[] spawnPointsManos;  // Dónde aparecen los P2 (arriba)
 
-    // --- AÑADIDO PARA LA UI ---
+    //  AÑADIDO PARA LA UI  temporal para alpha
     [Header("UI (Textos de la pantalla)")]
     public UIReceta[] panelesUIParejas; // Para asignar el texto de la pantalla a cada pareja
 
@@ -80,7 +80,7 @@ public class CalderoManager : MonoBehaviour
             }
         }
 
-        // CORRECCIÓN 2: Te faltaba añadir este bloque en la Cesta
+        // sacar el animator de cada player
         if (sprite.TryGetComponent<Animator>(out var animator))
         {
             if (animatorCestas.Length > indexSpawn && animatorCestas[indexSpawn] != null)

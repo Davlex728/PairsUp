@@ -932,6 +932,8 @@ MonoBehaviour:
   - {fileID: 590897951}
   - {fileID: 2021377019}
   - {fileID: 1032062945}
+  escenasAleatorias:
+  - Caldero
 --- !u!1 &895595869
 GameObject:
   m_ObjectHideFlags: 0

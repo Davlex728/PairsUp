@@ -1,5 +1,7 @@
-using UnityEngine;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LaserTagManager : MonoBehaviour
 {
@@ -18,7 +20,7 @@ public class LaserTagManager : MonoBehaviour
     private List<GameObject> padresVivos = new List<GameObject>();
     private GameObject padreInstanciado;
     private bool partidaTerminada = false;
-
+    public String[] escenasAleatorias;
     private void Awake()
     {
         Instance = this;
@@ -58,7 +60,27 @@ public class LaserTagManager : MonoBehaviour
 
         if (padresVivos.Count == 1)
         {
+
             partidaTerminada = true;
+            // Comprobación de seguridad
+            if (escenasAleatorias == null || escenasAleatorias.Length == 0)
+            {
+                Debug.LogError("[SpriteCesta] ERROR: No hay escenas configuradas en el array 'Escenas Aleatorias'.");
+                return;
+            }
+
+            // Elegir y cargar la escena aleatoria
+            int indiceAleatorio = UnityEngine.Random.Range(0, escenasAleatorias.Length);
+            string escenaElegida = escenasAleatorias[indiceAleatorio];
+
+            if (string.IsNullOrEmpty(escenaElegida))
+            {
+                Debug.LogError($"[SpriteCesta] ERROR: El hueco {indiceAleatorio} del array de escenas está vacío.");
+                return;
+            }
+
+            Debug.Log($"[SpriteCesta] Saltando a la nueva partida: {escenaElegida}");
+            SceneManager.LoadScene(escenaElegida);
             Debug.Log($"[LaserTagManager] ¡Ha ganado la pareja: {padresVivos[0].name}!");
         }
         else if (padresVivos.Count == 0)

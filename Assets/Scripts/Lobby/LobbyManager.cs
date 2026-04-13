@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement; // <- ¡Importante! Faltaba esta línea para poder cargar escenas
 
 [RequireComponent(typeof(PlayerInputManager))]
 public class LobbyManager : MonoBehaviour
 {
     [Header("Configuración de partida")]
     [SerializeField] private int requiredPlayers = 6;
-    [SerializeField] private string nextSceneName = "MainGame";
+    [SerializeField] private string[] randomSceneNames;
 
     [Header("Referencias UI")]
     [SerializeField] private LobbySlotUI[] playerSlots;
@@ -94,8 +94,32 @@ public class LobbyManager : MonoBehaviour
             remaining -= Time.deltaTime;
         }
 
-        Destroy(gameObject);
-        SceneManager.LoadScene(nextSceneName);
+        if (countdownText)
+            countdownText.text = "¡Cargando mapa...";
+
+        yield return null; // Esperamos un frame para asegurar que Unity actualiza el texto
+
+        if (randomSceneNames != null && randomSceneNames.Length > 0)
+        {
+            int indexRandom = Random.Range(0, randomSceneNames.Length);
+            string selectedScene = randomSceneNames[indexRandom];
+
+            if (string.IsNullOrEmpty(selectedScene))
+            {
+                Debug.LogError($"[Lobby] ERROR: El hueco {indexRandom} del array de escenas está vacío.");
+                yield break;
+            }
+
+            Debug.Log($"[Lobby] Cargando escena aleatoria: {selectedScene}");
+            SceneManager.LoadScene(selectedScene); // <- Faltaba esta línea para efectuar el salto
+        }
+        else
+        {
+            Debug.LogError("[Lobby] ERROR: No se han asignado escenas aleatorias en el Inspector.");
+            // Si quieres cargar una escena por defecto en caso de error, pon aquí SceneManager.LoadScene("NombreEscenaPorDefecto");
+        }
+
+        Destroy(gameObject); // Destruimos el lobby al final para que no corte la ejecución anterior
     }
 
     private void RefreshCounterUI()

@@ -176,6 +176,10 @@ MonoBehaviour:
     m_Bits: 8
   recetaObjetivo: 0000000001000000010000000200000000000000
   recetasCompletadas: 2
+  recetasParaGanar: 1
+  tiempoEspera: 2
+  escenasAleatorias:
+  - Juego
   miUI: {fileID: 0}
 --- !u!61 &4119917161930199132
 BoxCollider2D:
