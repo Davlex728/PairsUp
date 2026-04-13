@@ -1,46 +1,102 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class LaserTagManager : MonoBehaviour
 {
+    public static LaserTagManager Instance; // Singleton para llamarlo desde cualquier sitio
+
     [Header("Prefab Padre (invisible, lleva movimiento)")]
     public GameObject prefabPadre;
 
     [Header("Prefab Hijo (el círculo visible)")]
     public GameObject prefabCirculo;
-    public Vector2 offsetHijo; // posición relativa al padre, ajústala en el Inspector
+    public Vector2 offsetHijo;
 
-    [Header("Spawn Point")]
-    public Transform spawnPoint;
+    [Header("Spawn Points")]
+    public Transform[] spawnPointsPlayers;
+
+    private List<GameObject> padresVivos = new List<GameObject>();
+    private GameObject padreInstanciado;
+    private bool partidaTerminada = false;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
         PersistentPlayer[] jugadoresConectados = FindObjectsByType<PersistentPlayer>(FindObjectsSortMode.None);
 
-        if (jugadoresConectados.Length < 2)
+        if (jugadoresConectados.Length == 0)
         {
-            Debug.LogWarning("[LaserTagManager] Se necesitan al menos 2 jugadores.");
+            Debug.LogWarning("[LaserTagManager] No hay jugadores. ¿Has pasado por el lobby?");
             return;
         }
 
-        PlayerInputHandler mandoJ1 = jugadoresConectados[0].GetComponent<PlayerInputHandler>();
-        PlayerInputHandler mandoJ2 = jugadoresConectados[1].GetComponent<PlayerInputHandler>();
+        int contadorJugadores = 0;
 
-        // Instanciar el padre
-        GameObject padre = Instantiate(prefabPadre, spawnPoint.position, Quaternion.identity);
+        foreach (PersistentPlayer mandoFantasma in jugadoresConectados)
+        {
+            PlayerInputHandler lectorBotones = mandoFantasma.GetComponent<PlayerInputHandler>();
 
-        // Instanciar el hijo y hacerlo hijo del padre
-        GameObject hijo = Instantiate(prefabCirculo, padre.transform.position + (Vector3)offsetHijo, Quaternion.identity);
-        hijo.transform.SetParent(padre.transform);
+            if (contadorJugadores % 2 == 0)
+                SpawnearPadre(contadorJugadores, lectorBotones);
+            else
+                SpawnearHijo(contadorJugadores, lectorBotones);
 
-        // J1 mueve el padre
-        if (padre.TryGetComponent<Movement>(out var movement))
-            movement.ConectarMando(mandoJ1);
+            contadorJugadores++;
+        }
+    }
 
-        // J2 apunta y dispara desde el hijo
+    // Llama a este método desde cualquier script cuando muera un jugador
+    public void ComprobarGanador()
+    {
+        if (partidaTerminada) return;
+
+        padresVivos.RemoveAll(p => p == null);
+
+        if (padresVivos.Count == 1)
+        {
+            partidaTerminada = true;
+            Debug.Log($"[LaserTagManager] ¡Ha ganado la pareja: {padresVivos[0].name}!");
+        }
+        else if (padresVivos.Count == 0)
+        {
+            partidaTerminada = true;
+            Debug.Log("[LaserTagManager] ¡Empate! No quedan parejas.");
+        }
+    }
+
+    private void SpawnearPadre(int idJugador, PlayerInputHandler mando)
+    {
+        int indexSpawn = idJugador / 2;
+        Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
+
+        padreInstanciado = Instantiate(prefabPadre, puntoSpawn.position, Quaternion.identity);
+        padresVivos.Add(padreInstanciado);
+
+        if (padreInstanciado.TryGetComponent<Movement>(out var movement))
+            movement.ConectarMando(mando);
+    }
+
+    private void SpawnearHijo(int idJugador, PlayerInputHandler mando)
+    {
+        if (padreInstanciado == null)
+        {
+            Debug.LogWarning("[LaserTagManager] No hay padre instanciado para este hijo.");
+            return;
+        }
+
+        GameObject hijo = Instantiate(prefabCirculo, padreInstanciado.transform.position + (Vector3)offsetHijo, Quaternion.identity);
+        hijo.transform.SetParent(padreInstanciado.transform);
+
         if (hijo.TryGetComponent<Aiming>(out var aiming))
-            aiming.ConectarMando(mandoJ2);
+            aiming.ConectarMando(mando);
 
         if (hijo.TryGetComponent<Shoot>(out var shoot))
-            shoot.ConectarMando(mandoJ2);
+            shoot.ConectarMando(mando);
+
+        padreInstanciado = null;
     }
 }
