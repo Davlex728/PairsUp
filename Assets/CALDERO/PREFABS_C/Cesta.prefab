@@ -174,12 +174,12 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  recetaObjetivo: 0000000001000000010000000200000000000000
-  recetasCompletadas: 2
-  recetasParaGanar: 1
+  recetaObjetivo: 0000000003000000010000000200000003000000
+  recetasCompletadas: 0
+  recetasParaGanar: 2
   tiempoEspera: 2
   escenasAleatorias:
-  - Juego
+  - PaintBall
   miUI: {fileID: 0}
 --- !u!61 &4119917161930199132
 BoxCollider2D:

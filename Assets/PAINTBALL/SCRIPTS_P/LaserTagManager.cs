@@ -50,7 +50,10 @@ public class LaserTagManager : MonoBehaviour
             contadorJugadores++;
         }
     }
-
+    private void Update()
+    {
+        ComprobarGanador();
+    }
     // Llama a este método desde cualquier script cuando muera un jugador
     public void ComprobarGanador()
     {
