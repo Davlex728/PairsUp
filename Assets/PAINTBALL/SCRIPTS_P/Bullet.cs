@@ -42,11 +42,7 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Eliminado");
-            Destroy(other.gameObject);
-        }
+        
 
         if (other.gameObject.CompareTag("Wall"))
         {
