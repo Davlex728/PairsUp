@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class BallLimits : MonoBehaviour
 {
-    private int live;
+    [SerializeField]private int live;
 
     private int liveMax = 3;
     
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject wall;
     public BombMovement bomb;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -16,6 +17,7 @@ public class BallLimits : MonoBehaviour
     {
         live = liveMax;
         player.SetActive(true);
+        wall.SetActive(false);
         
         
     }
@@ -31,7 +33,7 @@ public class BallLimits : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         //Destroy(collision.gameObject);
-
+        //bomb.RespawnBomb();
         RestarVida();
     }
 
@@ -40,12 +42,19 @@ public class BallLimits : MonoBehaviour
         live -= 1;
         
         Debug.Log($"Vidas de {player.name} : {live}");
-
-        bomb.RespawnBomb();
+        if (live > 0)
+        {
+            bomb.RespawnBomb();    
+            Debug.Log("bomba respawneada");
+        }
+        
         
         if (live == 0)
         {
-            player.SetActive(false);
+            
+            Destroy(player);
+            
+            //wall.SetActive(true);
             
         }
         

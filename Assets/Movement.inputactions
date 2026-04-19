@@ -121,6 +121,17 @@
                 },
                 {
                     "name": "",
+                    "id": "290e9d8f-6e3a-4775-9e11-e21223c10e9c",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f716a2bb-f740-45ca-8145-29f6db247fa0",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",

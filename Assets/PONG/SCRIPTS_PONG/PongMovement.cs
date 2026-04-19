@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,11 +22,18 @@ public class PongMovement : MonoBehaviour
         void FixedUpdate()
         {
             Vector2 direction = mandoMovimiento.moveInput;
-            Debug.Log("rotando");
+            //Debug.Log("rotando");
              
-            transform.Rotate(0f, 0f, direction.x * speed * Time.deltaTime, Space.Self);    
+            transform.Rotate(0f, 0f, -direction.x * speed * Time.deltaTime, Space.Self);    
                 
-            Debug.Log(direction.x);
+            
+            
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+           
+                Debug.Log("LIMITE!");                                                     
             
         }
 }

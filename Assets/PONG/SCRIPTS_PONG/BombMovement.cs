@@ -9,7 +9,7 @@ public class BombMovement : MonoBehaviour
 
     public Vector2 newVelocity;
 
-    private float currentSpeed;
+    [SerializeField]private float currentSpeed;
 
     [SerializeField] private float speedIncreasePercentage;
     
@@ -40,6 +40,7 @@ public class BombMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+       /* Debug.Log("Colisión detectada con: " + collision.gameObject.name);
         var firstContact = collision.contacts[0];
         // Rebota usando la velocidad real actual (no una dirección "vieja").
         var currentVelocity = rb.linearVelocity;
@@ -52,16 +53,16 @@ public class BombMovement : MonoBehaviour
         }
 
         newVelocity = Vector2.Reflect(currentVelocity.normalized, firstContact.normal);
-
+        direction = rb.linearVelocity.normalized;*/
+    
         currentSpeed *= (1 + speedIncreasePerHit);
         
         currentSpeed = Mathf.Min(currentSpeed, maxSpeed);
 
-        newVelocity = newVelocity.normalized * currentSpeed;
-        rb.linearVelocity = newVelocity;
+        //newVelocity = newVelocity.normalized * currentSpeed;
+        rb.linearVelocity = currentSpeed * direction;
 
         // Mantén 'direction' coherente si lo usas en otros sitios/debug.
-        direction = rb.linearVelocity.normalized;
     }
 
     public void RespawnBomb()
