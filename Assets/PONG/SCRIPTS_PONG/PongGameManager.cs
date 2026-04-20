@@ -17,6 +17,10 @@ public class PongGameManager : MonoBehaviour
     [Header("Spawn Points")]
     public Transform[] spawnPointsPlayers;
     
+    [Header("Ángulos de rotación por spawn point")]
+    public float[] angulosMinimos;  // Array con el ángulo mínimo para cada spawn
+    public float[] angulosMaximos;  // Array con el ángulo máximo para cada spawn
+    
     private int i = 0;
 
     public List<GameObject> jugadoresVivos = new List<GameObject>();
@@ -120,6 +124,11 @@ public class PongGameManager : MonoBehaviour
         if (jugadorUno.TryGetComponent<PongMovement>(out var scriptMovimiento))
         {
             scriptMovimiento.ConectarMando(mando);
+            // Configurar los ángulos según el spawn point
+            if (indexSpawn < angulosMinimos.Length && indexSpawn < angulosMaximos.Length)
+            {
+                scriptMovimiento.ConfigurarAngulos(angulosMinimos[indexSpawn], angulosMaximos[indexSpawn]);
+            }
         }
     } 
     
@@ -128,12 +137,16 @@ public class PongGameManager : MonoBehaviour
         int indexSpawn = idJugador / 2;
         Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
         
-      jugadorDos = Instantiate(prefabCirculo, puntoSpawn.position + (Vector3)offsetHijo, spawnPointsPlayers[i].transform.rotation );
-        //hijo.transform.SetParent(jugadorInstanciado.transform);
+        jugadorDos = Instantiate(prefabCirculo, puntoSpawn.position + (Vector3)offsetHijo, spawnPointsPlayers[i].transform.rotation );
 
         if (jugadorDos.TryGetComponent<PongMovement>(out var scriptMovimiento))
         {
             scriptMovimiento.ConectarMando(mando);
+            // Configurar los ángulos según el spawn point
+            if (indexSpawn < angulosMinimos.Length && indexSpawn < angulosMaximos.Length)
+            {
+                scriptMovimiento.ConfigurarAngulos(angulosMinimos[indexSpawn], angulosMaximos[indexSpawn]);
+            }
         }
     }
 }

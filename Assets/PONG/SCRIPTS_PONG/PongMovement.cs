@@ -4,36 +4,49 @@ using UnityEngine.InputSystem;
 
 public class PongMovement : MonoBehaviour
 {
-        PlayerInput playerInput;
-        CharacterController controller;
         [SerializeField] private float speed = 5f;
+        [SerializeField] private float min;
+        [SerializeField] private float max;
 
         private PlayerInputHandler mandoMovimiento;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        }
         
         public void ConectarMando(PlayerInputHandler mando)
         {
             mandoMovimiento = mando;
         }
-        // Update is called once per frame
+
+        public void ConfigurarAngulos(float minAngulo, float maxAngulo)
+        {
+            min = minAngulo;
+            max = maxAngulo;
+        }
+
         void FixedUpdate()
         {
             Vector2 direction = mandoMovimiento.moveInput;
-            //Debug.Log("rotando");
-             
-            transform.Rotate(0f, 0f, -direction.x * speed * Time.deltaTime, Space.Self);    
-                
+            
+            // Obtener la rotación actual en el eje Z
+            float currentRotation = transform.eulerAngles.z;
             
             
-        }
-
-        private void OnCollisionEnter2D(Collision2D other)
-        {
-           
-                Debug.Log("LIMITE!");                                                     
+            // Calcular la nueva rotación
+            float newRotation = currentRotation - direction.x * speed;
             
+            // Solo permitir movimiento dentro del rango [min, max]
+            if (newRotation >= min && newRotation <= max)
+            {
+                // Dentro del rango, permitir el movimiento
+                transform.eulerAngles = new Vector3(0f, 0f, newRotation);
+            }
+            else if (newRotation < min)
+            {
+                // Si intenta pasar el mínimo, quedarse en el mínimo
+                transform.eulerAngles = new Vector3(0f, 0f, min);
+            }
+            else if (newRotation > max)
+            {
+                // Si intenta pasar el máximo, quedarse en el máximo
+                transform.eulerAngles = new Vector3(0f, 0f, max);
+            }
         }
 }

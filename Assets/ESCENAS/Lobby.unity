@@ -3512,8 +3512,6 @@ MonoBehaviour:
   requiredPlayers: 2
   randomSceneNames:
   - Pong
-  - Caldero
-  - PaintBall
   playerSlots:
   - {fileID: 2143192389}
   - {fileID: 639829378}

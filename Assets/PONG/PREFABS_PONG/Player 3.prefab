@@ -47,7 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c597deacb30a384a833b916a26f0d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PongMovement
-  speed: 60
+  speed: 3
+  min: 13
+  max: 107
 --- !u!61 &8951841480640370427
 BoxCollider2D:
   m_ObjectHideFlags: 0

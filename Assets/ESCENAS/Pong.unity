@@ -271,13 +271,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434121505}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.17364836, w: 0.9848078}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 750198882}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 190}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &495703522
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,14 +648,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750198881}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.9961947, w: 0.08715588}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 434121506}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 170}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &987882445
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,7 +908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1245499512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,16 +1144,28 @@ MonoBehaviour:
   prefabCirculo: {fileID: 1797861907412409191, guid: c62f2bdcb8d743147a36b044d6030529, type: 3}
   offsetHijo: {x: 0, y: 0}
   spawnPointsPlayers:
-  - {fileID: 1540423254}
-  - {fileID: 1248623613}
   - {fileID: 750198882}
   - {fileID: 434121506}
+  - {fileID: 1540423254}
+  - {fileID: 1248623613}
   - {fileID: 1905715505}
   - {fileID: 1836629656}
+  angulosMinimos:
+  - 13
+  - 13
+  - 133
+  - 133
+  - 253
+  - 253
+  angulosMaximos:
+  - 107
+  - 107
+  - 227
+  - 227
+  - 347
+  - 347
   jugadoresVivos: []
-  escenasAleatorias:
-  - PaintBall
-  - Caldero
+  escenasAleatorias: []
 --- !u!1 &1472292616
 GameObject:
   m_ObjectHideFlags: 0
