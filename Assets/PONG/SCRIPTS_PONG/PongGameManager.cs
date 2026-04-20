@@ -30,6 +30,11 @@ public class PongGameManager : MonoBehaviour
 
     private GameObject jugadorUno;
     private GameObject jugadorDos;
+    
+    List<List<GameObject>> parejas = new List<List<GameObject>>();
+    
+    
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -73,6 +78,20 @@ public class PongGameManager : MonoBehaviour
     void Update()
     {
         ComprobarGanador();
+        for (int j = 0; j < parejas.Count; j++)
+        {
+            if (parejas[j][0].TryGetComponent<PongMovement>(out var scriptMov) &&
+                parejas[j][1].TryGetComponent<PongMovement>(out var scriptMove))
+            {
+                if ((scriptMove.mandoMovimiento.moveInput.x * scriptMov.mandoMovimiento.moveInput.x <= 0) &&
+                    (scriptMove.mandoMovimiento.moveInput.x != 0 || scriptMov.mandoMovimiento.moveInput.x != 0))
+                {
+                    scriptMove.mandoMovimiento.moveInput = Vector2.zero;
+                    scriptMov.mandoMovimiento.moveInput = Vector2.zero;
+                }
+               
+            }
+        }
     }
     public void ComprobarGanador()
     {
@@ -134,11 +153,18 @@ public class PongGameManager : MonoBehaviour
     
     private void SpawnearJugadorDos(int idJugador, PlayerInputHandler mando, int i )
     {
+        List<GameObject> nuevaPareja = new List<GameObject>();
         int indexSpawn = idJugador / 2;
         Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
         
         jugadorDos = Instantiate(prefabCirculo, puntoSpawn.position + (Vector3)offsetHijo, spawnPointsPlayers[i].transform.rotation );
-
+        
+            nuevaPareja.Add(jugadorUno);
+            nuevaPareja.Add(jugadorDos);
+            
+            parejas.Add(nuevaPareja);
+            
+        
         if (jugadorDos.TryGetComponent<PongMovement>(out var scriptMovimiento))
         {
             scriptMovimiento.ConectarMando(mando);

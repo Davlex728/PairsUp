@@ -8,8 +8,15 @@ public class PongMovement : MonoBehaviour
         [SerializeField] private float min;
         [SerializeField] private float max;
 
-        private PlayerInputHandler mandoMovimiento;
+        public PlayerInputHandler mandoMovimiento;
         
+        public static PongMovement instance;
+
+        private void Start()
+        {
+            instance = this;
+        }
+
         public void ConectarMando(PlayerInputHandler mando)
         {
             mandoMovimiento = mando;
