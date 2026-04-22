@@ -1089,13 +1089,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248623612}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.08715567, w: 0.9961947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1540423254}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 65}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1432908651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,7 +1141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PongGameManager
   prefabPadre: {fileID: 1797861907412409191, guid: c62f2bdcb8d743147a36b044d6030529, type: 3}
-  prefabCirculo: {fileID: 1797861907412409191, guid: c62f2bdcb8d743147a36b044d6030529, type: 3}
+  prefabCirculo: {fileID: 1797861907412409191, guid: 8aa31a9322f131246843ef56f269f19a, type: 3}
   offsetHijo: {x: 0, y: 0}
   spawnPointsPlayers:
   - {fileID: 750198882}
@@ -1393,13 +1393,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836629655}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.08715561, w: 0.9961947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1905715505}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -75}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1886736961
 GameObject:
   m_ObjectHideFlags: 0

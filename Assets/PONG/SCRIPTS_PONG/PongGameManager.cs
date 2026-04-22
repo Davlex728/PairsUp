@@ -78,21 +78,33 @@ public class PongGameManager : MonoBehaviour
     void Update()
     {
         ComprobarGanador();
-        for (int j = 0; j < parejas.Count; j++)
+        
+    }
+
+    void LateUpdate()
+    {
+        foreach (var pareja in parejas)
         {
-            if (parejas[j][0].TryGetComponent<PongMovement>(out var scriptMov) &&
-                parejas[j][1].TryGetComponent<PongMovement>(out var scriptMove))
+            if (pareja[0].TryGetComponent<PongMovement>(out var jugA) &&
+                pareja[1].TryGetComponent<PongMovement>(out var jugB))
             {
-                if ((scriptMove.mandoMovimiento.moveInput.x * scriptMov.mandoMovimiento.moveInput.x <= 0) &&
-                    (scriptMove.mandoMovimiento.moveInput.x != 0 || scriptMov.mandoMovimiento.moveInput.x != 0))
+                float inputA = jugA.mandoMovimiento.moveInput.x;
+                float inputB = jugB.mandoMovimiento.moveInput.x;
+
+                if (inputA != 0 && inputB != 0 && Mathf.Sign(inputA) == Mathf.Sign(inputB))
                 {
-                    scriptMove.mandoMovimiento.moveInput = Vector2.zero;
-                    scriptMov.mandoMovimiento.moveInput = Vector2.zero;
+                    jugA.inputEfectivo = inputA;
+                    jugB.inputEfectivo = inputB;
                 }
-               
+                else
+                {
+                    jugA.inputEfectivo = 0f;
+                    jugB.inputEfectivo = 0f;
+                }
             }
         }
     }
+    
     public void ComprobarGanador()
     {
         if (partidaTerminada) return;
