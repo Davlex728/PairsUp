@@ -191,6 +191,70 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 53411720-8c4e-4d10-b643-602520bd86c5
     m_ActionName: Minijuegos/SwitchTool
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5857834240823103571}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 50839af3-f57c-403b-95e7-57ff4834c08d
+    m_ActionName: 'Minijuegos/NortZone[/XInputControllerWindows/buttonNorth]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5857834240823103571}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ca37b2cb-e8f7-4fe5-8538-514d973ebe05
+    m_ActionName: 'Minijuegos/SouthZone[/XInputControllerWindows/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5857834240823103571}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c0c78cae-a5de-4354-b70d-926a9bb5286d
+    m_ActionName: 'Minijuegos/EastZone[/XInputControllerWindows/buttonEast]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5857834240823103571}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1718317a-770e-4ec4-9e99-367498fc7eb1
+    m_ActionName: 'Minijuegos/WestZone[/XInputControllerWindows/buttonWest]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Minijuegos
@@ -227,5 +291,9 @@ MonoBehaviour:
   isJumping: 0
   isGrabbing: 0
   isShooting: 0
+  isSouthZone: 0
+  isNorthZone: 0
+  isWestZone: 0
+  isEastZone: 0
   lookInput: {x: 0, y: 0}
   isSwitchingTool: 0
