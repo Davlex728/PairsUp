@@ -16,11 +16,13 @@ public class SpriteMano : MonoBehaviour
     private Rigidbody2D rb;
 
     private Rigidbody2D objetoAgarrado;
-
+    private Animator animator;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
+        animator = GetComponent<Animator>();
+        animator.SetBool("Caldero", true);
     }
 
     public void ConectarMando(PlayerInputHandler mando)

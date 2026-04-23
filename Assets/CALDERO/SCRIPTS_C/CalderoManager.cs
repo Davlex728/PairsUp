@@ -7,13 +7,8 @@ public class CalderoManager : MonoBehaviour
     public GameObject prefabCesta; // abajo
     public GameObject prefabMano;  // El cursor de arriba
 
-
-    [Header("animator Cestas")]
-    public RuntimeAnimatorController[] animatorCestas; // Para asignar el animator correcto a cada cesta (P1, P3, P5)
-
-    [Header("animator Manos")]
-    public RuntimeAnimatorController[] animatorManos; // Para asignar el animator correcto a cada mano (P2, P4, P6)
-
+    [Header("Animators Jugadores")]
+    public RuntimeAnimatorController[] animators; // Para asignar el animator correcto a cada jugador (6 en total)
 
     [Header("Spawn Points")]
     public Transform[] spawnPointsCestas; // Dónde aparecen los P1 (abajo)
@@ -35,7 +30,7 @@ public class CalderoManager : MonoBehaviour
             return;
         }
 
-        // Creamos nuestro propio contador para ignorar los IDs que asigne Unity por que se raya y se salta numeros por que le sale de los huevos, si lo haceis con el id de unity tendreis 2 cestas en este caso en vez de 1 d ecada
+        // Creamos nuestro propio contador para ignorar los IDs que asigne Unity
         int contadorJugadores = 0;
 
         foreach (PersistentPlayer mandoFantasma in jugadoresConectados)
@@ -43,7 +38,7 @@ public class CalderoManager : MonoBehaviour
             // Conseguimos player input de cada uno
             PlayerInputHandler lectorBotones = mandoFantasma.GetComponent<PlayerInputHandler>();
 
-            // Lógica de parejas para sacar el p1 o p2 de cada pàreja y asiganr spawns
+            // Lógica de parejas para sacar el p1 o p2 de cada pareja y asignar spawns
             if (contadorJugadores % 2 == 0)
             {
                 SpawnearCesta(contadorJugadores, lectorBotones);
@@ -80,12 +75,12 @@ public class CalderoManager : MonoBehaviour
             }
         }
 
-        // sacar el animator de cada player
+        // Asignar el animator basado en el ID del jugador
         if (sprite.TryGetComponent<Animator>(out var animator))
         {
-            if (animatorCestas.Length > indexSpawn && animatorCestas[indexSpawn] != null)
+            if (animators.Length > idJugador && animators[idJugador] != null)
             {
-                animator.runtimeAnimatorController = animatorCestas[indexSpawn];
+                animator.runtimeAnimatorController = animators[idJugador];
             }
         }
     }
@@ -96,7 +91,7 @@ public class CalderoManager : MonoBehaviour
         int indexSpawn = idJugador / 2;
         Transform puntoSpawn = spawnPointsManos[indexSpawn];
 
-        // Instanciamos  la mano de la wii
+        // Instanciamos la mano
         GameObject avatar = Instantiate(prefabMano, puntoSpawn.position, Quaternion.identity);
 
         if (avatar.TryGetComponent<SpriteMano>(out var scriptMano))
@@ -104,12 +99,12 @@ public class CalderoManager : MonoBehaviour
             scriptMano.ConectarMando(mando);
         }
 
+        // Asignar el animator basado en el ID del jugador
         if (avatar.TryGetComponent<Animator>(out var animator))
         {
-            if (animatorManos.Length > indexSpawn && animatorManos[indexSpawn] != null)
+            if (animators.Length > idJugador && animators[idJugador] != null)
             {
-
-                animator.runtimeAnimatorController = animatorManos[indexSpawn];
+                animator.runtimeAnimatorController = animators[idJugador];
             }
         }
     }

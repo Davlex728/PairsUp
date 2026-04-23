@@ -318,14 +318,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CalderoManager
   prefabCesta: {fileID: 1480593402329651200, guid: e67f36a053869d748bddb8b9469d857f, type: 3}
   prefabMano: {fileID: 5335658803824351116, guid: 50f002e9f83ba8a46afd331411b78351, type: 3}
-  animatorCestas:
-  - {fileID: 9100000, guid: b24f784cd310067478fbc8df669fcbbb, type: 2}
-  - {fileID: 9100000, guid: 9c5af7f396795b74386c3b5ec1d5acba, type: 2}
-  - {fileID: 9100000, guid: 9ec04742432b327488eb0b42d7c74377, type: 2}
-  animatorManos:
-  - {fileID: 9100000, guid: 485f74453fcbfdb44a03975f25be8e68, type: 2}
-  - {fileID: 9100000, guid: c35dbb9bcfd751d4ab8173992fefd26e, type: 2}
-  - {fileID: 9100000, guid: 2035bbd6b28ce6f4ca58325313e4e49a, type: 2}
+  animators:
+  - {fileID: 9100000, guid: 175f7120d7ee45044bd30764d1fb40d2, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   spawnPointsCestas:
   - {fileID: 1038253858}
   - {fileID: 2147086614}

@@ -3,7 +3,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement; // Necesario para cambiar de escena
 
 [RequireComponent(typeof(Rigidbody2D))]
+
 public class SpriteCesta : MonoBehaviour
+
 {
     [Header("Configuración Cesta")]
     public float moveSpeed = 5f;
@@ -30,7 +32,7 @@ public class SpriteCesta : MonoBehaviour
     public String[] escenasAleatorias;
 
     private bool juegoTerminado = false;
-
+    private Animator animator;
     // --- AÑADIDO PARA LA UI ---
     [HideInInspector]
     public UIReceta miUI; // El Manager nos pasará esta referencia automáticamente
@@ -38,6 +40,8 @@ public class SpriteCesta : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>(); 
+        animator.SetBool("Caldero", true);
     }
 
     public void ConectarMando(PlayerInputHandler mando)
@@ -67,6 +71,7 @@ public class SpriteCesta : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             miMando.isJumping = false;
+            animator.SetBool("isJumping", true); // Dispara la animación de salto
         }
     }
 
@@ -93,6 +98,7 @@ public class SpriteCesta : MonoBehaviour
 
             if (ingrediente.miTipo == ingredienteQueNecesito)
             {
+              animator.SetTrigger("correctIngredient");
                 // si acierta
                 pasoActual++; //siguiente paso
                 Debug.Log($"¡Bien! Has cogido {ingrediente.miTipo}. Faltan {recetaObjetivo.Length - pasoActual} ingredientes.");
@@ -115,6 +121,7 @@ public class SpriteCesta : MonoBehaviour
             {
                 // el jugador ha fallado, ha cogido un ingrediente que no era el que necesitaba
                 Debug.Log($"¡Error! Has cogido {ingrediente.miTipo} pero necesitabas {ingredienteQueNecesito}. ¡Receta arruinada!");
+                animator.SetTrigger("wrongIngredient");
                 pasoActual = 0; // vuelta al paso 0 se podria hacer reroll en el futuro para que no sea siempre la misma receta
             }
 
