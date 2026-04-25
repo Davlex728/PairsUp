@@ -337,6 +337,9 @@ MonoBehaviour:
   - {fileID: 1013449722}
   - {fileID: 1764476528}
   - {fileID: 1527304681}
+  tiempoEsperaVictoria: 2
+  escenasAleatorias:
+  - 
 --- !u!4 &434736100
 Transform:
   m_ObjectHideFlags: 0

@@ -1,11 +1,7 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement; // Necesario para cambiar de escena
 
 [RequireComponent(typeof(Rigidbody2D))]
-
 public class SpriteCesta : MonoBehaviour
-
 {
     [Header("Configuración Cesta")]
     public float moveSpeed = 5f;
@@ -21,26 +17,24 @@ public class SpriteCesta : MonoBehaviour
     public LayerMask groundLayer;
     private bool isGrounded;
 
-    [Header(" RECETA ")]
-    public TipoIngrediente[] recetaObjetivo; // El orden exacto de la "receta"
-    private int pasoActual = 0;              // Por qué paso de la receta vamos
-    public int recetasCompletadas = 0;       // mas de una combinacion cuenta
+    [Header("RECETA")]
+    public TipoIngrediente[] recetaObjetivo;
+    private int pasoActual = 0;
+    public int recetasCompletadas = 0;
 
-    [Header(" Condicion victoria ")]
+    [Header("Condición Victoria")]
     public int recetasParaGanar = 1;
-    public float tiempoEspera = 2f; // Tiempo que se muestra el mensaje de victoria antes de volver al lobby
-    public String[] escenasAleatorias;
 
     private bool juegoTerminado = false;
     private Animator animator;
-    // --- AÑADIDO PARA LA UI ---
+
     [HideInInspector]
-    public UIReceta miUI; // El Manager nos pasará esta referencia automáticamente
+    public UIReceta miUI;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>(); 
+        animator = GetComponent<Animator>();
         animator.SetBool("Caldero", true);
     }
 
@@ -49,29 +43,24 @@ public class SpriteCesta : MonoBehaviour
         miMando = mando;
     }
 
-    // AÑADIDO PARA LA UI: Fuerza el texto a aparecer al empezar ---
     public void IniciarUI()
     {
         if (miUI != null)
-        {
             miUI.ActualizarTexto(recetaObjetivo, pasoActual, recetasCompletadas);
-        }
     }
 
     private void Update()
     {
-        if (miMando == null || juegoTerminado) return; // Si el juego terminó, no dejamos saltar
+        if (miMando == null || juegoTerminado) return;
 
         if (groundCheck != null)
-        {
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
-        }
 
         if (miMando.isJumping && isGrounded && rb.linearVelocity.y <= 0.1f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             miMando.isJumping = false;
-            animator.SetBool("isJumping", true); // Dispara la animación de salto
+            animator.SetBool("isJumping", true);
         }
     }
 
@@ -79,7 +68,7 @@ public class SpriteCesta : MonoBehaviour
     {
         if (miMando == null || juegoTerminado)
         {
-            if (juegoTerminado) rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // Frena la cesta al ganar
+            if (juegoTerminado) rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             return;
         }
 
@@ -89,84 +78,42 @@ public class SpriteCesta : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (juegoTerminado) return; // Si alguien ya ganó, ignora nuevos ingredientes
+        if (juegoTerminado) return;
 
-        if (collision.TryGetComponent<Ingrediente>(out var ingrediente))
+        if (collision.TryGetComponent(out Ingrediente ingrediente))
         {
-            // ingrediente que toca atrapar ahora mismo
             TipoIngrediente ingredienteQueNecesito = recetaObjetivo[pasoActual];
 
             if (ingrediente.miTipo == ingredienteQueNecesito)
             {
-              animator.SetTrigger("correctIngredient");
-                // si acierta
-                pasoActual++; //siguiente paso
+                animator.SetTrigger("correctIngredient");
+                pasoActual++;
                 Debug.Log($"¡Bien! Has cogido {ingrediente.miTipo}. Faltan {recetaObjetivo.Length - pasoActual} ingredientes.");
 
-                // ha terminado toda la receta?
                 if (pasoActual >= recetaObjetivo.Length)
                 {
                     recetasCompletadas++;
                     Debug.Log($"¡POCIÓN COMPLETADA! Llevas {recetasCompletadas} hechas.");
-                    pasoActual = 0; // Reiniciamos para hacer otra receta
+                    pasoActual = 0;
 
-                    // --- COMPROBACIÓN DE VICTORIA ---
                     if (recetasCompletadas >= recetasParaGanar)
                     {
-                        DeclararVictoria();
+                        juegoTerminado = true;
+                        CalderoManager.Instance.DeclararVictoria(gameObject);
                     }
                 }
             }
             else
             {
-                // el jugador ha fallado, ha cogido un ingrediente que no era el que necesitaba
                 Debug.Log($"¡Error! Has cogido {ingrediente.miTipo} pero necesitabas {ingredienteQueNecesito}. ¡Receta arruinada!");
                 animator.SetTrigger("wrongIngredient");
-                pasoActual = 0; // vuelta al paso 0 se podria hacer reroll en el futuro para que no sea siempre la misma receta
+                pasoActual = 0;
             }
 
-            // Temporal para alpha
             if (miUI != null)
-            {
                 miUI.ActualizarTexto(recetaObjetivo, pasoActual, recetasCompletadas);
-            }
 
-            // Destruimos el ingrediente al chocar
             Destroy(collision.gameObject);
         }
-    }
-
-    private void DeclararVictoria()
-    {
-        juegoTerminado = true;
-        Debug.Log($"¡VICTORIA! El jugador {gameObject.name} ha ganado la partida.");
-
-        // Opcional para poner un panel de vicotria
-
-
-        Invoke(nameof(CargarEscenaAleatoria), tiempoEspera);
-    }
-
-    private void CargarEscenaAleatoria()
-    {
-        // Comprobación de seguridad
-        if (escenasAleatorias == null || escenasAleatorias.Length == 0)
-        {
-            Debug.LogError("[SpriteCesta] ERROR: No hay escenas configuradas en el array 'Escenas Aleatorias'.");
-            return;
-        }
-
-        // Elegir y cargar la escena aleatoria
-        int indiceAleatorio = UnityEngine.Random.Range(0, escenasAleatorias.Length);
-        string escenaElegida = escenasAleatorias[indiceAleatorio];
-
-        if (string.IsNullOrEmpty(escenaElegida))
-        {
-            Debug.LogError($"[SpriteCesta] ERROR: El hueco {indiceAleatorio} del array de escenas está vacío.");
-            return;
-        }
-
-        Debug.Log($"[SpriteCesta] Saltando a la nueva partida: {escenaElegida}");
-        SceneManager.LoadScene(escenaElegida);
     }
 }
