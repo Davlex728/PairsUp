@@ -1,22 +1,40 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlataformeoManager : MonoBehaviour
 {
-    // Igual que CalderoManager pero par = Platformero, impar = Mano Constructora
+    public static PlataformeoManager Instance { get; private set; }
 
     [Header("Prefabs Sprites")]
-    public GameObject prefabPlatformero;    // El que corre y salta (par)
-    public GameObject prefabMano;           // El cursor constructor (impar)
+    public GameObject prefabPlatformero;
+    public GameObject prefabMano;
 
     [Header("Animators Platformero")]
-    public RuntimeAnimatorController[] animatorsPlatformero; // P1, P3, P5...
+    public RuntimeAnimatorController[] animatorsPlatformero;
 
     [Header("Animators Mano")]
-    public RuntimeAnimatorController[] animatorsMano;        // P2, P4, P6...
+    public RuntimeAnimatorController[] animatorsMano;
 
     [Header("Spawn Points")]
-    public Transform[] spawnPointsPlatformero; // Dónde aparece el corredor (inicio del nivel)
-    public Transform[] spawnPointsMano;        // Dónde aparece la mano (libre por el nivel)
+    public Transform[] spawnPointsPlatformero;
+    public Transform[] spawnPointsMano;
+
+    [Header("Condición de Victoria")]
+    [SerializeField] private float tiempoEsperaVictoria = 2f;
+    [SerializeField] private string[] escenasAleatorias;
+
+    private bool juegoTerminado = false;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -34,8 +52,6 @@ public class PlataformeoManager : MonoBehaviour
         {
             PlayerInputHandler lectorBotones = mandoFantasma.GetComponent<PlayerInputHandler>();
 
-            // Par = Platformero | Impar = Mano constructora
-
             if (contadorJugadores % 2 == 0)
                 SpawnearPlatformero(contadorJugadores, lectorBotones);
             else
@@ -45,19 +61,53 @@ public class PlataformeoManager : MonoBehaviour
         }
     }
 
+    // Llamado por SpritePlatformero cuando toca la meta(singleton)
+    public void DeclararVictoria(GameObject ganador)
+    {
+        if (juegoTerminado) return;
+        juegoTerminado = true;
+
+        Debug.Log($"[PlataformeoManager] ¡VICTORIA! Ganador: {ganador.name}");
+
+        StartCoroutine(EsperarYCargarEscena());
+    }
+
+    private IEnumerator EsperarYCargarEscena()
+    {
+        yield return new WaitForSeconds(tiempoEsperaVictoria);
+        CargarEscenaAleatoria();
+    }
+
+    private void CargarEscenaAleatoria()
+    {
+        if (escenasAleatorias == null || escenasAleatorias.Length == 0)
+        {
+            Debug.LogError("[PlataformeoManager] ERROR: No hay escenas configuradas en 'Escenas Aleatorias'.");
+            return;
+        }
+
+        int indiceAleatorio = Random.Range(0, escenasAleatorias.Length);
+        string escenaElegida = escenasAleatorias[indiceAleatorio];
+
+        if (string.IsNullOrEmpty(escenaElegida))
+        {
+            Debug.LogError($"[PlataformeoManager] ERROR: El hueco {indiceAleatorio} del array de escenas está vacío.");
+            return;
+        }
+
+        Debug.Log($"[PlataformeoManager] Cargando escena: {escenaElegida}");
+        SceneManager.LoadScene(escenaElegida);
+    }
+
     private void SpawnearPlatformero(int idJugador, PlayerInputHandler mando)
     {
-        // ID 0 = Spawn 0 | ID 2 = Spawn 1 | ID 4 = Spawn 2
-
         int indexSpawn = idJugador / 2;
         Transform puntoSpawn = spawnPointsPlatformero[indexSpawn];
 
         GameObject sprite = Instantiate(prefabPlatformero, puntoSpawn.position, Quaternion.identity);
 
         if (sprite.TryGetComponent(out SpritePlatformero scriptPlatformero))
-        {
             scriptPlatformero.ConectarMando(mando);
-        }
 
         if (sprite.TryGetComponent(out Animator animator))
         {
@@ -68,17 +118,13 @@ public class PlataformeoManager : MonoBehaviour
 
     private void SpawnearMano(int idJugador, PlayerInputHandler mando)
     {
-        // ID 1 = Spawn 0 | ID 3 = Spawn 1 | ID 5 = Spawn 2
-
         int indexSpawn = idJugador / 2;
         Transform puntoSpawn = spawnPointsMano[indexSpawn];
 
         GameObject avatar = Instantiate(prefabMano, puntoSpawn.position, Quaternion.identity);
 
         if (avatar.TryGetComponent(out SpriteManoBob scriptMano))
-        {
             scriptMano.ConectarMando(mando);
-        }
 
         if (avatar.TryGetComponent(out Animator animator))
         {

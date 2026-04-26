@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SpriteCesta : MonoBehaviour
@@ -10,12 +12,26 @@ public class SpriteCesta : MonoBehaviour
     [Header("Referencias")]
     public PlayerInputHandler miMando;
     private Rigidbody2D rb;
+    private Animator animator;
+
 
     [Header("Suelo Salto")]
     public Transform groundCheck;
     public float groundRadius = 0.2f;
     public LayerMask groundLayer;
     private bool isGrounded;
+
+    [Header("AnimacionIngrediente")]//nO SE SI VA A FUNCIONAR CON EL ANIMATOR 
+
+    public float blinkDuration = 0.1f;
+    public float blinkRate = 5f;
+
+    [Header("Rebote")]
+
+    public float bounceForce = 5f;
+    public float bounceDuration = 0.5f;
+    private bool isBouncing = false;
+
 
     [Header("RECETA")]
     public TipoIngrediente[] recetaObjetivo;
@@ -26,7 +42,7 @@ public class SpriteCesta : MonoBehaviour
     public int recetasParaGanar = 1;
 
     private bool juegoTerminado = false;
-    private Animator animator;
+
 
     [HideInInspector]
     public UIReceta miUI;
@@ -66,7 +82,7 @@ public class SpriteCesta : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (miMando == null || juegoTerminado)
+        if (miMando == null || juegoTerminado || isBouncing)
         {
             if (juegoTerminado) rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             return;
@@ -116,4 +132,25 @@ public class SpriteCesta : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isBouncing) return;
+        if (!collision.gameObject.TryGetComponent(out SpriteCesta otraCesta)) return;//Descarta todo lo que no tenga el sprite de la cesta y concreta que cesta es 
+
+        Vector2 direccionRebote = (transform.position - collision.transform.position).normalized;
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(direccionRebote * bounceForce, ForceMode2D.Impulse);
+
+        StartCoroutine(TemporizadorRebote());
+    }
+
+    private IEnumerator TemporizadorRebote()
+    {
+        isBouncing = true;
+        yield return new WaitForSeconds(bounceDuration);
+        isBouncing = false;
+        { }
+    }
 }
+
