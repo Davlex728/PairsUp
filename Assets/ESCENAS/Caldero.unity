@@ -319,8 +319,8 @@ MonoBehaviour:
   prefabCesta: {fileID: 1480593402329651200, guid: e67f36a053869d748bddb8b9469d857f, type: 3}
   prefabMano: {fileID: 5335658803824351116, guid: 50f002e9f83ba8a46afd331411b78351, type: 3}
   animators:
-  - {fileID: 9100000, guid: 1d9719f526eb9024fa8c9f404c6127d5, type: 2}
-  - {fileID: 9100000, guid: 1d9719f526eb9024fa8c9f404c6127d5, type: 2}
+  - {fileID: 9100000, guid: 8cb75b7b4f6deaa48b0a1055ba00f0c5, type: 2}
+  - {fileID: 9100000, guid: d1cfb9303035189409e8fdacf71bca8c, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -504,11 +504,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5854256186954580203, guid: e67f36a053869d748bddb8b9469d857f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.03
+      value: -16.22
       objectReference: {fileID: 0}
     - target: {fileID: 5854256186954580203, guid: e67f36a053869d748bddb8b9469d857f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.44
+      value: -2.94
       objectReference: {fileID: 0}
     - target: {fileID: 5854256186954580203, guid: e67f36a053869d748bddb8b9469d857f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -545,7 +545,7 @@ PrefabInstance:
     - target: {fileID: 8276738108940847764, guid: e67f36a053869d748bddb8b9469d857f, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1d9719f526eb9024fa8c9f404c6127d5, type: 2}
+      objectReference: {fileID: 9100000, guid: 7648340e7e82c54498fac03cd1ede275, type: 2}
     - target: {fileID: 8703110759876490656, guid: e67f36a053869d748bddb8b9469d857f, type: 3}
       propertyPath: bounceDuration
       value: 0.2
@@ -1535,7 +1535,7 @@ PrefabInstance:
     - target: {fileID: 9139569052629054739, guid: 50f002e9f83ba8a46afd331411b78351, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 44697ff899cbf394e8e979f2d54bb0f0, type: 2}
+      objectReference: {fileID: 9100000, guid: 3a29288bd4ab2ff48ba55862d69d6421, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
