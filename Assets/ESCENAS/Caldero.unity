@@ -319,8 +319,8 @@ MonoBehaviour:
   prefabCesta: {fileID: 1480593402329651200, guid: e67f36a053869d748bddb8b9469d857f, type: 3}
   prefabMano: {fileID: 5335658803824351116, guid: 50f002e9f83ba8a46afd331411b78351, type: 3}
   animators:
-  - {fileID: 9100000, guid: 175f7120d7ee45044bd30764d1fb40d2, type: 2}
-  - {fileID: 0}
+  - {fileID: 9100000, guid: 73c82d9f117f9774f9c16c29a7789a65, type: 2}
+  - {fileID: 9100000, guid: 73c82d9f117f9774f9c16c29a7789a65, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1473,7 +1473,7 @@ PrefabInstance:
     - target: {fileID: 8276738108940847764, guid: e67f36a053869d748bddb8b9469d857f, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 5ab6831f174cdfc41b135ad4a8e914fd, type: 2}
+      objectReference: {fileID: 9100000, guid: 73c82d9f117f9774f9c16c29a7789a65, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

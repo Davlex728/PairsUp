@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-
 [RequireComponent(typeof(Rigidbody2D))]
 public class SpriteCesta : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class SpriteCesta : MonoBehaviour
     public PlayerInputHandler miMando;
     private Rigidbody2D rb;
     private Animator animator;
-
+    private SpriteRenderer sr;
 
     [Header("Suelo Salto")]
     public Transform groundCheck;
@@ -21,17 +20,18 @@ public class SpriteCesta : MonoBehaviour
     public LayerMask groundLayer;
     private bool isGrounded;
 
-    [Header("AnimacionIngrediente")]//nO SE SI VA A FUNCIONAR CON EL ANIMATOR 
-
-    public float blinkDuration = 0.1f;
-    public float blinkRate = 5f;
+    [Header("Efectos Ingrediente")]
+    public float blinkDuration = 1f;
+    public float blinkRate = 0.1f;
+    public float flashVerdeDuration = 0.4f;
+    private Coroutine corrutinaEfecto;
 
     [Header("Rebote")]
-
     public float bounceForce = 5f;
     public float bounceDuration = 0.5f;
+    public float escalaRebote = 1.3f;//visua
+    public float duracionEscalaRebote = 0.2f;//visual
     private bool isBouncing = false;
-
 
     [Header("RECETA")]
     public TipoIngrediente[] recetaObjetivo;
@@ -43,7 +43,6 @@ public class SpriteCesta : MonoBehaviour
 
     private bool juegoTerminado = false;
 
-
     [HideInInspector]
     public UIReceta miUI;
 
@@ -51,13 +50,11 @@ public class SpriteCesta : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        animator.SetBool("Caldero", true);
+        sr = GetComponent<SpriteRenderer>();
+        animator.SetBool("M1", true);
     }
 
-    public void ConectarMando(PlayerInputHandler mando)
-    {
-        miMando = mando;
-    }
+    public void ConectarMando(PlayerInputHandler mando) => miMando = mando;
 
     public void IniciarUI()
     {
@@ -106,6 +103,11 @@ public class SpriteCesta : MonoBehaviour
                 pasoActual++;
                 Debug.Log($"¡Bien! Has cogido {ingrediente.miTipo}. Faltan {recetaObjetivo.Length - pasoActual} ingredientes.");
 
+                // Flash verde al acertar
+                if (corrutinaEfecto != null) StopCoroutine(corrutinaEfecto);
+                sr.color = Color.white;
+                corrutinaEfecto = StartCoroutine(FlashVerde());
+
                 if (pasoActual >= recetaObjetivo.Length)
                 {
                     recetasCompletadas++;
@@ -124,6 +126,11 @@ public class SpriteCesta : MonoBehaviour
                 Debug.Log($"¡Error! Has cogido {ingrediente.miTipo} pero necesitabas {ingredienteQueNecesito}. ¡Receta arruinada!");
                 animator.SetTrigger("wrongIngredient");
                 pasoActual = 0;
+
+                // Parpadeo al fallar
+                if (corrutinaEfecto != null) StopCoroutine(corrutinaEfecto);
+                sr.color = Color.white;
+                corrutinaEfecto = StartCoroutine(Parpadear());
             }
 
             if (miUI != null)
@@ -136,13 +143,36 @@ public class SpriteCesta : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (isBouncing) return;
-        if (!collision.gameObject.TryGetComponent(out SpriteCesta otraCesta)) return;//Descarta todo lo que no tenga el sprite de la cesta y concreta que cesta es 
+        if (!collision.gameObject.TryGetComponent(out SpriteCesta otraCesta)) return;
 
         Vector2 direccionRebote = (transform.position - collision.transform.position).normalized;
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(direccionRebote * bounceForce, ForceMode2D.Impulse);
 
         StartCoroutine(TemporizadorRebote());
+        StartCoroutine(EfectoEscalaRebote());
+    }
+
+    // las corrutinas para los efectos
+
+    private IEnumerator Parpadear()
+    {
+        float timer = 0f;
+        while (timer < blinkDuration)
+        {
+            sr.enabled = !sr.enabled;
+            yield return new WaitForSeconds(blinkRate);
+            timer += blinkRate;
+        }
+        sr.enabled = true;
+        sr.color = Color.white;
+    }
+
+    private IEnumerator FlashVerde()
+    {
+        sr.color = new Color(0.3f, 1f, 0.3f);
+        yield return new WaitForSeconds(flashVerdeDuration);
+        sr.color = Color.white;
     }
 
     private IEnumerator TemporizadorRebote()
@@ -150,7 +180,21 @@ public class SpriteCesta : MonoBehaviour
         isBouncing = true;
         yield return new WaitForSeconds(bounceDuration);
         isBouncing = false;
-        { }
+    }
+
+    private IEnumerator EfectoEscalaRebote()
+    {
+        Vector3 escalaOriginal = transform.localScale;
+        transform.localScale = escalaOriginal * escalaRebote;
+
+        float timer = 0f;
+        while (timer < duracionEscalaRebote)
+        {
+            transform.localScale = Vector3.Lerp(escalaOriginal * escalaRebote, escalaOriginal, timer / duracionEscalaRebote);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = escalaOriginal;
     }
 }
-
