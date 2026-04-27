@@ -51,7 +51,7 @@ public class SpriteCesta : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-
+        //animator.SetBool("isGrabbing", true);
     }
 
     public void ConectarMando(PlayerInputHandler mando) => miMando = mando;
