@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
-using System.Collections;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Users;
+using System.Collections.Generic;
 
 
 
@@ -13,6 +11,7 @@ public class Movement : MonoBehaviour
     private PlayerInputHandler mandoMovimiento;
     
     [SerializeField]private int health = 3; // Vida del jugador
+    private List<GameObject> misCorazones;
 
     void Awake()
     {
@@ -22,6 +21,11 @@ public class Movement : MonoBehaviour
     public void ConectarMando(PlayerInputHandler mando)
     {
         mandoMovimiento = mando;
+    }
+    public void AsignarCorazones(List<GameObject> corazones)
+    {
+        misCorazones = corazones;
+        UIManager.instance.ActualizarCorazones(misCorazones, health);
     }
 
     private void FixedUpdate()
@@ -42,6 +46,8 @@ public class Movement : MonoBehaviour
             //Restar vida al jugador
             health--;
             //Si no le queda vida, destruir el jugador
+            UIManager.instance.ActualizarCorazones(misCorazones, health);
+            
             if (health == 0)
             {
                 Destroy(gameObject);

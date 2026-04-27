@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -95,6 +96,7 @@ public class LaserTagManager : MonoBehaviour
 
     private void SpawnearPadre(int idJugador, PlayerInputHandler mando)
     {
+        int j = 0;
         int indexSpawn = idJugador / 2;
         Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
 
@@ -102,7 +104,12 @@ public class LaserTagManager : MonoBehaviour
         padresVivos.Add(padreInstanciado);
 
         if (padreInstanciado.TryGetComponent<Movement>(out var movement))
+        {
             movement.ConectarMando(mando);
+            List<GameObject> corazones = UIManager.instance.ReclamarCorazones();
+            movement.AsignarCorazones(corazones);
+        }
+                  
     }
 
     private void SpawnearHijo(int idJugador, PlayerInputHandler mando)
