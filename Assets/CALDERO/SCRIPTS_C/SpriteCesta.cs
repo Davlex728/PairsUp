@@ -99,7 +99,7 @@ public class SpriteCesta : MonoBehaviour
 
             if (ingrediente.miTipo == ingredienteQueNecesito)
             {
-                animator.SetTrigger("correctIngredient");
+                
                 pasoActual++;
                 Debug.Log($"¡Bien! Has cogido {ingrediente.miTipo}. Faltan {recetaObjetivo.Length - pasoActual} ingredientes.");
 
@@ -124,7 +124,7 @@ public class SpriteCesta : MonoBehaviour
             else
             {
                 Debug.Log($"¡Error! Has cogido {ingrediente.miTipo} pero necesitabas {ingredienteQueNecesito}. ¡Receta arruinada!");
-                animator.SetTrigger("wrongIngredient");
+               
                 pasoActual = 0;
 
                 // Parpadeo al fallar
@@ -197,4 +197,7 @@ public class SpriteCesta : MonoBehaviour
 
         transform.localScale = escalaOriginal;
     }
+     
+    
+
 }

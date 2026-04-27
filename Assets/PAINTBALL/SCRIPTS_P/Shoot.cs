@@ -8,7 +8,7 @@ public class Shoot : MonoBehaviour
     public Transform firePoint;
     public static Shoot Instance;
 
-    [SerializeField] private float speed = 8f;
+    //[SerializeField] private float speed = 8f;
     [SerializeField] private float fireRate = 0.7f;
     [SerializeField] private int bulletTime = 3;
 
