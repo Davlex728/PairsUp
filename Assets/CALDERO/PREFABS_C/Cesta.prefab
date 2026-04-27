@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 8703110759876490656}
   - component: {fileID: 4119917161930199132}
   - component: {fileID: 8276738108940847764}
+  - component: {fileID: 2116104965510349108}
   m_Layer: 0
   m_Name: Cesta
   m_TagString: Untagged
@@ -174,12 +175,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  bounceForce: 5
+  bounceDuration: 0.5
   recetaObjetivo: 0000000003000000010000000200000003000000
   recetasCompletadas: 0
   recetasParaGanar: 2
-  tiempoEspera: 2
-  escenasAleatorias:
-  - PaintBall
   miUI: {fileID: 0}
 --- !u!61 &4119917161930199132
 BoxCollider2D:
@@ -249,3 +249,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2116104965510349108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480593402329651200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4762351c2e2117242920e87e1a9dcca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenWrap
