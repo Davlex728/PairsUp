@@ -17,6 +17,8 @@ public class SpriteMano : MonoBehaviour
 
     private Rigidbody2D objetoAgarrado;
     private Animator animator;
+
+    private bool isAgarrandoHugo = false;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -69,6 +71,16 @@ public class SpriteMano : MonoBehaviour
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
             }
         }
+        Collider2D coliderDeHugoParaLaMano = Physics2D.OverlapCircle(transform.position, radioDeAgarre, capaIngredientes);
+        if (coliderDeHugoParaLaMano != null && !isAgarrandoHugo)
+        {
+            Debug.Log($"Pawn");
+            animator.SetBool("isHovering", true);
+        }
+        else
+        {
+            animator.SetBool("isHovering", false);
+        }
     }
 
     private void IntentarAgarrar()
@@ -91,6 +103,8 @@ public class SpriteMano : MonoBehaviour
                 Debug.Log("¡Objeto agarrado con éxito!");
                 objetoAgarrado.gravityScale = 0f;
                 objetoAgarrado.linearVelocity = Vector2.zero;
+                animator.SetBool("isGrabbing", true);
+                isAgarrandoHugo = true;
             }
             else
             {
@@ -105,6 +119,8 @@ public class SpriteMano : MonoBehaviour
         objetoAgarrado.gravityScale = 1f;
         objetoAgarrado.linearVelocity = rb.linearVelocity * 0.5f;
         objetoAgarrado = null;
+        animator.SetBool("isGrabbing", false);
+            isAgarrandoHugo = false;
     }
 
     private void OnDrawGizmosSelected()
