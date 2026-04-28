@@ -9,6 +9,10 @@ public class PlayerInputHandler : MonoBehaviour
     public bool isJumping;
     public bool isGrabbing;
     public bool isShooting;
+    public bool isSouthZone;
+    public bool isNorthZone;
+    public bool isWestZone;
+    public bool isEastZone;
     public Vector2 lookInput;
 
     //platformer
@@ -55,5 +59,26 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (context.performed) isSwitchingTool = true;
         else if (context.canceled) isSwitchingTool = false;
+    }
+    
+    public void OnSouthZoneInput(InputAction.CallbackContext context)
+    {
+       if(context.performed) isSouthZone = true;
+       else if (context.canceled) isSouthZone = false;
+    }
+    public void OnNorthZoneInput(InputAction.CallbackContext context)
+    {
+        if(context.performed) isNorthZone = true;
+        else if (context.canceled) isNorthZone = false;
+    }
+    public void OnWestZoneInput(InputAction.CallbackContext context)
+    {
+        if(context.performed) isWestZone = true;
+        else if (context.canceled) isWestZone = false;
+    }
+    public void OnEastZoneInput(InputAction.CallbackContext context)
+    {
+        if(context.performed) isEastZone = true;
+        else if (context.canceled) isEastZone = false;
     }
 }

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2971930130116400483}
   - component: {fileID: 9070096948828979851}
-  - component: {fileID: 1819699332976905100}
-  - component: {fileID: 1366208664570120696}
+  - component: {fileID: -6926687420566728657}
+  - component: {fileID: 1971083533894863219}
   m_Layer: 0
   m_Name: PlayerLobby
   m_TagString: Player
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1366208664570120696}
+      - m_Target: {fileID: 1971083533894863219}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: OnMoveInput
         m_Mode: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
     m_ActionName: 'Minijuegos/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1366208664570120696}
+      - m_Target: {fileID: 1971083533894863219}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: OnJumpInput
         m_Mode: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
     m_ActionName: 'Minijuegos/Jump[/XInputControllerWindows/buttonSouth,/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1366208664570120696}
+      - m_Target: {fileID: 1971083533894863219}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: OnGrabInput
         m_Mode: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
     m_ActionName: 'Minijuegos/Grab[/Mouse/leftButton,/XInputControllerWindows/rightTrigger]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1366208664570120696}
+      - m_Target: {fileID: 1971083533894863219}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: OnShootInput
         m_Mode: 0
@@ -125,9 +125,9 @@ MonoBehaviour:
     m_ActionName: 'Minijuegos/Shoot[/XInputControllerWindows/rightTrigger]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1366208664570120696}
+      - m_Target: {fileID: 5857834240823103571}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnLookInput
+        m_MethodName: 
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -145,7 +145,7 @@ MonoBehaviour:
     m_ActionName: Minijuegos/Separate
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1366208664570120696}
+      - m_Target: {fileID: 1971083533894863219}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: OnSwitchToolInput
         m_Mode: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_DefaultActionMap: Minijuegos
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1819699332976905100
+--- !u!114 &-6926687420566728657
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,13 +173,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5857834240823103571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 862d69a4b6012484dace65736f2ec6b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 82bae756ada7b3a4f87913fa99d07e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PersistentPlayer
   playerIndex: 0
   teamIndex: 0
   scoreGame: 0
---- !u!114 &1366208664570120696
+--- !u!114 &1971083533894863219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,12 +188,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5857834240823103571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8be56b04f287ec4d9f96e754cd97fcf, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a0119045dd47c448b38f9ac3af90b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
   moveInput: {x: 0, y: 0}
   isJumping: 0
   isGrabbing: 0
   isShooting: 0
+  isSouthZone: 0
+  isNorthZone: 0
+  isWestZone: 0
+  isEastZone: 0
   lookInput: {x: 0, y: 0}
   isSwitchingTool: 0
