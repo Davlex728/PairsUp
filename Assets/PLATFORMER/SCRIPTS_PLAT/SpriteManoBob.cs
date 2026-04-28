@@ -7,14 +7,14 @@ public class SpriteManoBob : MonoBehaviour
 {
     [Header("Configuración Mano")]
     public float flySpeed = 8f;
-    public float limiteY = 2f;//Temporal o seguridad extra poner barrera fisica
+    public float limiteY = 2f; // Temporal o seguridad extra poner barrera fisica
 
     [Header("Construcción")]
     public HerramientaMano herramientaActual = HerramientaMano.Suelo;
     public GameObject prefabSuelo;
     public GameObject prefabPared;
     public LayerMask capaConstruible; // Layer "Construido" para solo eliminar cosas construidas por los players
-    public int maxBloques = 8; //ciclo maximo cuando llega a 9 la 1 se destruye
+    public int maxBloques = 8; // ciclo maximo cuando llega a 9 la 1 se destruye
     public float cooldown = 0.3f;
 
     [Header("Referencias")]
@@ -35,8 +35,15 @@ public class SpriteManoBob : MonoBehaviour
     private void Update()
     {
         if (miMando == null) return;
-        //time.time es un reloj de unity interno he teneido qu usar esto por que si no se crean 200 paredes por click
-        //Uso isGrabbin para reciclar el metodo del input handler pero imnagenaos que pone accion es lo mismo (gatillo derecho)
+
+        // Cambio de herramienta
+        if (miMando.isSwitchingTool)
+        {
+            CambiarHerramientaSiguiente();
+            miMando.isSwitchingTool = false; // Resetea el estado
+        }
+
+        // Construcción o destrucción
         if (miMando.isGrabbing && Time.time > tiempoUltimaAccion + cooldown)
         {
             EjecutarAccion();
@@ -98,7 +105,7 @@ public class SpriteManoBob : MonoBehaviour
 
     private void BorrarBloque()
     {
-        //  bloque construido más cercano
+        // bloque construido más cercano
         Collider2D col = Physics2D.OverlapCircle(transform.position, 1.2f, capaConstruible);
         if (col != null && bloquesActivos.Contains(col.gameObject))
         {
@@ -112,6 +119,12 @@ public class SpriteManoBob : MonoBehaviour
     {
         herramientaActual = nueva;
         Debug.Log($"[Mano] Herramienta: {nueva}");
+    }
+
+    private void CambiarHerramientaSiguiente()
+    {
+        herramientaActual = (HerramientaMano)(((int)herramientaActual + 1) % System.Enum.GetValues(typeof(HerramientaMano)).Length);
+        Debug.Log($"[Mano] Herramienta: {herramientaActual}");
     }
 
     private void OnDrawGizmosSelected()

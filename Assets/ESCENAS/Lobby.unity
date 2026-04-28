@@ -3509,7 +3509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4928957f470f443a26fa173d7bb6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LobbyManager
-  requiredPlayers: 2
+  requiredPlayers: 1
   randomSceneNames:
   - Caldero
   playerSlots:
