@@ -1,5 +1,5 @@
 using UnityEngine;
-//podemos añadir cosas pata construir pinchos o saltos si vemos que se queda seco
+
 public enum HerramientaMano { Suelo, Pared, Borrar }
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -7,14 +7,14 @@ public class SpriteManoBob : MonoBehaviour
 {
     [Header("Configuración Mano")]
     public float flySpeed = 8f;
-    public float limiteY = 2f; // Temporal o seguridad extra poner barrera fisica
+    public float limiteY = 2f;
 
     [Header("Construcción")]
     public HerramientaMano herramientaActual = HerramientaMano.Suelo;
     public GameObject prefabSuelo;
     public GameObject prefabPared;
-    public LayerMask capaConstruible; // Layer "Construido" para solo eliminar cosas construidas por los players
-    public int maxBloques = 8; // ciclo maximo cuando llega a 9 la 1 se destruye
+    public LayerMask capaConstruible;
+    public int maxBloques = 8;
     public float cooldown = 0.3f;
 
     [Header("Referencias")]
@@ -40,7 +40,7 @@ public class SpriteManoBob : MonoBehaviour
         if (miMando.isSwitchingTool)
         {
             CambiarHerramientaSiguiente();
-            miMando.isSwitchingTool = false; // Resetea el estado
+            miMando.isSwitchingTool = false;
         }
 
         // Construcción o destrucción
@@ -67,6 +67,7 @@ public class SpriteManoBob : MonoBehaviour
 
     private void EjecutarAccion()
     {
+        Debug.Log($"[EjecutarAccion] herramienta: {herramientaActual}");
         switch (herramientaActual)
         {
             case HerramientaMano.Suelo:
@@ -83,15 +84,15 @@ public class SpriteManoBob : MonoBehaviour
 
     private void ColocarBloque(GameObject prefab)
     {
+        Debug.Log($"[ColocarBloque] prefab recibido: {(prefab == null ? "NULL" : prefab.name)} | herramienta: {herramientaActual}");
         if (prefab == null) return;
+
         if (bloquesActivos.Count >= maxBloques)
         {
-            // el tema del ciclo se ejecuta aqui
             Destroy(bloquesActivos[0]);
             bloquesActivos.RemoveAt(0);
         }
 
-        // Snap temporal por q no se si me gusta
         Vector3 posSnap = new Vector3(
             Mathf.Round(transform.position.x),
             Mathf.Round(transform.position.y),
@@ -105,13 +106,17 @@ public class SpriteManoBob : MonoBehaviour
 
     private void BorrarBloque()
     {
-        // bloque construido más cercano
+        Debug.Log("[BorrarBloque] intentando borrar...");
         Collider2D col = Physics2D.OverlapCircle(transform.position, 1.2f, capaConstruible);
         if (col != null && bloquesActivos.Contains(col.gameObject))
         {
             bloquesActivos.Remove(col.gameObject);
             Destroy(col.gameObject);
             Debug.Log("[Mano] Bloque borrado.");
+        }
+        else
+        {
+            Debug.Log($"[BorrarBloque] nada encontrado. col={col}");
         }
     }
 
@@ -124,7 +129,7 @@ public class SpriteManoBob : MonoBehaviour
     private void CambiarHerramientaSiguiente()
     {
         herramientaActual = (HerramientaMano)(((int)herramientaActual + 1) % System.Enum.GetValues(typeof(HerramientaMano)).Length);
-        Debug.Log($"[Mano] Herramienta: {herramientaActual}");
+        Debug.Log($"[Mano] Herramienta cambiada a: {herramientaActual}");
     }
 
     private void OnDrawGizmosSelected()
