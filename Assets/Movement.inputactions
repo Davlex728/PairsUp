@@ -68,42 +68,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "NortZone",
-                    "type": "Button",
-                    "id": "50839af3-f57c-403b-95e7-57ff4834c08d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SouthZone",
-                    "type": "Button",
-                    "id": "ca37b2cb-e8f7-4fe5-8538-514d973ebe05",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "EastZone",
-                    "type": "Button",
-                    "id": "c0c78cae-a5de-4354-b70d-926a9bb5286d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "WestZone",
-                    "type": "Button",
-                    "id": "1718317a-770e-4ec4-9e99-367498fc7eb1",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -274,45 +238,12 @@
                 },
                 {
                     "name": "",
-                    "id": "cbe5d79f-d609-486a-8437-53d832a1c200",
-                    "path": "<Gamepad>/buttonNorth",
+                    "id": "4ce977dd-178d-470d-b4ba-8df9108cfc5d",
+                    "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "NortZone",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "152b7f27-ab0f-481d-8770-235c2e96ed34",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SouthZone",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "08a4d333-32e0-4853-a339-dfa3f71e91d5",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "EastZone",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bb41f5c5-f29c-4d4d-939a-579e7ad4936f",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "WestZone",
+                    "action": "SwitchTool",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
