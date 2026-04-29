@@ -14,9 +14,14 @@ public class UIManager : MonoBehaviour
 
     public static UIManager instance;
 
-    void Start()
+    private void Awake()
     {
         instance = this;
+    }
+    
+    void Start()
+    {
+        
 
         // Se encolan en orden: jugador 1, 2, 3
         corazonesDisponibles = new Queue<List<GameObject>>();
@@ -38,6 +43,12 @@ public class UIManager : MonoBehaviour
 
     public void ActualizarCorazones(List<GameObject> corazones, int vidasRestantes)
     {
+        if (corazones == null)
+        {
+            Debug.LogWarning("[UIManager] ActualizarCorazones: lista null, ignorando.");
+            return;
+        }
+
         for (int i = 0; i < corazones.Count; i++)
         {
             corazones[i].SetActive(i < vidasRestantes);

@@ -1671,9 +1671,7 @@ MonoBehaviour:
   - {fileID: 590897951}
   - {fileID: 2021377019}
   - {fileID: 1032062945}
-  escenasAleatorias:
-  - Caldero
-  - Pong
+  escenasAleatorias: []
 --- !u!114 &827207762
 MonoBehaviour:
   m_ObjectHideFlags: 0

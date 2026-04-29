@@ -1,13 +1,21 @@
+using System;
 using UnityEngine;
 
 public class MazeMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     
     private PlayerInputHandler mandoMovimiento;
     
+    public static MazeMovement instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

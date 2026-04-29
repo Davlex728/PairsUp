@@ -44,7 +44,8 @@ public class Movement : MonoBehaviour
             //Destruir la bala
             Destroy(other.gameObject);
             //Restar vida al jugador
-            health--;
+            health = health - 1;
+            Debug.Log(health);
             //Si no le queda vida, destruir el jugador
             UIManager.instance.ActualizarCorazones(misCorazones, health);
             

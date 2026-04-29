@@ -41,13 +41,16 @@ public class LaserTagManager : MonoBehaviour
 
         foreach (PersistentPlayer mandoFantasma in jugadoresConectados)
         {
+                Debug.Log(contadorJugadores);
             PlayerInputHandler lectorBotones = mandoFantasma.GetComponent<PlayerInputHandler>();
 
             if (contadorJugadores % 2 == 0)
                 SpawnearPadre(contadorJugadores, lectorBotones);
             else
+            {
+                Debug.Log("Hola hijo");
                 SpawnearHijo(contadorJugadores, lectorBotones);
-
+            }
             contadorJugadores++;
         }
     }
@@ -105,6 +108,11 @@ public class LaserTagManager : MonoBehaviour
         if (padreInstanciado.TryGetComponent<Movement>(out var movement))
         {
             movement.ConectarMando(mando);
+            if (UIManager.instance == null)
+            {
+                Debug.LogError("[LaserTagManager] UIManager.instance es null. ¿Está en la escena?");
+                return;
+            }
             List<GameObject> corazones = UIManager.instance.ReclamarCorazones();
             movement.AsignarCorazones(corazones);
         }
@@ -118,6 +126,8 @@ public class LaserTagManager : MonoBehaviour
             Debug.LogWarning("[LaserTagManager] No hay padre instanciado para este hijo.");
             return;
         }
+
+        Debug.Log("Hola");
 
         GameObject hijo = Instantiate(prefabCirculo, padreInstanciado.transform.position + (Vector3)offsetHijo, Quaternion.identity);
         hijo.transform.SetParent(padreInstanciado.transform);
