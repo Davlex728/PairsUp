@@ -96,7 +96,6 @@ public class LaserTagManager : MonoBehaviour
 
     private void SpawnearPadre(int idJugador, PlayerInputHandler mando)
     {
-        int j = 0;
         int indexSpawn = idJugador / 2;
         Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
 

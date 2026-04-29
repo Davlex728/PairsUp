@@ -37,8 +37,10 @@ public class MazeGameManager : MonoBehaviour
     void Start()
     {
         PersistentPlayer[] jugadoresConectados = FindObjectsByType<PersistentPlayer>(FindObjectsSortMode.None);
-
-        if (parejas.Count == 0)
+        
+        Debug.Log($"[MazeGameManager] Jugadores conectados: {jugadoresConectados.Length}");
+        
+        if (jugadoresConectados.Length == 0)
         {
             Debug.LogWarning("[MazeGameManager] No hay jugadores. ¿Has pasado por el lobby?");
             return;
@@ -48,10 +50,13 @@ public class MazeGameManager : MonoBehaviour
 
         foreach (PersistentPlayer jugador in jugadoresConectados)
         {
+            
+            Debug.Log(contadorJugadores);
             Debug.Log($"Procesando Jugador : {jugador.name}");
             PlayerInputHandler lectorBotones = jugador.GetComponent<PlayerInputHandler>();
             if (contadorJugadores % 2 == 0)
             {
+                
                 SpawnearJugadorUno(contadorJugadores,lectorBotones,i);
                 Debug.Log($"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
             }
@@ -61,7 +66,6 @@ public class MazeGameManager : MonoBehaviour
                 Debug.Log($"Spawnereando jugador 2 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
                 
             }
-
             i = i + 1;
             contadorJugadores++;
         }
@@ -109,15 +113,26 @@ public class MazeGameManager : MonoBehaviour
     {
         Debug.Log("Spawneando jugador padre");
         int indexSpawn = idJugador / 2;
-        Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
+        Transform puntoSpawn = spawnPointsPlayers[i];
+        Debug.Log(i);
         
-        jugadorUno = Instantiate(prefabPlayerUno, puntoSpawn.position, spawnPointsPlayers[i].transform.rotation);
+        jugadorUno = Instantiate(prefabPlayerUno, puntoSpawn.position, Quaternion.identity );
         jugadoresVivos.Add(jugadorUno);
-
+        if (i == 0)
+        {
+            jugadorUno.gameObject.tag = "Azul";   
+        }
+        if (i == 2)
+        {
+            jugadorUno.gameObject.tag = "Rojo";   
+        }
+        if (i == 4)
+        {
+            jugadorUno.gameObject.tag = "Amarillo";   
+        }
         if (jugadorUno.TryGetComponent<MazeMovement>(out var scriptMovimiento))
         {
             scriptMovimiento.ConectarMando(mando);
-            // Configurar los ángulos según el spawn point
            
         }
     } 
@@ -126,20 +141,28 @@ public class MazeGameManager : MonoBehaviour
     {
         List<GameObject> nuevaPareja = new List<GameObject>();
         int indexSpawn = idJugador / 2;
-        Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
-        
-        jugadorDos = Instantiate(prefabPlayerDos, puntoSpawn.position, spawnPointsPlayers[i].transform.rotation );
-        
-            nuevaPareja.Add(jugadorUno);
-            nuevaPareja.Add(jugadorDos);
+        Transform puntoSpawn = spawnPointsPlayers[i];
+        jugadorDos = Instantiate(prefabPlayerDos, puntoSpawn.position, Quaternion.identity );
+        jugadoresVivos.Add(jugadorDos);
             
-            parejas.Add(nuevaPareja);
-            
+        if (i == 1)
+        {
+            jugadorDos.gameObject.tag = "Azul";   
+        }
+        if (i == 3)
+        {
+            jugadorDos.gameObject.tag = "Rojo";   
+        }
+        if (i == 5)
+        {
+            jugadorDos.gameObject.tag = "Amarillo";   
+        }
+            //parejas.Add(nuevaPareja);
+            //Debug.Log(i);
         
         if (jugadorDos.TryGetComponent<MazeMovement>(out var scriptMovimiento))
         {
             scriptMovimiento.ConectarMando(mando);
-            // Configurar los ángulos según el spawn point
             
         }
     }

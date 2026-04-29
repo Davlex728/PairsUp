@@ -8,6 +8,9 @@ TagManager:
   - Bullet
   - Limit
   - Meta
+  - Amarillo
+  - Azul
+  - Rojo
   layers:
   - Default
   - TransparentFX
@@ -44,6 +47,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Negro
+    uniqueID: 2222438249
+    locked: 0
+  - name: Luz
+    uniqueID: 789429101
     locked: 0
   m_RenderingLayers:
   - Default

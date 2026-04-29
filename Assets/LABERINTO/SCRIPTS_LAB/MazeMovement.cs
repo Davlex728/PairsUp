@@ -6,13 +6,12 @@ public class MazeMovement : MonoBehaviour
     
     Rigidbody2D rb;
     
-    public PlayerInputHandler mandoMovimiento;
-    private bool canMove = true;
+    private PlayerInputHandler mandoMovimiento;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void ConectarMando(PlayerInputHandler mando)
@@ -22,11 +21,13 @@ public class MazeMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (mandoMovimiento == null) return;
         Vector2 input = mandoMovimiento.moveInput;
-        if (canMove)
-        {
-            rb.linearVelocity = new Vector2(input.x * speed, input.y * speed);
-        }
+        
+        rb.linearVelocity = new Vector2(input.x * speed, input.y * speed);
+        
+        Debug.Log($"Moviendo la mierda esta");
+        
     }
 
     void Update()
