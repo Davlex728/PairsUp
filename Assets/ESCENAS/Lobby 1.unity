@@ -3511,7 +3511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LobbyManager
   requiredPlayers: 2
   randomSceneNames:
-  - PaintBall
+  - Pong
   playerSlots:
   - {fileID: 2143192389}
   - {fileID: 639829378}

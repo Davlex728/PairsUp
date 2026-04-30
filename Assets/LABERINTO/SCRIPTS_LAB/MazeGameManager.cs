@@ -83,13 +83,15 @@ public class MazeGameManager : MonoBehaviour
                 InputBoton botonA = ObtenerBotonPulsado(jugA.mandoMovimiento);
                 InputBoton botonB = ObtenerBotonPulsado(jugB.mandoMovimiento);
 
+                // ¿Han pulsado el mismo botón los dos?
                 if (botonA != InputBoton.Ninguno && botonA == botonB)
                 {
+                    // Manda el botón al script de movimiento
                     jugA.RecibirInput(botonA);
                     jugB.RecibirInput(botonB);
 
-                    
-                    //GestorSimbolos.instance.ComprobarInput(botonA);
+                    // Manda al script de símbolos para comprobar si es correcto
+                    ButtonLogic.instance.ComprobarInput(botonA);
                 }
                 else
                 {

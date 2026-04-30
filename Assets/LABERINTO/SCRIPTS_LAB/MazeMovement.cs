@@ -31,7 +31,7 @@ public class MazeMovement : MonoBehaviour
     public void RecibirInput(InputBoton boton)
     {
         inputEfectivo = boton;
-        // Aquí tu lógica de movimiento según el botón
+        
     }
 
     public void ConectarMando(PlayerInputHandler mando)
@@ -46,7 +46,6 @@ public class MazeMovement : MonoBehaviour
         
         rb.linearVelocity = new Vector2(input.x * speed, input.y * speed);
         
-        Debug.Log($"Moviendo la mierda esta");
         
     }
 
