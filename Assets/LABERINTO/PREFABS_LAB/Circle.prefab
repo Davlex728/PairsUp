@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8660180382167657556}
   - component: {fileID: 1699261110058897472}
   - component: {fileID: -6854545676864644554}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MazeMovement
   speed: 2
+  rb: {fileID: 0}
 --- !u!1 &2578393143610768770
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +183,7 @@ GameObject:
   - component: {fileID: 1920978514570056289}
   - component: {fileID: 2262460918414629556}
   - component: {fileID: 1971830927695531525}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

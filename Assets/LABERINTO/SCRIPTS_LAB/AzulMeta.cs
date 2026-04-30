@@ -3,7 +3,14 @@ using UnityEngine;
 
 public class AzulMeta : MonoBehaviour
 {
+    public static AzulMeta instance;
     public int jugadoresAzules;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,11 +27,11 @@ public class AzulMeta : MonoBehaviour
     {
         if (other.tag == "Azul")
         {
-            Debug.Log("other.name");
+            Debug.Log(other.name);
             other.TryGetComponent<MazeMovement>(out MazeMovement mazeMovement);
             mazeMovement.rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
-            MazeMovement.instance.transform.position = new Vector3(0,-0.404f,0);
+            mazeMovement.transform.position = new Vector3(0,-0.404f,0);
         }
          jugadoresAzules+= 1;  
     }

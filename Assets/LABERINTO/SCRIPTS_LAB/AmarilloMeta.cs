@@ -1,8 +1,14 @@
 using UnityEngine;
 
 public class AmarilloMeta : MonoBehaviour
-{
+{ 
+    public static AmarilloMeta instance;
     public int jugadoresAmarillos;
+    
+    private void Awake()
+    {
+        instance = this;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,7 +27,7 @@ public class AmarilloMeta : MonoBehaviour
         {
             other.TryGetComponent<MazeMovement>(out MazeMovement mazeMovement);
             mazeMovement.rb.constraints = RigidbodyConstraints2D.FreezeAll;
-            MazeMovement.instance.transform.position = new Vector3(0,-0.104f,0);
+            mazeMovement.transform.position = new Vector3(0,-0.104f,0);
         }
         jugadoresAmarillos+= 1;
     }

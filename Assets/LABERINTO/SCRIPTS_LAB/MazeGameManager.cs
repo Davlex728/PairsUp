@@ -5,41 +5,43 @@ using UnityEngine.SceneManagement;
 
 public class MazeGameManager : MonoBehaviour
 {
-    [Header("Prefabs")] 
-    
-    public GameObject prefabPlayerUno;
+    public static MazeGameManager instance;
+
+    [Header("Prefabs")] public GameObject prefabPlayerUno;
 
     public GameObject prefabPlayerDos;
 
-    [Header("Spawners")] 
-    
-    private int i = 0;
-    
-    public Transform[]  spawnPointsPlayers;
-    
+    [Header("Spawners")] private int i = 0;
+
+    public Transform[] spawnPointsPlayers;
+
     public List<List<GameObject>> spawnPointsList;
-    
+
     private bool partidaTerminada = false;
-    [Header("Random Scenes")]
-    
-    public String[] escenasAleatorias;
-    
-    
-    [Header("Players")]
-    
-    public List<GameObject> jugadoresVivos = new List<GameObject>();
+    [Header("Random Scenes")] public String[] escenasAleatorias;
+
+
+    [Header("Players")] public List<GameObject> jugadoresVivos = new List<GameObject>();
     private GameObject jugadorUno;
     private GameObject jugadorDos;
-    
+
     List<List<GameObject>> parejas = new List<List<GameObject>>();
+    public Transform puntoSpawn;
+
+     
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         PersistentPlayer[] jugadoresConectados = FindObjectsByType<PersistentPlayer>(FindObjectsSortMode.None);
-        
+
         Debug.Log($"[MazeGameManager] Jugadores conectados: {jugadoresConectados.Length}");
-        
+
         if (jugadoresConectados.Length == 0)
         {
             Debug.LogWarning("[MazeGameManager] No hay jugadores. ¿Has pasado por el lobby?");
@@ -50,25 +52,60 @@ public class MazeGameManager : MonoBehaviour
 
         foreach (PersistentPlayer jugador in jugadoresConectados)
         {
-            
             Debug.Log(contadorJugadores);
             Debug.Log($"Procesando Jugador : {jugador.name}");
             PlayerInputHandler lectorBotones = jugador.GetComponent<PlayerInputHandler>();
             if (contadorJugadores % 2 == 0)
             {
-                
-                SpawnearJugadorUno(contadorJugadores,lectorBotones,i);
-                Debug.Log($"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
+                SpawnearJugadorUno(contadorJugadores, lectorBotones, i);
+                Debug.Log(
+                    $"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
             }
             else
             {
-                SpawnearJugadorDos(contadorJugadores,lectorBotones,i);
-                Debug.Log($"Spawnereando jugador 2 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
-                
+                SpawnearJugadorDos(contadorJugadores, lectorBotones, i);
+                Debug.Log(
+                    $"Spawnereando jugador 2 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
             }
+
             i = i + 1;
             contadorJugadores++;
         }
+    }
+
+    void LateUpdate()
+    {
+        foreach (var pareja in parejas)
+        {
+            if (pareja[0].TryGetComponent<MazeMovement>(out var jugA)
+                && pareja[1].TryGetComponent<MazeMovement>(out var jugB))
+            {
+                InputBoton botonA = ObtenerBotonPulsado(jugA.mandoMovimiento);
+                InputBoton botonB = ObtenerBotonPulsado(jugB.mandoMovimiento);
+
+                if (botonA != InputBoton.Ninguno && botonA == botonB)
+                {
+                    jugA.RecibirInput(botonA);
+                    jugB.RecibirInput(botonB);
+
+                    
+                    //GestorSimbolos.instance.ComprobarInput(botonA);
+                }
+                else
+                {
+                    jugA.RecibirInput(InputBoton.Ninguno);
+                    jugB.RecibirInput(InputBoton.Ninguno);
+                }
+            }
+        }
+    }
+    private InputBoton ObtenerBotonPulsado(PlayerInputHandler mando)
+    {
+        if (mando.isSouthZone) return InputBoton.South;
+        if (mando.isNorthZone) return InputBoton.North;
+        if (mando.isWestZone)  return InputBoton.West;
+        if (mando.isEastZone)  return InputBoton.East;
+        return InputBoton.Ninguno;
     }
 
     public void ComprobarGanador()
@@ -77,9 +114,9 @@ public class MazeGameManager : MonoBehaviour
 
         jugadoresVivos.RemoveAll(p => p == null);
 
-        if (jugadoresVivos.Count == 1)
+        if (AzulMeta.instance.jugadoresAzules == 2 || RojoMeta.instance.jugadoresRojos == 2 ||
+            AmarilloMeta.instance.jugadoresAmarillos == 2)
         {
-
             partidaTerminada = true;
             // Comprobación de seguridad
             if (escenasAleatorias == null || escenasAleatorias.Length == 0)
@@ -113,57 +150,66 @@ public class MazeGameManager : MonoBehaviour
     {
         Debug.Log("Spawneando jugador padre");
         int indexSpawn = idJugador / 2;
-        Transform puntoSpawn = spawnPointsPlayers[i];
+        puntoSpawn = spawnPointsPlayers[i];
         Debug.Log(i);
-        
-        jugadorUno = Instantiate(prefabPlayerUno, puntoSpawn.position, Quaternion.identity );
+
+        jugadorUno = Instantiate(prefabPlayerUno, puntoSpawn.position, Quaternion.identity);
         jugadoresVivos.Add(jugadorUno);
         if (i == 0)
         {
-            jugadorUno.gameObject.tag = "Azul";   
+            jugadorUno.gameObject.tag = "Azul";
+            MazeMovement.instance.spawnPoint = puntoSpawn;
         }
+
         if (i == 2)
         {
-            jugadorUno.gameObject.tag = "Rojo";   
+            jugadorUno.gameObject.tag = "Rojo";
         }
+
         if (i == 4)
         {
-            jugadorUno.gameObject.tag = "Amarillo";   
+            jugadorUno.gameObject.tag = "Amarillo";
         }
+
         if (jugadorUno.TryGetComponent<MazeMovement>(out var scriptMovimiento))
         {
             scriptMovimiento.ConectarMando(mando);
-           
         }
-    } 
-    
-    private void SpawnearJugadorDos(int idJugador, PlayerInputHandler mando, int i )
+    }
+
+    private void SpawnearJugadorDos(int idJugador, PlayerInputHandler mando, int i)
     {
         List<GameObject> nuevaPareja = new List<GameObject>();
         int indexSpawn = idJugador / 2;
-        Transform puntoSpawn = spawnPointsPlayers[i];
-        jugadorDos = Instantiate(prefabPlayerDos, puntoSpawn.position, Quaternion.identity );
+        puntoSpawn = spawnPointsPlayers[i];
+        jugadorDos = Instantiate(prefabPlayerDos, puntoSpawn.position, Quaternion.identity);
         jugadoresVivos.Add(jugadorDos);
-            
+        nuevaPareja.Add(jugadorUno);
+        nuevaPareja.Add(jugadorDos);
+
+        parejas.Add(nuevaPareja);
+
         if (i == 1)
         {
-            jugadorDos.gameObject.tag = "Azul";   
+            jugadorDos.gameObject.tag = "Azul";
+            MazeMovement.instance.spawnPoint = puntoSpawn;
         }
+
         if (i == 3)
         {
-            jugadorDos.gameObject.tag = "Rojo";   
+            jugadorDos.gameObject.tag = "Rojo";
         }
+
         if (i == 5)
         {
-            jugadorDos.gameObject.tag = "Amarillo";   
+            jugadorDos.gameObject.tag = "Amarillo";
         }
-            //parejas.Add(nuevaPareja);
-            //Debug.Log(i);
-        
+        //parejas.Add(nuevaPareja);
+        //Debug.Log(i);
+
         if (jugadorDos.TryGetComponent<MazeMovement>(out var scriptMovimiento))
         {
             scriptMovimiento.ConectarMando(mando);
-            
         }
     }
 }

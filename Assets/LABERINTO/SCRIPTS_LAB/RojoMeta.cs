@@ -1,8 +1,16 @@
+using System;
 using UnityEngine;
 
 public class RojoMeta : MonoBehaviour
 {
+    public static RojoMeta instance;
     public int jugadoresRojos;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,7 +29,7 @@ public class RojoMeta : MonoBehaviour
         {
             other.TryGetComponent<MazeMovement>(out MazeMovement mazeMovement);
             mazeMovement.rb.constraints = RigidbodyConstraints2D.FreezeAll;
-            MazeMovement.instance.transform.position = new Vector3(0,0.222f,0);
+            mazeMovement.transform.position = new Vector3(0,0.222f,0);
 
             jugadoresRojos += 1;
         }
