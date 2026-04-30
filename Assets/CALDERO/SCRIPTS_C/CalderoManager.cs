@@ -59,7 +59,7 @@ public class CalderoManager : MonoBehaviour
         }
     }
 
-    // ── Spawn ───────────────────────────────────────────────────────────────
+    
 
     private void SpawnearCesta(int slotId, int equipo, PlayerInputHandler mando)
     {
