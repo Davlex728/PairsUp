@@ -171,7 +171,7 @@ MonoBehaviour:
   jumpForce: 5
   miMando: {fileID: 0}
   groundCheck: {fileID: 9183026249944285059}
-  groundRadius: 0.2
+  groundRadius: 0.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
