@@ -33,11 +33,13 @@ public class MazeGameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
         PersistentPlayer[] jugadoresConectados = FindObjectsByType<PersistentPlayer>(FindObjectsSortMode.None);
 
         Debug.Log($"[MazeGameManager] Jugadores conectados: {jugadoresConectados.Length}");
@@ -52,6 +54,9 @@ public class MazeGameManager : MonoBehaviour
 
         foreach (PersistentPlayer jugador in jugadoresConectados)
         {
+            
+            Debug.Log($"Jugador: {jugador.name} playerIndex: {jugador.playerIndex} teamIndex: {jugador.teamIndex}");
+            
             Debug.Log(contadorJugadores);
             Debug.Log($"Procesando Jugador : {jugador.name}");
             PlayerInputHandler lectorBotones = jugador.GetComponent<PlayerInputHandler>();
@@ -76,25 +81,29 @@ public class MazeGameManager : MonoBehaviour
             i = i + 1;
             contadorJugadores++;
         }
+
     }
 
     void LateUpdate()
     {
         foreach (var pareja in parejas)
         {
-            if (pareja[0].TryGetComponent<MazeMovement>(out var jugA)
-                && pareja[1].TryGetComponent<MazeMovement>(out var jugB))
+            //Debug.Log($"Pareja[0]: {pareja[0]} Pareja[1]: {pareja[1]}");
+            
+            if (pareja[0].TryGetComponent<MazeMovement>(out var jugA) && pareja[1].TryGetComponent<MazeMovement>(out var jugB))
             {
                 InputBoton botonA = ObtenerBotonPulsado(jugA.mandoMovimiento);
                 InputBoton botonB = ObtenerBotonPulsado(jugB.mandoMovimiento);
+                Debug.Log($"BotonA: {botonA} BotonB: {botonB}");
 
+                
                 // ¿Han pulsado el mismo botón los dos?
                 if (botonA != InputBoton.Ninguno && botonA == botonB)
                 {
                     // Manda el botón al script de movimiento
                     jugA.RecibirInput(botonA);
                     jugB.RecibirInput(botonB);
-
+                    Debug.Log("Hola que pasa, pulsando los botones");
                     // Manda al script de símbolos para comprobar si es correcto
                     ButtonLogic.instance.ComprobarInput(botonA);
                 }
@@ -108,10 +117,19 @@ public class MazeGameManager : MonoBehaviour
     }
     private InputBoton ObtenerBotonPulsado(PlayerInputHandler mando)
     {
+        if (mando == null) return InputBoton.Ninguno;
+        
         if (mando.isSouthZone) return InputBoton.South;
         if (mando.isNorthZone) return InputBoton.North;
         if (mando.isWestZone)  return InputBoton.West;
         if (mando.isEastZone)  return InputBoton.East;
+        if (mando == null)
+        {
+            Debug.LogError("El mando es null");
+            return InputBoton.Ninguno;
+
+        }
+
         return InputBoton.Ninguno;
     }
 
@@ -184,6 +202,7 @@ public class MazeGameManager : MonoBehaviour
 
     private void SpawnearJugadorDos(int slotId, int equipo, PlayerInputHandler mando)
     {
+        Debug.Log($"jugadorUno al entrar en SpawnearJugadorDos:{jugadorUno}");
         List<GameObject> nuevaPareja = new List<GameObject>();
         //int indexSpawn = idJugador / 2;
         Debug.Log(slotId);

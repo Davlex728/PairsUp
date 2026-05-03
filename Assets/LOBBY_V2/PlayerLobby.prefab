@@ -125,9 +125,9 @@ MonoBehaviour:
     m_ActionName: 'Minijuegos/Shoot[/XInputControllerWindows/rightTrigger]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5857834240823103571}
+      - m_Target: {fileID: 1971083533894863219}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OnLookInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -161,68 +161,68 @@ MonoBehaviour:
     m_ActionName: Minijuegos/SwitchTool
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5857834240823103571}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1971083533894863219}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnNorthZoneInput
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 50839af3-f57c-403b-95e7-57ff4834c08d
-    m_ActionName: 'Minijuegos/NortZone[/XInputControllerWindows/buttonNorth]'
+    m_ActionId: a86bd0f6-8898-4266-ac96-dbbe29d71bce
+    m_ActionName: 'Minijuegos/North[/XInputControllerWindows1/buttonNorth,/XInputControllerWindows/buttonNorth]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5857834240823103571}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1971083533894863219}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnSouthZoneInput
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: ca37b2cb-e8f7-4fe5-8538-514d973ebe05
-    m_ActionName: 'Minijuegos/SouthZone[/XInputControllerWindows/buttonSouth]'
+    m_ActionId: f79e111e-6369-4220-ad1f-bdeb25837639
+    m_ActionName: 'Minijuegos/South[/XInputControllerWindows1/buttonSouth,/XInputControllerWindows/buttonSouth]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5857834240823103571}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1971083533894863219}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnWestZoneInput
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: c0c78cae-a5de-4354-b70d-926a9bb5286d
-    m_ActionName: 'Minijuegos/EastZone[/XInputControllerWindows/buttonEast]'
+    m_ActionId: 6e5f33d1-a5b3-4b0f-9b4d-780d3534c14f
+    m_ActionName: 'Minijuegos/West[/XInputControllerWindows1/buttonWest,/XInputControllerWindows/buttonWest]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5857834240823103571}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1971083533894863219}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnEastZoneInput
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 1718317a-770e-4ec4-9e99-367498fc7eb1
-    m_ActionName: 'Minijuegos/WestZone[/XInputControllerWindows/buttonWest]'
+    m_ActionId: c268c624-ca21-4769-a668-2da982889ec3
+    m_ActionName: 'Minijuegos/East[/XInputControllerWindows1/buttonEast,/XInputControllerWindows/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Minijuegos
