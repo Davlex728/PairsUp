@@ -90,7 +90,7 @@ public class MazeGameManager : MonoBehaviour
         {
             //Debug.Log($"Pareja[0]: {pareja[0]} Pareja[1]: {pareja[1]}");
             
-            if (pareja[0].TryGetComponent<MazeMovement>(out var jugA) && pareja[1].TryGetComponent<MazeMovement>(out var jugB))
+            if (pareja[0].TryGetComponent<MazeMovement>(out var jugA)  && pareja[1].TryGetComponent<MazeMovement>(out var jugB))
             {
                 InputBoton botonA = ObtenerBotonPulsado(jugA.mandoMovimiento);
                 InputBoton botonB = ObtenerBotonPulsado(jugB.mandoMovimiento);
