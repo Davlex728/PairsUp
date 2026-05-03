@@ -20,7 +20,7 @@ public class PlataformeoManager : MonoBehaviour
     public Transform[] spawnPointsPlatformero;
     public Transform[] spawnPointsMano;
 
-    [Header("Condición de Victoria")]
+    [Header("Condicion de Victoria")]
     [SerializeField] private float tiempoEsperaVictoria = 2f;
     [SerializeField] private string[] escenasAleatorias;
 
@@ -28,11 +28,7 @@ public class PlataformeoManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
     }
 
@@ -46,29 +42,29 @@ public class PlataformeoManager : MonoBehaviour
             return;
         }
 
-        int contadorJugadores = 0;
+        int contadorPlatformeros = 0;
+        int contadorManos = 0;
 
-        foreach (PersistentPlayer mandoFantasma in jugadoresConectados)
+        foreach (PersistentPlayer pp in jugadoresConectados)
         {
-            PlayerInputHandler lectorBotones = mandoFantasma.GetComponent<PlayerInputHandler>();
+            PlayerInputHandler mando = pp.GetComponent<PlayerInputHandler>();
+            int slotId = pp.playerIndex; // 1-6 asignado en lobby
 
-            if (contadorJugadores % 2 == 0)
-                SpawnearPlatformero(contadorJugadores, lectorBotones);
+            // Slots impares (1,3,5) → Platformero | Slots pares (2,4,6) → Mano
+            bool esPlatformero = slotId % 2 != 0;
+
+            if (esPlatformero)
+                SpawnearPlatformero(contadorPlatformeros++, mando);
             else
-                SpawnearMano(contadorJugadores, lectorBotones);
-
-            contadorJugadores++;
+                SpawnearMano(contadorManos++, mando);
         }
     }
 
-    // Llamado por SpritePlatformero cuando toca la meta(singleton)
     public void DeclararVictoria(GameObject ganador)
     {
         if (juegoTerminado) return;
         juegoTerminado = true;
-
         Debug.Log($"[PlataformeoManager] ¡VICTORIA! Ganador: {ganador.name}");
-
         StartCoroutine(EsperarYCargarEscena());
     }
 
@@ -82,54 +78,47 @@ public class PlataformeoManager : MonoBehaviour
     {
         if (escenasAleatorias == null || escenasAleatorias.Length == 0)
         {
-            Debug.LogError("[PlataformeoManager] ERROR: No hay escenas configuradas en 'Escenas Aleatorias'.");
+            Debug.LogError("[PlataformeoManager] No hay escenas configuradas.");
+            return;
+        }
+        string escena = escenasAleatorias[Random.Range(0, escenasAleatorias.Length)];
+
+        if (string.IsNullOrEmpty(escena))
+        {
+            Debug.LogError("[PlataformeoManager] Escena vacía.");
+            return;
+        }
+        SceneManager.LoadScene(escena);
+    }
+
+    private void SpawnearPlatformero(int indice, PlayerInputHandler mando)
+    {
+        if (indice >= spawnPointsPlatformero.Length)
+        {
+            Debug.LogError($"[PlataformeoManager] Falta spawn platformero {indice}");
+            return;
+        }
+        GameObject sprite = Instantiate(prefabPlatformero, spawnPointsPlatformero[indice].position, Quaternion.identity);
+
+        if (sprite.TryGetComponent(out SpritePlatformero s)) s.ConectarMando(mando);
+
+        if (sprite.TryGetComponent(out Animator anim) && animatorsPlatformero.Length > indice && animatorsPlatformero[indice] != null)
+            anim.runtimeAnimatorController = animatorsPlatformero[indice];
+    }
+
+    private void SpawnearMano(int indice, PlayerInputHandler mando)
+    {
+        if (indice >= spawnPointsMano.Length)
+        {
+            Debug.LogError($"[PlataformeoManager] Falta spawn mano {indice}");
             return;
         }
 
-        int indiceAleatorio = Random.Range(0, escenasAleatorias.Length);
-        string escenaElegida = escenasAleatorias[indiceAleatorio];
+        GameObject avatar = Instantiate(prefabMano, spawnPointsMano[indice].position, Quaternion.identity);
 
-        if (string.IsNullOrEmpty(escenaElegida))
-        {
-            Debug.LogError($"[PlataformeoManager] ERROR: El hueco {indiceAleatorio} del array de escenas está vacío.");
-            return;
-        }
+        if (avatar.TryGetComponent(out SpriteManoBob s)) s.ConectarMando(mando);
 
-        Debug.Log($"[PlataformeoManager] Cargando escena: {escenaElegida}");
-        SceneManager.LoadScene(escenaElegida);
-    }
-
-    private void SpawnearPlatformero(int idJugador, PlayerInputHandler mando)
-    {
-        int indexSpawn = idJugador / 2;
-        Transform puntoSpawn = spawnPointsPlatformero[indexSpawn];
-
-        GameObject sprite = Instantiate(prefabPlatformero, puntoSpawn.position, Quaternion.identity);
-
-        if (sprite.TryGetComponent(out SpritePlatformero scriptPlatformero))
-            scriptPlatformero.ConectarMando(mando);
-
-        if (sprite.TryGetComponent(out Animator animator))
-        {
-            if (animatorsPlatformero.Length > indexSpawn && animatorsPlatformero[indexSpawn] != null)
-                animator.runtimeAnimatorController = animatorsPlatformero[indexSpawn];
-        }
-    }
-
-    private void SpawnearMano(int idJugador, PlayerInputHandler mando)
-    {
-        int indexSpawn = idJugador / 2;
-        Transform puntoSpawn = spawnPointsMano[indexSpawn];
-
-        GameObject avatar = Instantiate(prefabMano, puntoSpawn.position, Quaternion.identity);
-
-        if (avatar.TryGetComponent(out SpriteManoBob scriptMano))
-            scriptMano.ConectarMando(mando);
-
-        if (avatar.TryGetComponent(out Animator animator))
-        {
-            if (animatorsMano.Length > indexSpawn && animatorsMano[indexSpawn] != null)
-                animator.runtimeAnimatorController = animatorsMano[indexSpawn];
-        }
+        if (avatar.TryGetComponent(out Animator anim) && animatorsMano.Length > indice && animatorsMano[indice] != null)
+            anim.runtimeAnimatorController = animatorsMano[indice];
     }
 }

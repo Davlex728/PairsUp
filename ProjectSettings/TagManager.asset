@@ -11,6 +11,8 @@ TagManager:
   - Amarillo
   - Azul
   - Rojo
+  - Bandera
+  - Base
   layers:
   - Default
   - TransparentFX

@@ -2275,7 +2275,7 @@ MonoBehaviour:
   lobbyCanvasRect: {fileID: 965560789}
   countdownText: {fileID: 935118941}
   playersCountText: {fileID: 1809591027}
-  autoStartDelay: 1
+  autoStartDelay: 3
 --- !u!114 &1728664030
 MonoBehaviour:
   m_ObjectHideFlags: 0
