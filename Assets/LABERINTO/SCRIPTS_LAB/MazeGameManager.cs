@@ -7,7 +7,9 @@ public class MazeGameManager : MonoBehaviour
 {
     public static MazeGameManager instance;
 
-    [Header("Prefabs")] public GameObject prefabPlayerUno;
+    [Header("Prefabs")] 
+    
+    public GameObject prefabPlayerUno;
 
     public GameObject prefabPlayerDos;
 
@@ -51,7 +53,7 @@ public class MazeGameManager : MonoBehaviour
         }
 
         int contadorJugadores = 0;
-
+        Array.Sort(jugadoresConectados, (a, b) => a.playerIndex.CompareTo(b.playerIndex));
         foreach (PersistentPlayer jugador in jugadoresConectados)
         {
             

@@ -82,33 +82,3 @@ public class BombMovement : MonoBehaviour
     }
 }
 
-/*
-
-using UnityEngine;
-
-public class BallScript : MonoBehaviour
-{
-
-Rigidbody2D rb;
-// Start is called once before the first execution of Update after the MonoBehaviour is created
-void Start()
-{
-rb = GetComponent<Rigidbody2D>();
-rb.linearVelocity = new Vector2(0, 1).normalized * 5f; // Initial velocity of the ball
-}
-
-// Update is called once per frame
-void Update()
-{
-}
-
-void FixedUpdate()
-{
-}
-
-void OnCollisionEnter2D(Collision2D collision)
-{
-rb.linearVelocity = Vector2.down * 5f;
-Debug.Log("Velocity: " + rb.linearVelocity);
-}
-*/

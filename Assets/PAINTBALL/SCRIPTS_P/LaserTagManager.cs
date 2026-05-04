@@ -7,7 +7,11 @@ using UnityEngine.SceneManagement;
 public class LaserTagManager : MonoBehaviour
 {
     public static LaserTagManager Instance; // Singleton para llamarlo desde cualquier sitio
-
+    
+    [Header("Animators para cada jugador (en orden de slot)")]
+    public RuntimeAnimatorController[] animators;
+    
+    
     [Header("Prefab Padre (invisible, lleva movimiento)")]
     public GameObject prefabPadre;
 
@@ -20,8 +24,17 @@ public class LaserTagManager : MonoBehaviour
 
     private List<GameObject> padresVivos = new List<GameObject>();
     private GameObject padreInstanciado;
+    private GameObject hijo;
     private bool partidaTerminada = false;
     public String[] escenasAleatorias;
+    [Header("Players")]
+    public List<GameObject> jugadoresVivos = new List<GameObject>();
+
+    private GameObject jugadorUno;
+    private GameObject jugadorDos;
+    
+    List<List<GameObject>> parejas = new List<List<GameObject>>();
+    public Transform puntoSpawn;
     private void Awake()
     {
         Instance = this;
@@ -39,17 +52,24 @@ public class LaserTagManager : MonoBehaviour
 
         int contadorJugadores = 0;
 
+        Array.Sort(jugadoresConectados, (a, b) => a.playerIndex.CompareTo(b.playerIndex));
+
         foreach (PersistentPlayer mandoFantasma in jugadoresConectados)
         {
-                Debug.Log(contadorJugadores);
+            Debug.Log(contadorJugadores);
             PlayerInputHandler lectorBotones = mandoFantasma.GetComponent<PlayerInputHandler>();
-
-            if (contadorJugadores % 2 == 0)
-                SpawnearPadre(contadorJugadores, lectorBotones);
+            
+            int slotId = mandoFantasma.playerIndex;  // 1-6, asignado en la lobby
+            int equipo = mandoFantasma.teamIndex;    
+            
+            bool esJugadorUno = (slotId % 2 != 0);
+            
+            if (esJugadorUno)
+                SpawnearPadre(slotId, equipo, lectorBotones);
             else
             {
                 Debug.Log("Hola hijo");
-                SpawnearHijo(contadorJugadores, lectorBotones);
+                SpawnearHijo(slotId, equipo, lectorBotones);
             }
             contadorJugadores++;
         }
@@ -97,12 +117,10 @@ public class LaserTagManager : MonoBehaviour
         }
     }
 
-    private void SpawnearPadre(int idJugador, PlayerInputHandler mando)
+    private void SpawnearPadre(int slotId, int equipo,PlayerInputHandler mando)
     {
-        int indexSpawn = idJugador / 2;
-        Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
-
-        padreInstanciado = Instantiate(prefabPadre, puntoSpawn.position, Quaternion.identity);
+        
+        padreInstanciado = Instantiate(prefabPadre, spawnPointsPlayers[slotId].position, Quaternion.identity);
         padresVivos.Add(padreInstanciado);
 
         if (padreInstanciado.TryGetComponent<Movement>(out var movement))
@@ -116,10 +134,11 @@ public class LaserTagManager : MonoBehaviour
             List<GameObject> corazones = UIManager.instance.ReclamarCorazones();
             movement.AsignarCorazones(corazones);
         }
+        AsignarAnimator(padreInstanciado, slotId);
                   
     }
 
-    private void SpawnearHijo(int idJugador, PlayerInputHandler mando)
+    private void SpawnearHijo(int slotId, int equipo ,PlayerInputHandler mando)
     {
         if (padreInstanciado == null)
         {
@@ -128,10 +147,14 @@ public class LaserTagManager : MonoBehaviour
         }
 
         Debug.Log("Hola");
-
-        GameObject hijo = Instantiate(prefabCirculo, padreInstanciado.transform.position + (Vector3)offsetHijo, Quaternion.identity);
+        List<GameObject> nuevaPareja = new List<GameObject>();
+         hijo = Instantiate(prefabCirculo, padreInstanciado.transform.position + (Vector3)offsetHijo, Quaternion.identity);
         hijo.transform.SetParent(padreInstanciado.transform);
-
+        
+        jugadoresVivos.Add(hijo);
+        nuevaPareja.Add(padreInstanciado);
+        nuevaPareja.Add(hijo);
+        
         if (hijo.TryGetComponent<Aiming>(out var aiming))
             aiming.ConectarMando(mando);
 
@@ -139,5 +162,28 @@ public class LaserTagManager : MonoBehaviour
             shoot.ConectarMando(mando);
 
         padreInstanciado = null;
+        AsignarAnimator(hijo,slotId);
+    }
+    
+    private void AsignarAnimator(GameObject obj, int slotId)
+    {
+        int animIndex = slotId - 1; // slot 1 → índice 0
+        if (obj.TryGetComponent(out Animator animator))
+        {
+           if(animators.Length > animIndex && animators[animIndex] != null)
+               animator.runtimeAnimatorController = animators[animIndex];
+           else
+               Debug.LogWarning($"[CalderoManager] No hay animator para slot {slotId} (índice {animIndex})");
+           if (animator == null)
+           {
+               if (obj.GetComponentInChildren<Animator>())
+               {
+                   if(animators.Length > animIndex && animators[animIndex] != null)
+                       animator.runtimeAnimatorController = animators[animIndex];
+               }
+
+           }
+        }
+        
     }
 }

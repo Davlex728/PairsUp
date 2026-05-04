@@ -1664,14 +1664,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d0b20acc004044b86042cae40c2afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserTagManager
+  animators:
+  - {fileID: 9100000, guid: b986ff98037c50b4896214e4e2265232, type: 2}
+  - {fileID: 9100000, guid: 7b5e05ebfb2203a46a813ec6336af52f, type: 2}
+  - {fileID: 9100000, guid: 78a33ecaa592ab5458c92aa5825d2444, type: 2}
+  - {fileID: 9100000, guid: 1566ab0495be1704a9e8f86b833f4738, type: 2}
+  - {fileID: 9100000, guid: a86a34357496fa545999eef9f50943da, type: 2}
+  - {fileID: 9100000, guid: 0f9b3c5ecbda8154590721005a4a8836, type: 2}
   prefabPadre: {fileID: 8414549958308006745, guid: d080cf97b97b590409b7a5be608b30b5, type: 3}
   prefabCirculo: {fileID: 108101235688593767, guid: 2a27a88416aa17049b5de57770757ba5, type: 3}
-  offsetHijo: {x: 0, y: 0}
+  offsetHijo: {x: 0, y: 0.3}
   spawnPointsPlayers:
   - {fileID: 590897951}
   - {fileID: 2021377019}
   - {fileID: 1032062945}
   escenasAleatorias: []
+  jugadoresVivos: []
+  puntoSpawn: {fileID: 0}
 --- !u!114 &827207762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2109,7 +2118,7 @@ Transform:
   m_GameObject: {fileID: 1018714458}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0704, y: -0.0221, z: 0}
+  m_LocalPosition: {x: 0.0704, y: -0.0221, z: 1.4}
   m_LocalScale: {x: 2.7948, y: 2.7948, z: 2.7948}
   m_ConstrainProportionsScale: 0
   m_Children: []

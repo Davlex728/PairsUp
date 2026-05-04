@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 14b421655ef003945be66b68e7df34e0
+guid: 5d480217994d27940b68faf0e76068a9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4339979947514111527
-    second: FichaHombreAmarillo_0
+      213: 546531623787507228
+    second: editfranthanos_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 550
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FichaHombreAmarillo_0
+      name: editfranthanos_0
       rect:
         serializedVersion: 2
-        x: 678
-        y: 258
-        width: 571
-        height: 569
+        x: 0
+        y: 0
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9d95a106b3b45c3c0800000000000000
-      internalID: -4339979947514111527
+      spriteID: c1e2f5ebd9ba59700800000000000000
+      internalID: 546531623787507228
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      FichaHombreAmarillo_0: -4339979947514111527
+      editfranthanos_0: 546531623787507228
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

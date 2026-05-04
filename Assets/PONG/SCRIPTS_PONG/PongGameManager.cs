@@ -10,17 +10,21 @@ public class PongGameManager : MonoBehaviour
     [Header("Prefab Padre (invisible, lleva movimiento)")]
     public GameObject prefabPadre;
 
+    [Header("Animators para cada jugador (en orden de slot)")]
+    public RuntimeAnimatorController[] animators;
+
     [Header("Prefab Hijo (el círculo visible)")]
     public GameObject prefabCirculo;
+
     public Vector2 offsetHijo;
 
-    [Header("Spawn Points")]
-    public Transform[] spawnPointsPlayers;
-    
+    [Header("Spawn Points")] public Transform[] spawnPointsPlayers;
+
     [Header("Ángulos de rotación por spawn point")]
-    public float[] angulosMinimos;  // Array con el ángulo mínimo para cada spawn
-    public float[] angulosMaximos;  // Array con el ángulo máximo para cada spawn
-    
+    public float[] angulosMinimos; // Array con el ángulo mínimo para cada spawn
+
+    public float[] angulosMaximos; // Array con el ángulo máximo para cada spawn
+
     private int i = 0;
 
     public List<GameObject> jugadoresVivos = new List<GameObject>();
@@ -30,17 +34,16 @@ public class PongGameManager : MonoBehaviour
 
     private GameObject jugadorUno;
     private GameObject jugadorDos;
-    
+
     List<List<GameObject>> parejas = new List<List<GameObject>>();
-    
-    
-    
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Instance = this;
         PersistentPlayer[] jugadoresConectados = FindObjectsByType<PersistentPlayer>(FindObjectsSortMode.None);
-        
+
         if (jugadoresConectados.Length == 0)
         {
             Debug.LogWarning("[PongGameManager] No hay jugadores. ¿Has pasado por el lobby?");
@@ -48,27 +51,33 @@ public class PongGameManager : MonoBehaviour
         }
 
         int contadorJugadores = 0;
-
+        Array.Sort(jugadoresConectados, (a, b) => a.playerIndex.CompareTo(b.playerIndex));
         foreach (PersistentPlayer mandoFantasma in jugadoresConectados)
         {
-            
             Debug.Log("Procesando jugador: " + mandoFantasma.name);
             PlayerInputHandler lectorBotones = mandoFantasma.GetComponent<PlayerInputHandler>();
-            if (contadorJugadores % 2 == 0)
+
+            int slotId = mandoFantasma.playerIndex;
+            int equipo = mandoFantasma.teamIndex;
+
+            bool esJugadorUno = (slotId % 2 != 0);
+
+            if (esJugadorUno)
             {
-                
-                SpawnearJugadorUno(contadorJugadores, lectorBotones, i);
-                Debug.Log($"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
+                SpawnearJugadorUno(slotId, equipo, lectorBotones);
+                Debug.Log(
+                    $"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
                 jugadorUno.transform.SetParent(spawnPointsPlayers[i].transform);
-                
             }
             else
             {
-                SpawnearJugadorDos(contadorJugadores, lectorBotones, i);
-                Debug.Log($"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
+                SpawnearJugadorDos(slotId, equipo, lectorBotones);
+                Debug.Log(
+                    $"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
                 jugadorDos.transform.SetParent(spawnPointsPlayers[i].transform);
                 //jugadorDos.transform.SetParent(jugadorUno.transform);
             }
+
             i = i + 1;
             contadorJugadores++;
         }
@@ -78,7 +87,6 @@ public class PongGameManager : MonoBehaviour
     void Update()
     {
         ComprobarGanador();
-        
     }
 
     void LateUpdate()
@@ -104,7 +112,7 @@ public class PongGameManager : MonoBehaviour
             }
         }
     }
-    
+
     public void ComprobarGanador()
     {
         if (partidaTerminada) return;
@@ -113,7 +121,6 @@ public class PongGameManager : MonoBehaviour
 
         if (jugadoresVivos.Count == 1)
         {
-
             partidaTerminada = true;
             // Comprobación de seguridad
             if (escenasAleatorias == null || escenasAleatorias.Length == 0)
@@ -143,12 +150,11 @@ public class PongGameManager : MonoBehaviour
         }
     }
 
-    private void SpawnearJugadorUno(int idJugador, PlayerInputHandler mando, int i)
+    private void SpawnearJugadorUno(int slotId, int equipo, PlayerInputHandler mando)
     {
         Debug.Log("Spawneando jugador padre");
-        int indexSpawn = idJugador / 2;
+        int indexSpawn = (slotId - 1) / 2;
         Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
-        
         jugadorUno = Instantiate(prefabPadre, puntoSpawn.position, spawnPointsPlayers[i].transform.rotation);
         jugadoresVivos.Add(jugadorUno);
 
@@ -161,22 +167,23 @@ public class PongGameManager : MonoBehaviour
                 scriptMovimiento.ConfigurarAngulos(angulosMinimos[indexSpawn], angulosMaximos[indexSpawn]);
             }
         }
-    } 
-    
-    private void SpawnearJugadorDos(int idJugador, PlayerInputHandler mando, int i )
+    }
+
+    private void SpawnearJugadorDos(int slotId, int equipo, PlayerInputHandler mando)
     {
         List<GameObject> nuevaPareja = new List<GameObject>();
-        int indexSpawn = idJugador / 2;
+        int indexSpawn = (slotId - 1) / 2;
         Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
-        
-        jugadorDos = Instantiate(prefabCirculo, puntoSpawn.position + (Vector3)offsetHijo, spawnPointsPlayers[i].transform.rotation );
-        
-            nuevaPareja.Add(jugadorUno);
-            nuevaPareja.Add(jugadorDos);
-            
-            parejas.Add(nuevaPareja);
-            
-        
+
+        jugadorDos = Instantiate(prefabCirculo, puntoSpawn.position + (Vector3)offsetHijo,
+            spawnPointsPlayers[i].transform.rotation);
+
+        nuevaPareja.Add(jugadorUno);
+        nuevaPareja.Add(jugadorDos);
+
+        parejas.Add(nuevaPareja);
+
+
         if (jugadorDos.TryGetComponent<PongMovement>(out var scriptMovimiento))
         {
             scriptMovimiento.ConectarMando(mando);
@@ -186,5 +193,28 @@ public class PongGameManager : MonoBehaviour
                 scriptMovimiento.ConfigurarAngulos(angulosMinimos[indexSpawn], angulosMaximos[indexSpawn]);
             }
         }
+        AsignarAnimator(jugadorDos,slotId, equipo);
+    }
+
+    private void AsignarAnimator(GameObject obj, int slotId, int equipo)
+    {
+        Animator[] soloHijos = System.Array.FindAll(
+            obj.GetComponentsInChildren<Animator>(), 
+            a => a.gameObject != obj
+        );
+
+        // equipo 0 → índices 0,1 | equipo 1 → índices 2,3 | equipo 2 → índices 4,5
+        int baseIndex = equipo * soloHijos.Length;
+
+        for (int i = 0; i < soloHijos.Length; i++)
+        {
+            int animIndex = baseIndex + i;
+
+            if (animIndex < animators.Length && animators[animIndex] != null)
+                soloHijos[i].runtimeAnimatorController = animators[animIndex];
+            else
+                Debug.LogWarning($"[PongGameManager] No hay animator para slot {slotId} hijo {i} (índice {animIndex})");
+        }
+    
     }
 }

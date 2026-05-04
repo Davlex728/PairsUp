@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 14b421655ef003945be66b68e7df34e0
+guid: dd0d2cfd06fa21247a0fbf6fb3755574
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4339979947514111527
-    second: FichaHombreAmarillo_0
+      213: -746623696557166736
+    second: Yellow_PistolaPAINTBALL_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 550
+  spritePixelsToUnits: 1500
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FichaHombreAmarillo_0
+      name: Yellow_PistolaPAINTBALL_0
       rect:
         serializedVersion: 2
-        x: 678
-        y: 258
-        width: 571
-        height: 569
+        x: 571
+        y: 266
+        width: 927
+        height: 1508
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9d95a106b3b45c3c0800000000000000
-      internalID: -4339979947514111527
+      spriteID: 07f22d924b573a5f0800000000000000
+      internalID: -746623696557166736
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      FichaHombreAmarillo_0: -4339979947514111527
+      Yellow_PistolaPAINTBALL_0: -746623696557166736
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -930,13 +930,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248623612}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.10452846, w: 0.9945219}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1540423254}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 12}
 --- !u!1 &1291312378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,29 +1050,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PongGameManager
   prefabPadre: {fileID: 1797861907412409191, guid: c62f2bdcb8d743147a36b044d6030529, type: 3}
+  animators:
+  - {fileID: 9100000, guid: acc8b3891f5e2bb48be51a3d8539c284, type: 2}
+  - {fileID: 9100000, guid: acc8b3891f5e2bb48be51a3d8539c284, type: 2}
+  - {fileID: 9100000, guid: 7b134cc1ad27a9d459001dfea3e3b76a, type: 2}
+  - {fileID: 9100000, guid: 7b134cc1ad27a9d459001dfea3e3b76a, type: 2}
+  - {fileID: 9100000, guid: 5543836d789881945b08491cb799e3bb, type: 2}
+  - {fileID: 9100000, guid: 5543836d789881945b08491cb799e3bb, type: 2}
   prefabCirculo: {fileID: 1797861907412409191, guid: 8aa31a9322f131246843ef56f269f19a, type: 3}
   offsetHijo: {x: 0, y: 0}
   spawnPointsPlayers:
-  - {fileID: 750198882}
-  - {fileID: 434121506}
   - {fileID: 1540423254}
   - {fileID: 1248623613}
+  - {fileID: 750198882}
+  - {fileID: 434121506}
   - {fileID: 1905715505}
   - {fileID: 1836629656}
   angulosMinimos:
-  - 13
-  - 13
-  - 133
-  - 133
-  - 253
-  - 253
+  - 22
+  - 22
+  - 142
+  - 142
+  - 266
+  - 266
   angulosMaximos:
-  - 107
-  - 107
-  - 227
-  - 227
-  - 347
-  - 347
+  - 98
+  - 98
+  - 222
+  - 222
+  - 338
+  - 338
   jugadoresVivos: []
   escenasAleatorias: []
 --- !u!1 &1436176971
