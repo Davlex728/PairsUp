@@ -157,11 +157,13 @@ public class PongGameManager : MonoBehaviour
         int indexSpawn = (slotId - 1) / 2;
         Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
         jugadorUno = Instantiate(prefabPadre, spawnPointsPlayers[slotId]/*, spawnPointsPlayers[slotId].transform.rotation*/);
-        jugadorUno.transform.position = spawnPointsPlayers[slotId].transform.position + spawnPointsPlayers[2].transform.rotation * Vector3.up * 10;
+        Debug.Log($"slotId : {slotId}");
+        jugadorUno.transform.position = spawnPointsPlayers[slotId].transform.position /*+ spawnPointsPlayers[slotId].transform.rotation * Vector3.up /** 10*/;
+        Debug.Log(jugadorUno.transform.position);
 
         jugadoresVivos.Add(jugadorUno);
 
-        /*if (jugadorUno.TryGetComponent<PongMovement>(out var scriptMovimiento))
+        if (jugadorUno.TryGetComponent<PongMovement>(out var scriptMovimiento))
         {
             scriptMovimiento.ConectarMando(mando);
             // Configurar los ángulos según el spawn point
@@ -169,7 +171,7 @@ public class PongGameManager : MonoBehaviour
             {
                 scriptMovimiento.ConfigurarAngulos(angulosMinimos[indexSpawn], angulosMaximos[indexSpawn]);
             }
-        }*/
+        }
     }
 
     private void SpawnearJugadorDos(int slotId, int equipo, PlayerInputHandler mando)
