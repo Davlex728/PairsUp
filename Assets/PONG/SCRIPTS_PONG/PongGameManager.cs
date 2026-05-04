@@ -157,6 +157,7 @@ public class PongGameManager : MonoBehaviour
         int indexSpawn = (slotId - 1) / 2;
         Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
         jugadorUno = Instantiate(prefabPadre, spawnPointsPlayers[slotId]/*, spawnPointsPlayers[slotId].transform.rotation*/);
+        jugadorUno.transform.position = spawnPointsPlayers[slotId].transform.position + spawnPointsPlayers[2].transform.rotation * Vector3.up * 10;
 
         jugadoresVivos.Add(jugadorUno);
 
