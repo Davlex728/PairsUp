@@ -24,9 +24,7 @@ public class PongGameManager : MonoBehaviour
     public float[] angulosMinimos; // Array con el ángulo mínimo para cada spawn
 
     public float[] angulosMaximos; // Array con el ángulo máximo para cada spawn
-
-    private int i = 0;
-
+    
     public List<GameObject> jugadoresVivos = new List<GameObject>();
     private GameObject jugadorInstanciado;
     private bool partidaTerminada = false;
@@ -66,19 +64,19 @@ public class PongGameManager : MonoBehaviour
             {
                 SpawnearJugadorUno(slotId, equipo, lectorBotones);
                 Debug.Log(
-                    $"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
-                jugadorUno.transform.SetParent(spawnPointsPlayers[i].transform);
+                    $"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {slotId-1}");
+                jugadorUno.transform.SetParent(spawnPointsPlayers[slotId-1].transform);
             }
             else
             {
                 SpawnearJugadorDos(slotId, equipo, lectorBotones);
                 Debug.Log(
-                    $"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
-                jugadorDos.transform.SetParent(spawnPointsPlayers[i].transform);
+                    $"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {slotId-1}");
+                jugadorDos.transform.SetParent(spawnPointsPlayers[slotId-1].transform);
                 //jugadorDos.transform.SetParent(jugadorUno.transform);
             }
 
-            i = i + 1;
+           
             contadorJugadores++;
         }
     }
@@ -155,7 +153,15 @@ public class PongGameManager : MonoBehaviour
         Debug.Log("Spawneando jugador padre");
         int indexSpawn = (slotId - 1) / 2;
         Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
+<<<<<<< Updated upstream
         jugadorUno = Instantiate(prefabPadre, puntoSpawn.position, spawnPointsPlayers[i].transform.rotation);
+=======
+        jugadorUno = Instantiate(prefabPadre, spawnPointsPlayers[slotId]/*, spawnPointsPlayers[slotId].transform.rotation*/);
+        Debug.Log($"slotId : {slotId}");
+        jugadorUno.transform.position = spawnPointsPlayers[slotId-1 ].transform.position /*+ spawnPointsPlayers[slotId].transform.rotation * Vector3.up /** 10*/;
+        Debug.Log(jugadorUno.transform.position);
+
+>>>>>>> Stashed changes
         jugadoresVivos.Add(jugadorUno);
 
         if (jugadorUno.TryGetComponent<PongMovement>(out var scriptMovimiento))
@@ -175,8 +181,13 @@ public class PongGameManager : MonoBehaviour
         int indexSpawn = (slotId - 1) / 2;
         Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
 
+<<<<<<< Updated upstream
         jugadorDos = Instantiate(prefabCirculo, puntoSpawn.position + (Vector3)offsetHijo,
             spawnPointsPlayers[i].transform.rotation);
+=======
+        jugadorDos = Instantiate(prefabCirculo, puntoSpawn.position + (Vector3)offsetHijo, spawnPointsPlayers[slotId - 1].transform.rotation);
+
+>>>>>>> Stashed changes
 
         nuevaPareja.Add(jugadorUno);
         nuevaPareja.Add(jugadorDos);
