@@ -19,7 +19,8 @@ public class ButtonLogic : MonoBehaviour
     private void Start()
     {
         instance = this;
-        InvokeRepeating("GenerarSecuencia", 20, 2);
+        imagen.SetActive(false);
+        Invoke("GenerarSecuencia", 20);
         //GenerarSecuencia(4);
         
     }
@@ -33,8 +34,10 @@ public class ButtonLogic : MonoBehaviour
         
         if (botonPulsado == botonEsperado)
         {
+            imagen.SetActive(false);
             StartCoroutine(Time(1));   
             Debug.Log("Hola");
+            imagen.SetActive(true);
             posicionSecuencia += 1;
             if (posicionSecuencia == secuencia.Length)
             {
@@ -50,7 +53,7 @@ public class ButtonLogic : MonoBehaviour
         else
         {
             imagen.SetActive(false);
-            posicionSecuencia = 0;
+            posicionSecuencia = 3;
             return;
             // Penalización, etc.
         }
@@ -64,12 +67,13 @@ public class ButtonLogic : MonoBehaviour
 
     }
 
-    public void GenerarSecuencia(int cantidad = 4)
+    public void GenerarSecuencia()
     {
+        Debug.Log("Generando secuencia de botones");
         posicionSecuencia = 0;
         imagen.SetActive(true);
-        secuencia = new InputBoton[cantidad];
-        for(int i = 0; i < cantidad; i++)
+        secuencia = new InputBoton[4];
+        for(int i = 0; i < 4; i++)
         {
             InputBoton botonAleatorio = (InputBoton)UnityEngine.Random.Range(1, Enum.GetValues(typeof(InputBoton)).Length);
             secuencia[i] = botonAleatorio;
