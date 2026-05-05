@@ -1068,18 +1068,18 @@ MonoBehaviour:
   - {fileID: 1836629656}
   angulosMinimos:
   - 18
-  - 22
-  - -138
-  - -138
-  - 262
-  - 262
+  - 17
+  - 138
+  - 138
+  - 258
+  - 258
   angulosMaximos:
-  - 98
-  - 98
+  - 102
+  - 102
   - 222
   - 222
-  - 338
-  - 338
+  - 342
+  - 343
   jugadoresVivos: []
   escenasAleatorias: []
 --- !u!1 &1436176971

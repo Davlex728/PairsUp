@@ -26,7 +26,7 @@ public class PongGameManager : MonoBehaviour
 
     public float[] angulosMaximos; // Array con el ángulo máximo para cada spawn
 
-    private int i = 0;
+    
 
     public List<GameObject> jugadoresVivos = new List<GameObject>();
     private GameObject jugadorInstanciado;
@@ -38,7 +38,13 @@ public class PongGameManager : MonoBehaviour
 
     List<List<GameObject>> parejas = new List<List<GameObject>>();
 
+    public int slotId;
+    public int equipo;
 
+     private void Awake()
+    {
+        Instance = this;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -58,8 +64,8 @@ public class PongGameManager : MonoBehaviour
             Debug.Log("Procesando jugador: " + mandoFantasma.name);
             PlayerInputHandler lectorBotones = mandoFantasma.GetComponent<PlayerInputHandler>();
 
-            int slotId = mandoFantasma.playerIndex;
-            int equipo = mandoFantasma.teamIndex;
+             slotId = mandoFantasma.playerIndex;
+             equipo = mandoFantasma.teamIndex;
 
             bool esJugadorUno = (slotId % 2 != 0);
 
@@ -67,19 +73,19 @@ public class PongGameManager : MonoBehaviour
             {
                 SpawnearJugadorUno(slotId, equipo, lectorBotones);
                 Debug.Log(
-                    $"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
-                jugadorUno.transform.SetParent(spawnPointsPlayers[i].transform);
+                    $"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {spawnPointsPlayers[slotId-1].name}");
+                jugadorUno.transform.SetParent(spawnPointsPlayers[slotId-1].transform);
             }
             else
             {
                 SpawnearJugadorDos(slotId, equipo, lectorBotones);
                 Debug.Log(
-                    $"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {i}");
-                jugadorDos.transform.SetParent(spawnPointsPlayers[i].transform);
+                    $"Spawnereando jugador 1 {contadorJugadores} con mando {lectorBotones.name} en spawn point {spawnPointsPlayers[slotId-1].name}");
+                jugadorDos.transform.SetParent(spawnPointsPlayers[slotId-1].transform);
                 //jugadorDos.transform.SetParent(jugadorUno.transform);
             }
 
-            i = i + 1;
+            
             contadorJugadores++;
         }
     }
@@ -155,10 +161,10 @@ public class PongGameManager : MonoBehaviour
     {
         Debug.Log("Spawneando jugador padre");
         int indexSpawn = (slotId - 1) / 2;
-        Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
-        jugadorUno = Instantiate(prefabPadre, spawnPointsPlayers[slotId]/*, spawnPointsPlayers[slotId].transform.rotation*/);
+        //Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
+        jugadorUno = Instantiate(prefabPadre, spawnPointsPlayers[slotId-1].transform.position, spawnPointsPlayers[slotId-1].transform.rotation);
+        jugadorUno.transform.rotation = spawnPointsPlayers[slotId-1].transform.rotation;
         Debug.Log($"slotId : {slotId}");
-        jugadorUno.transform.position = spawnPointsPlayers[slotId].transform.position /*+ spawnPointsPlayers[slotId].transform.rotation * Vector3.up /** 10*/;
         Debug.Log(jugadorUno.transform.position);
 
         jugadoresVivos.Add(jugadorUno);
@@ -167,9 +173,9 @@ public class PongGameManager : MonoBehaviour
         {
             scriptMovimiento.ConectarMando(mando);
             // Configurar los ángulos según el spawn point
-            if (indexSpawn < angulosMinimos.Length && indexSpawn < angulosMaximos.Length)
+            if (slotId-1 < angulosMinimos.Length && slotId-1 < angulosMaximos.Length)
             {
-                scriptMovimiento.ConfigurarAngulos(angulosMinimos[indexSpawn], angulosMaximos[indexSpawn]);
+                scriptMovimiento.ConfigurarAngulos(angulosMinimos[slotId-1], angulosMaximos[slotId-1]);
             }
         }
     }
@@ -178,11 +184,10 @@ public class PongGameManager : MonoBehaviour
     {
         List<GameObject> nuevaPareja = new List<GameObject>();
         int indexSpawn = (slotId - 1) / 2;
-        Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
+       //Transform puntoSpawn = spawnPointsPlayers[indexSpawn];
 
-        jugadorDos = Instantiate(prefabCirculo, puntoSpawn.position + (Vector3)offsetHijo,
-            spawnPointsPlayers[i].transform.rotation);
-        
+        jugadorDos = Instantiate(prefabCirculo, spawnPointsPlayers[slotId-1].transform.position, spawnPointsPlayers[slotId-1].transform.rotation);
+        jugadorDos.transform.rotation = spawnPointsPlayers[slotId-1].transform.rotation;
 
         nuevaPareja.Add(jugadorUno);
         nuevaPareja.Add(jugadorDos);
@@ -196,7 +201,7 @@ public class PongGameManager : MonoBehaviour
             // Configurar los ángulos según el spawn point
             if (indexSpawn < angulosMinimos.Length && indexSpawn < angulosMaximos.Length)
             {
-                scriptMovimiento.ConfigurarAngulos(angulosMinimos[indexSpawn], angulosMaximos[indexSpawn]);
+                scriptMovimiento.ConfigurarAngulos(angulosMinimos[slotId-1], angulosMaximos[slotId-1]);
             }
         }
         AsignarAnimator(jugadorDos,slotId, equipo);
@@ -226,23 +231,23 @@ public class PongGameManager : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, 0, 15) * Vector3.up * 10);
+        Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, 0, 105) * Vector3.up * 10);
+        Gizmos.DrawWireSphere(spawnPointsPlayers[4].transform.position + spawnPointsPlayers[4].transform.rotation * Vector3.up * 10, 0.5f);
+        Gizmos.DrawWireSphere(spawnPointsPlayers[5].transform.position + spawnPointsPlayers[5].transform.rotation * Vector3.up * 10, 0.5f);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, 0, 138) * Vector3.up * 10);
+        Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, 0,  228) * Vector3.up * 10);
+        //Gizmos.DrawWireSphere(transform.position + Quaternion.Euler(0, 0, 180) * Vector3.up * 10, 0.5f);
+        Gizmos.DrawWireSphere(spawnPointsPlayers[2].transform.position + spawnPointsPlayers[2].transform.rotation * Vector3.up * 10, 0.5f);
+        Gizmos.DrawWireSphere(spawnPointsPlayers[3].transform.position + spawnPointsPlayers[3].transform.rotation * Vector3.up * 10, 0.5f);
+
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, 0, -18) * Vector3.up * 10);
         Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, 0, -102) * Vector3.up * 10);
         Gizmos.DrawWireSphere(spawnPointsPlayers[0].transform.position + spawnPointsPlayers[0].transform.rotation * Vector3.up * 10, 0.5f);
         Gizmos.DrawWireSphere(spawnPointsPlayers[1].transform.position + spawnPointsPlayers[1].transform.rotation * Vector3.up * 10, 0.5f);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, 0, -18 -120) * Vector3.up * 10);
-        Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, 0, -102 -120) * Vector3.up * 10);
-        //Gizmos.DrawWireSphere(transform.position + Quaternion.Euler(0, 0, 180) * Vector3.up * 10, 0.5f);
-        Gizmos.DrawWireSphere(spawnPointsPlayers[2].transform.position + spawnPointsPlayers[2].transform.rotation * Vector3.up * 10, 0.5f);
-        Gizmos.DrawWireSphere(spawnPointsPlayers[3].transform.position + spawnPointsPlayers[3].transform.rotation * Vector3.up * 10, 0.5f);
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, 0, -18 -240) * Vector3.up * 10);
-        Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, 0, -102 -240) * Vector3.up * 10);
-        Gizmos.DrawWireSphere(spawnPointsPlayers[4].transform.position + spawnPointsPlayers[4].transform.rotation * Vector3.up * 10, 0.5f);
-        Gizmos.DrawWireSphere(spawnPointsPlayers[5].transform.position + spawnPointsPlayers[5].transform.rotation * Vector3.up * 10, 0.5f);
     }
 }

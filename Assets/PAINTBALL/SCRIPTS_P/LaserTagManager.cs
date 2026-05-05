@@ -63,9 +63,12 @@ public class LaserTagManager : MonoBehaviour
             int equipo = mandoFantasma.teamIndex;    
             
             bool esJugadorUno = (slotId % 2 != 0);
-            
+
             if (esJugadorUno)
+            {
                 SpawnearPadre(slotId, equipo, lectorBotones);
+                Debug.Log($"Spawner: {spawnPointsPlayers[equipo].name}");
+            }
             else
             {
                 Debug.Log("Hola hijo");
@@ -120,7 +123,7 @@ public class LaserTagManager : MonoBehaviour
     private void SpawnearPadre(int slotId, int equipo,PlayerInputHandler mando)
     {
         
-        padreInstanciado = Instantiate(prefabPadre, spawnPointsPlayers[slotId].position, Quaternion.identity);
+        padreInstanciado = Instantiate(prefabPadre, spawnPointsPlayers[equipo].position, Quaternion.identity);
         padresVivos.Add(padreInstanciado);
 
         if (padreInstanciado.TryGetComponent<Movement>(out var movement))
@@ -170,20 +173,25 @@ public class LaserTagManager : MonoBehaviour
         int animIndex = slotId - 1; // slot 1 → índice 0
         if (obj.TryGetComponent(out Animator animator))
         {
-           if(animators.Length > animIndex && animators[animIndex] != null)
-               animator.runtimeAnimatorController = animators[animIndex];
+            
+            if(animators.Length > animIndex && animators[animIndex] != null)
+                    animator.runtimeAnimatorController = animators[animIndex];
            else
                Debug.LogWarning($"[CalderoManager] No hay animator para slot {slotId} (índice {animIndex})");
-           if (animator == null)
-           {
-               if (obj.GetComponentInChildren<Animator>())
-               {
-                   if(animators.Length > animIndex && animators[animIndex] != null)
-                       animator.runtimeAnimatorController = animators[animIndex];
-               }
-
-           }
+          
+          
         }
+        
+        if (obj.GetComponentInChildren<Animator>())
+        {
+               Animator childAnimator = obj.GetComponentInChildren<Animator>();
+            if(animators.Length > animIndex && animators[animIndex] != null)
+                childAnimator.runtimeAnimatorController = animators[animIndex];
+        }
+
+        
+        
+       
         
     }
 }

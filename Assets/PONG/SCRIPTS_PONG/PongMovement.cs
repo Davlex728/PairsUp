@@ -36,6 +36,11 @@ public class PongMovement : MonoBehaviour
 
         // Calcular la nueva rotación usando inputEfectivo (calculado por el GameManager)
         float newRotation = currentRotation - inputEfectivo * speed;
+        
+        if(PongGameManager.Instance.equipo == 1)
+        {
+            newRotation = currentRotation + inputEfectivo * speed;
+        }
 
         // Solo permitir movimiento dentro del rango [min, max]
         if (newRotation >= min && newRotation <= max)
