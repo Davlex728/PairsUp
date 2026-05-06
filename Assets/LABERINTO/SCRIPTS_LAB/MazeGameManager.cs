@@ -178,12 +178,11 @@ public class MazeGameManager : MonoBehaviour
         Debug.Log("Spawneando jugador padre");
 
         jugadorUno = Instantiate(prefabPlayerUno, spawnPointsPlayers[slotId-1].position, Quaternion.identity);
-        MazeMovement.instance.spawnPoint = spawnPointsPlayers[slotId-1];
+        
         jugadoresVivos.Add(jugadorUno);
         if (slotId == 1)
         {
             jugadorUno.gameObject.tag = "Azul";
-            MazeMovement.instance.spawnPoint = puntoSpawn;
         }
 
         if (slotId == 3)
@@ -199,6 +198,8 @@ public class MazeGameManager : MonoBehaviour
         if (jugadorUno.TryGetComponent<MazeMovement>(out var scriptMovimiento))
         {
             scriptMovimiento.ConectarMando(mando);
+
+            scriptMovimiento.spawnPoint = spawnPointsPlayers[slotId - 1];
         }
     }
 
@@ -209,7 +210,7 @@ public class MazeGameManager : MonoBehaviour
         //int indexSpawn = idJugador / 2;
         Debug.Log(slotId);
         jugadorDos = Instantiate(prefabPlayerDos, spawnPointsPlayers[slotId-1].position, Quaternion.identity);
-        MazeMovement.instance.spawnPoint = spawnPointsPlayers[slotId-1];
+        
         jugadoresVivos.Add(jugadorDos);
         nuevaPareja.Add(jugadorUno);
         nuevaPareja.Add(jugadorDos);
@@ -237,6 +238,7 @@ public class MazeGameManager : MonoBehaviour
         if (jugadorDos.TryGetComponent<MazeMovement>(out var scriptMovimiento))
         {
             scriptMovimiento.ConectarMando(mando);
+            scriptMovimiento.spawnPoint = spawnPointsPlayers[slotId - 1];
         }
     }
 }
