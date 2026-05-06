@@ -60,6 +60,7 @@ public class SpriteCesta : MonoBehaviour
     {
         if (miUI != null)
             miUI.ActualizarTexto(recetaObjetivo, pasoActual, recetasCompletadas);
+            miUI.MostrarReceta(recetaObjetivo);
     }
 
     private void Update()

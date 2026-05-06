@@ -74,7 +74,6 @@ public class SpriteMano : MonoBehaviour
         Collider2D coliderDeHugoParaLaMano = Physics2D.OverlapCircle(transform.position, radioDeAgarre, capaIngredientes);
         if (coliderDeHugoParaLaMano != null && !isAgarrandoHugo)
         {
-            Debug.Log($"Pawn");
             animator.SetBool("isHovering", true);
         }
         else
