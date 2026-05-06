@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -25,7 +26,7 @@ public class ButtonLogic : MonoBehaviour
         
     }
 
-    public void ComprobarInput(InputBoton botonPulsado)
+    public void ComprobarInput(InputBoton botonPulsado, string equipo, List<GameObject> pareja)
     {
         if (esperando)
         {
@@ -44,11 +45,25 @@ public class ButtonLogic : MonoBehaviour
                 Debug.Log("Secuencia terminada");
                 imagen.SetActive(false);
                 posicionSecuencia = 0;
+                StartCoroutine(Time(1));
+                if (equipo == "Azul")
+                {
+                    StartCoroutine(TimeShader(3,pareja));
+                }
+                else if (equipo == "Rojo")
+                {
+                    StartCoroutine(TimeShader(3,pareja));
+                }
+                else if (equipo == "Amarillo")
+                {
+                   
+                    StartCoroutine(TimeShader(3,pareja));
+                  
+                }
                 return;
             }
             botonEsperado = secuencia[posicionSecuencia];
             imagenSimbolo.sprite = imagenSecuencia[(int)botonEsperado - 1];
-            
         }
         else
         {
@@ -65,6 +80,16 @@ public class ButtonLogic : MonoBehaviour
         yield return new WaitForSeconds(segundos);
         esperando = false;
 
+    }
+    IEnumerator TimeShader(float segundos, List<GameObject> pareja)
+    {
+        pareja[0].TryGetComponent<MazeMovement>(out var mov1);
+        pareja[1].TryGetComponent<MazeMovement>(out var mov2);
+        mov1.shaderRadius = 1;
+        mov2.shaderRadius = 1;
+        yield return new WaitForSeconds(segundos);
+        mov1.shaderRadius = 0.4f;
+        mov2.shaderRadius = 0.4f;
     }
 
     public void GenerarSecuencia()

@@ -702,12 +702,13 @@ PolygonCollider2D:
       - {x: 14.451547, y: -2.7104676}
       - {x: 16.1386, y: -3.063444}
       - {x: 17.132063, y: -3.5303912}
-      - {x: 17.909407, y: -3.9693913}
-      - {x: 18.632166, y: -4.5155334}
-      - {x: 20.204348, y: -5.9661307}
+      - {x: 17.80619, y: -3.9885054}
+      - {x: 18.894972, y: -5.821698}
+      - {x: 19.799946, y: -5.7520356}
       - {x: 4.493527, y: 9.553917}
-      - {x: 1.4992224, y: -11.350796}
-      - {x: 2.1632028, y: -8.670142}
+      - {x: 1.4467719, y: -10.985336}
+      - {x: 2.3679554, y: -10.334058}
+      - {x: 2.3649614, y: -8.603973}
       - {x: 3.0037231, y: -7.2619057}
       - {x: 3.9048166, y: -5.9836726}
       - {x: 5.552613, y: -4.5188446}
@@ -728,7 +729,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BallLimits
   live: 0
   player: {fileID: 1540423253}
-  wall: {fileID: 0}
   bomb: {fileID: 1245499512}
 --- !u!1 &1245499511
 GameObject:
@@ -749,7 +749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1245499512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,7 +767,7 @@ MonoBehaviour:
   newVelocity: {x: 0, y: 0}
   currentSpeed: 0
   speedIncreasePercentage: 15
-  maxSpeed: 50
+  maxSpeed: 38
   spawnPoint: {fileID: 1955173407}
 --- !u!50 &1245499513
 Rigidbody2D:
@@ -843,9 +843,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 2979218689466967686, guid: ec5d050bcf8279742846f04e9b4fc05d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1052,11 +1052,11 @@ MonoBehaviour:
   prefabPadre: {fileID: 1797861907412409191, guid: c62f2bdcb8d743147a36b044d6030529, type: 3}
   animators:
   - {fileID: 9100000, guid: acc8b3891f5e2bb48be51a3d8539c284, type: 2}
-  - {fileID: 9100000, guid: acc8b3891f5e2bb48be51a3d8539c284, type: 2}
+  - {fileID: 9100000, guid: 8bc2f27c4ae19f24b926044151023cdd, type: 2}
   - {fileID: 9100000, guid: 7b134cc1ad27a9d459001dfea3e3b76a, type: 2}
-  - {fileID: 9100000, guid: 7b134cc1ad27a9d459001dfea3e3b76a, type: 2}
+  - {fileID: 9100000, guid: 30f8ca2610d22ac4e9715248aa50c252, type: 2}
   - {fileID: 9100000, guid: 5543836d789881945b08491cb799e3bb, type: 2}
-  - {fileID: 9100000, guid: 5543836d789881945b08491cb799e3bb, type: 2}
+  - {fileID: 9100000, guid: f871e823d252f74448364363fede93f2, type: 2}
   prefabCirculo: {fileID: 1797861907412409191, guid: 8aa31a9322f131246843ef56f269f19a, type: 3}
   offsetHijo: {x: 0, y: 0}
   spawnPointsPlayers:
@@ -1082,6 +1082,8 @@ MonoBehaviour:
   - 343
   jugadoresVivos: []
   escenasAleatorias: []
+  slotId: 0
+  equipo: 0
 --- !u!1 &1436176971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,7 +1299,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BallLimits
   live: 0
   player: {fileID: 750198881}
-  wall: {fileID: 0}
   bomb: {fileID: 1245499512}
 --- !u!60 &1825239627
 PolygonCollider2D:
@@ -1350,12 +1351,13 @@ PolygonCollider2D:
       - {x: 2.691882, y: 3.348466}
       - {x: 3.5286674, y: 5.145163}
       - {x: 4.432822, y: 6.7202044}
-      - {x: 5.7209396, y: 8.11774}
-      - {x: 7.998943, y: 9.903218}
-      - {x: -0.4650626, y: 6.4622226}
-      - {x: -15.998098, y: 0.14735053}
-      - {x: 7.9094534, y: -9.388434}
-      - {x: 6.004292, y: -7.951549}
+      - {x: 7.54459, y: 8.662955}
+      - {x: 7.9103146, y: 9.875112}
+      - {x: -10.342701, y: 11.978307}
+      - {x: -9.263347, y: -15.053952}
+      - {x: 8.7318945, y: -9.840942}
+      - {x: 8.053145, y: -8.6636}
+      - {x: 5.9504285, y: -7.951549}
       - {x: 4.26819, y: -6.009649}
       - {x: 3.2896686, y: -4.1574383}
   m_UseDelaunayMesh: 1
@@ -1469,9 +1471,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 6.576415, y: 2.8371048}
-      - {x: -13.837599, y: 2.5339594}
-      - {x: -11.895875, y: 2.4622192}
+    - - {x: 20.52356, y: 6.1802416}
+      - {x: -14.244126, y: 2.5719519}
+      - {x: -12.746563, y: 1.7975712}
       - {x: -10.426415, y: 2.0472536}
       - {x: -8.340448, y: 1.2049313}
       - {x: -5.905944, y: -0.5946865}
@@ -1479,7 +1481,8 @@ PolygonCollider2D:
       - {x: -2.7545192, y: -6.1284437}
       - {x: -2.661663, y: -9.165834}
       - {x: -3.0490694, y: -11.629038}
-      - {x: -4.00226, y: -13.81867}
+      - {x: -4.537524, y: -12.721428}
+      - {x: -4.3031445, y: -14.381851}
   m_UseDelaunayMesh: 1
 --- !u!114 &1886736966
 MonoBehaviour:
@@ -1495,7 +1498,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BallLimits
   live: 0
   player: {fileID: 1905715504}
-  wall: {fileID: 0}
   bomb: {fileID: 1245499512}
 --- !u!1 &1905715504
 GameObject:

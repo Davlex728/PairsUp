@@ -25,7 +25,7 @@ Shader "Custom/DarknessShader"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             float4 _PlayerPositions[6];
-            float _Radius;
+            float _PlayerRadii[6];
             float4 _Color;
 
             struct Attributes
@@ -50,12 +50,19 @@ Shader "Custom/DarknessShader"
             half4 frag(Varyings IN) : SV_Target
             {
                 float minDist = 999999;
+                int closestIndex = 0;
+                
                 for (int i = 0; i < 6; i++)
                 {
                     float dist = distance(IN.worldPos.xy, _PlayerPositions[i].xy);
-                    minDist = min(minDist, dist);
+                    if (dist < minDist)
+                    {
+                        minDist = dist;
+                        closestIndex = i;
+                    }
                 }
-                float alpha = minDist > _Radius ? 1.0 : 0.0;
+                
+                float alpha = minDist > _PlayerRadii[closestIndex] ? 1.0 : 0.0;
                 return half4(_Color.rgb, alpha);
             }
             ENDHLSL

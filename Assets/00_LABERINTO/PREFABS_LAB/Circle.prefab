@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8660180382167657556}
   - component: {fileID: 1699261110058897472}
   - component: {fileID: -6854545676864644554}
+  - component: {fileID: -3909792399561741758}
   m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
+  m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1920978514570056289}
@@ -172,6 +173,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MazeMovement
   speed: 2
   rb: {fileID: 0}
+  mandoMovimiento: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  inputEfectivo: 0
+  shaderRadius: 0.4
+--- !u!95 &-3909792399561741758
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474952472672340436}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2578393143610768770
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ public class BallLimits : MonoBehaviour
     private int liveMax = 3;
     
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject wall;
     public BombMovement bomb;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,7 +16,6 @@ public class BallLimits : MonoBehaviour
     {
         live = liveMax;
         player.SetActive(true);
-        wall.SetActive(false);
         
         
     }
