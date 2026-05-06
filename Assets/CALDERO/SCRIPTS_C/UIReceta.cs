@@ -20,26 +20,22 @@ public class UIReceta : MonoBehaviour
     // Esta función la llamará la Cesta cada vez que coja algo
     public void ActualizarTexto(TipoIngrediente[] receta, int pasoActual, int puntuacion)
     {
-        string texto = $"POCIONES: {puntuacion}\nReceta: ";
+        string texto = $"{puntuacion}";
 
         for (int i = 0; i < receta.Length; i++)
         {
             if (i < pasoActual)
             {
-                // Ingredientes ya conseguidos: Verdes y tachados
-                texto += $"<color=#00FF00><s>{receta[i]}</s></color> - ";
+
                 tachadosUI[i].SetActive(true); // Muestra el tachado para los ingredientes conseguidos
             }
             else if (i == pasoActual)
             {
-                // Ingrediente que toca AHORA: Amarillo y grande
-                texto += $"<color=#FFFF00><b>{receta[i]}</b></color> - ";
+
                 tachadosUI[i].SetActive(false); // Asegúrate de que el tachado esté oculto para el ingrediente actual
             }
             else
             {
-                // Ingredientes que faltan: Blancos normales
-                texto += $"{receta[i]} - ";
                 tachadosUI[i].SetActive(false);
             }
         }
