@@ -113,6 +113,11 @@ public class PongGameManager : MonoBehaviour
                     jugB.inputEfectivo = inputA + inputB;
 
                 }
+                else
+                {
+                    jugA.inputEfectivo = 0;
+                    jugB.inputEfectivo = 0;
+                }
                 
             }
         }
