@@ -106,16 +106,14 @@ public class PongGameManager : MonoBehaviour
                 float inputA = jugA.mandoMovimiento.moveInput.x;
                 float inputB = jugB.mandoMovimiento.moveInput.x;
 
-                if (inputA != 0 && inputB != 0 && Mathf.Sign(inputA) == Mathf.Sign(inputB))
-                {
-                    jugA.inputEfectivo = inputA;
-                    jugB.inputEfectivo = inputB;
+                if (inputA != 0 && inputB != 0 && (Mathf.Sign(inputA) != Mathf.Sign(inputB) || Mathf.Sign(inputA) == Mathf.Sign(inputB)))
+                { 
+                 
+                    jugA.inputEfectivo = inputA + inputB;
+                    jugB.inputEfectivo = inputA + inputB;
+
                 }
-                else
-                {
-                    jugA.inputEfectivo = 0f;
-                    jugB.inputEfectivo = 0f;
-                }
+                
             }
         }
     }

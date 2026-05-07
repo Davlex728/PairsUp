@@ -762,12 +762,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8384e64ca28864dbecfe11598bbe55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BombMovement
-  speed: 10
+  speed: 5
   direction: {x: 0, y: 0}
   newVelocity: {x: 0, y: 0}
   currentSpeed: 0
-  speedIncreasePercentage: 15
-  maxSpeed: 38
+  speedIncreasePercentage: 5
+  maxSpeed: 20
   spawnPoint: {fileID: 1955173407}
 --- !u!50 &1245499513
 Rigidbody2D:

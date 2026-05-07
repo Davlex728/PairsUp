@@ -1138,10 +1138,10 @@ MonoBehaviour:
   animators:
   - {fileID: 9100000, guid: 8cb75b7b4f6deaa48b0a1055ba00f0c5, type: 2}
   - {fileID: 9100000, guid: d1cfb9303035189409e8fdacf71bca8c, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 9100000, guid: 895dfa5711d64874484b1ed60c8c82d6, type: 2}
+  - {fileID: 9100000, guid: c1fc3c9d86e65ec4990ee0f9fa2b357c, type: 2}
+  - {fileID: 9100000, guid: cb25cab1e63e22247818f3f5bf8ac331, type: 2}
+  - {fileID: 9100000, guid: 7bd07622cf202f6419eb1e65b9a94951, type: 2}
   spawnPointsCestas:
   - {fileID: 1038253858}
   - {fileID: 2147086614}
@@ -1156,7 +1156,9 @@ MonoBehaviour:
   - {fileID: 1527304681}
   tiempoEsperaVictoria: 2
   escenasAleatorias:
-  - 
+  - Pong
+  - MazeRunner
+  - PaintBall
 --- !u!4 &434736100
 Transform:
   m_ObjectHideFlags: 0

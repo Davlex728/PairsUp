@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/ZCrap/Lobby.unity
-    guid: 44263009691e5da4a8f0214629eb1c60
+    path: Assets/000000_ESCENAS/StartScene.unity
+    guid: d2e8aa5098101a742bd9a85aad0f7377
   - enabled: 1
     path: Assets/000000_ESCENAS/Caldero.unity
     guid: da2fb7c9bb496a84b840581b1b55dec9

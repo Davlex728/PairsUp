@@ -86,6 +86,10 @@ public class MazeGameManager : MonoBehaviour
             contadorJugadores++;
         }
     }
+    private void Update()
+    {
+        ComprobarGanador();
+    }
 
     void LateUpdate()
     {
@@ -147,8 +151,7 @@ public class MazeGameManager : MonoBehaviour
 
         jugadoresVivos.RemoveAll(p => p == null);
 
-        if (AzulMeta.instance.jugadoresAzules == 2 || RojoMeta.instance.jugadoresRojos == 2 ||
-            AmarilloMeta.instance.jugadoresAmarillos == 2)
+        if (AzulMeta.instance.jugadoresAzules == 2 || RojoMeta.instance.jugadoresRojos == 2 || AmarilloMeta.instance.jugadoresAmarillos == 2)
         {
             partidaTerminada = true;
             // Comprobación de seguridad

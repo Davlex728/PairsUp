@@ -153,7 +153,6 @@ MonoBehaviour:
   - {fileID: 1076297688}
   - {fileID: 1278056381}
   - {fileID: 1380945121}
-  - {fileID: 1073122053}
   - {fileID: 808949264}
   - {fileID: 756444482}
   - {fileID: 1995662584}
@@ -190,11 +189,11 @@ GameObject:
   - component: {fileID: 249570783}
   m_Layer: 0
   m_Name: MuroVerdeTileablePAINTBALL (1)_0 (8)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &249570783
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -229,17 +228,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.024668336}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84444445, y: 0.85555553}
+    oldSize: {x: 1.0857143, y: 1.1}
     newSize: {x: 0.84444445, y: 6.239277}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.84444445, y: 0.85555553}
+  m_Size: {x: 0.84444445, y: 6.1345453}
   m_EdgeRadius: 0
 --- !u!114 &249570784
 MonoBehaviour:
@@ -1126,11 +1125,11 @@ GameObject:
   - component: {fileID: 756444481}
   m_Layer: 0
   m_Name: MuroVerdeTileablePAINTBALL (1)_0 (6)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &756444481
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1165,17 +1164,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.039089203, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84444445, y: 0.85555553}
+    oldSize: {x: 1.0857143, y: 1.1}
     newSize: {x: 6.3834043, y: 0.85555553}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.84444445, y: 0.85555553}
+  m_Size: {x: 6.447216, y: 0.85555553}
   m_EdgeRadius: 0
 --- !u!114 &756444482
 MonoBehaviour:
@@ -1278,11 +1277,11 @@ GameObject:
   - component: {fileID: 808949263}
   m_Layer: 0
   m_Name: MuroVerdeTileablePAINTBALL (1)_0 (5)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &808949263
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1317,17 +1316,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.013029575}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84444445, y: 0.85555553}
+    oldSize: {x: 1.0857143, y: 1.1}
     newSize: {x: 0.84444445, y: 6.4005647}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.84444445, y: 0.85555553}
+  m_Size: {x: 0.84444445, y: 6.354087}
   m_EdgeRadius: 0
 --- !u!114 &808949264
 MonoBehaviour:
@@ -1608,158 +1607,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1073122051
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1073122055}
-  - component: {fileID: 1073122054}
-  - component: {fileID: 1073122053}
-  - component: {fileID: 1073122052}
-  m_Layer: 0
-  m_Name: MuroVerdeTileablePAINTBALL (1)_0 (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &1073122052
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073122051}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84444445, y: 0.85555553}
-    newSize: {x: 6.375555, y: 0.85555553}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 2
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.84444445, y: 0.85555553}
-  m_EdgeRadius: 0
---- !u!114 &1073122053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073122051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62ef0f5cb17f1a24d9ae963b193cc3d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Wall
-  isActive: 0
---- !u!212 &1073122054
-SpriteRenderer:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073122051}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_Sprite: {fileID: 8079559121590723162, guid: 96224a1b28899014b81fd84608377092, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 2
-  m_Size: {x: 6.375555, y: 0.85555553}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_SpriteSortPoint: 0
---- !u!4 &1073122055
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073122051}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.2944, y: -12.89, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1076297686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1774,7 +1621,7 @@ GameObject:
   - component: {fileID: 1076297687}
   m_Layer: 0
   m_Name: MuroVerdeTileablePAINTBALL (1)_0 (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1813,17 +1660,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.027287006}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84444445, y: 0.85555553}
+    oldSize: {x: 1.0857143, y: 1.1}
     newSize: {x: 0.76, y: 6.405527}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.84444445, y: 0.85555553}
+  m_Size: {x: 0.84444445, y: 6.3675957}
   m_EdgeRadius: 0
 --- !u!114 &1076297688
 MonoBehaviour:
@@ -2104,7 +1951,7 @@ GameObject:
   - component: {fileID: 1258543683}
   m_Layer: 0
   m_Name: MuroVerdeTileablePAINTBALL (1)_0
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2147,13 +1994,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84444445, y: 0.85555553}
+    oldSize: {x: 1.0857143, y: 1.1}
     newSize: {x: 6.736637, y: 0.77}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.84444445, y: 0.85555553}
+  m_Size: {x: 6.7385063, y: 0.85555553}
   m_EdgeRadius: 0
 --- !u!114 &1258543684
 MonoBehaviour:
@@ -2331,7 +2178,7 @@ GameObject:
   - component: {fileID: 1278056380}
   m_Layer: 0
   m_Name: MuroVerdeTileablePAINTBALL (1)_0 (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2370,17 +2217,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.00000011920929, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84444445, y: 0.85555553}
+    oldSize: {x: 1.0857143, y: 1.1}
     newSize: {x: 6.2799296, y: 0.77}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.84444445, y: 0.85555553}
+  m_Size: {x: 6.3019094, y: 0.85555553}
   m_EdgeRadius: 0
 --- !u!114 &1278056381
 MonoBehaviour:
@@ -2558,11 +2405,11 @@ GameObject:
   - component: {fileID: 1353294527}
   m_Layer: 0
   m_Name: MuroVerdeTileablePAINTBALL (1)_0 (9)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1353294527
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2597,17 +2444,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.009472847, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84444445, y: 0.85555553}
+    oldSize: {x: 1.0857143, y: 1.1}
     newSize: {x: 6.256511, y: 0.85555553}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.84444445, y: 0.85555553}
+  m_Size: {x: 6.2825184, y: 0.85555553}
   m_EdgeRadius: 0
 --- !u!114 &1353294528
 MonoBehaviour:
@@ -2710,7 +2557,7 @@ GameObject:
   - component: {fileID: 1380945120}
   m_Layer: 0
   m_Name: MuroVerdeTileablePAINTBALL (1)_0 (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2749,17 +2596,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.014286518}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84444445, y: 0.85555553}
+    oldSize: {x: 1.0857143, y: 1.1}
     newSize: {x: 0.84444445, y: 6.251786}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.84444445, y: 0.85555553}
+  m_Size: {x: 0.84444445, y: 6.1987286}
   m_EdgeRadius: 0
 --- !u!114 &1380945121
 MonoBehaviour:
@@ -2862,11 +2709,11 @@ GameObject:
   - component: {fileID: 1588634050}
   m_Layer: 0
   m_Name: MuroVerdeTileablePAINTBALL (1)_0 (10)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1588634050
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2901,17 +2748,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0117788315, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84444445, y: 0.85555553}
+    oldSize: {x: 1.0857143, y: 1.1}
     newSize: {x: 6.282872, y: 0.85555553}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.84444445, y: 0.85555553}
+  m_Size: {x: 6.2863674, y: 0.85555553}
   m_EdgeRadius: 0
 --- !u!114 &1588634051
 MonoBehaviour:
@@ -3014,11 +2861,11 @@ GameObject:
   - component: {fileID: 1920029536}
   m_Layer: 0
   m_Name: MuroVerdeTileablePAINTBALL (1)_0 (11)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1920029536
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3057,13 +2904,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84444445, y: 0.85555553}
+    oldSize: {x: 1.0857143, y: 1.1}
     newSize: {x: 0.84444445, y: 6.292408}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.84444445, y: 0.85555553}
+  m_Size: {x: 0.84444445, y: 6.1824245}
   m_EdgeRadius: 0
 --- !u!114 &1920029537
 MonoBehaviour:
@@ -3245,11 +3092,11 @@ GameObject:
   - component: {fileID: 1995662583}
   m_Layer: 0
   m_Name: MuroVerdeTileablePAINTBALL (1)_0 (7)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1995662583
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3284,17 +3131,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.046383142, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84444445, y: 0.85555553}
+    oldSize: {x: 1.0857143, y: 1.1}
     newSize: {x: 6.447421, y: 0.85555553}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.84444445, y: 0.85555553}
+  m_Size: {x: 6.5650573, y: 0.85555553}
   m_EdgeRadius: 0
 --- !u!114 &1995662584
 MonoBehaviour:
@@ -3601,7 +3448,6 @@ SceneRoots:
   - {fileID: 1076297690}
   - {fileID: 1278056383}
   - {fileID: 1380945123}
-  - {fileID: 1073122055}
   - {fileID: 808949266}
   - {fileID: 756444484}
   - {fileID: 1995662586}
