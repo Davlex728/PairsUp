@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Shoot
   bulletPrefab: {fileID: 7183448901356981602, guid: cae2f034eb1ba2846977bc597c4ccebd, type: 3}
   firePoint: {fileID: 7327434765709078320}
-  fireRate: 0.7
+  fireRate: 0.55
   bulletTime: 3
 --- !u!58 &6931578136921359992
 CircleCollider2D:
