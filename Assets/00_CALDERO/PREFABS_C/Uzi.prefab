@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3337374195300733875}
   - component: {fileID: 387430107297681361}
   - component: {fileID: 1051349668170278012}
+  - component: {fileID: -6192607583245177231}
   m_Layer: 6
   m_Name: Uzi
   m_TagString: Untagged
@@ -170,3 +171,15 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &-6192607583245177231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266789844381174005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4762351c2e2117242920e87e1a9dcca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenWrap

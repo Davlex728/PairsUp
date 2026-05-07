@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9142891078413200680}
   - component: {fileID: 3611133290953685087}
   - component: {fileID: -126236234174791078}
+  - component: {fileID: 2174656621947805339}
   m_Layer: 6
   m_Name: Pearls
   m_TagString: Untagged
@@ -170,3 +171,15 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &2174656621947805339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8096548412609292186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4762351c2e2117242920e87e1a9dcca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenWrap

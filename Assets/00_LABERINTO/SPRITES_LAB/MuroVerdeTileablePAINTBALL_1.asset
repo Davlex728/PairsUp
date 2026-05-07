@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: MuroTileable_2
+  m_Name: MuroVerdeTileablePAINTBALL_1
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.Tilemaps.Tile
   m_Sprite: {fileID: 8079559121590723162, guid: acd22800664a76e4aadb1811cf30f787, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.64280605, a: 1}
   m_Transform:
     e00: 1
     e01: 0

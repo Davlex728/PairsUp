@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: MuroTileable_3
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.Tilemaps.Tile
-  m_Sprite: {fileID: -4650811968642529135, guid: 463d71c70983c314da8d11d6dd9e481a, type: 3}
-  m_Color: {r: 1, g: 0.99579316, b: 0.015686274, a: 1}
+  m_Sprite: {fileID: 8079559121590723162, guid: acd22800664a76e4aadb1811cf30f787, type: 3}
+  m_Color: {r: 0.9737314, g: 1, b: 0, a: 1}
   m_Transform:
     e00: 1
     e01: 0
