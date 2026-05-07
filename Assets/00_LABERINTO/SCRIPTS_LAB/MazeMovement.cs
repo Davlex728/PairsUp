@@ -15,7 +15,7 @@ public class MazeMovement : MonoBehaviour
     
     public InputBoton inputEfectivo = InputBoton.Ninguno;
 
-    public float shaderRadius;
+    public float shaderRadius = 0.4f;
     
     private void Awake()
     {
