@@ -5,7 +5,7 @@ public class SpriteMano : MonoBehaviour
 {
     [Header("Configuración Mano")]
     public float flySpeed = 8f;
-    public float limiteY = 2f;
+    // public float limiteY = 2f;
 
     [Header("Configuración Agarre")]
     public float radioDeAgarre = 1.5f;
@@ -63,14 +63,15 @@ public class SpriteMano : MonoBehaviour
         Vector2 movimiento = miMando.moveInput;
         rb.linearVelocity = movimiento * flySpeed;
 
-        if (transform.position.y < limiteY)
-        {
-            transform.position = new Vector3(transform.position.x, limiteY, transform.position.z);
-            if (rb.linearVelocity.y < 0)
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
-            }
-        }
+        /* if (transform.position.y < limiteY)
+         {
+             transform.position = new Vector3(transform.position.x, limiteY, transform.position.z);
+             if (rb.linearVelocity.y < 0)
+
+             {
+                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
+             }
+         }*/
         Collider2D coliderDeHugoParaLaMano = Physics2D.OverlapCircle(transform.position, radioDeAgarre, capaIngredientes);
         if (coliderDeHugoParaLaMano != null && !isAgarrandoHugo)
         {
@@ -119,7 +120,7 @@ public class SpriteMano : MonoBehaviour
         objetoAgarrado.linearVelocity = rb.linearVelocity * 0.5f;
         objetoAgarrado = null;
         animator.SetBool("isGrabbing", false);
-            isAgarrandoHugo = false;
+        isAgarrandoHugo = false;
     }
 
     private void OnDrawGizmosSelected()

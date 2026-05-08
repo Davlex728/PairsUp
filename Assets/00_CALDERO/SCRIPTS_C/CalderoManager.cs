@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,20 +13,32 @@ public class CalderoManager : MonoBehaviour
     public GameObject prefabMano;
 
     [Header("Animators por Slot (índice 0 = slot 1, índice 5 = slot 6)")]
-    public RuntimeAnimatorController[] animators; // array de 6, uno por slot
+    public RuntimeAnimatorController[] animators;
 
     [Header("Spawn Points")]
-    public Transform[] spawnPointsCestas; // 3 puntos, uno por equipo
-    public Transform[] spawnPointsManos;  // 3 puntos, uno por equipo
+    public Transform[] spawnPointsCestas;
+    public Transform[] spawnPointsManos;
 
-    [Header("UI (Textos de la pantalla)")]
-    public UIReceta[] panelesUIParejas; // 3 paneles, uno por equipo
+    [Header("UI")]
+    public UIReceta[] panelesUIParejas;
+    public TextMeshProUGUI textoTimer;
+
+    [Header("Duración partida")]
+    public float duracionPartida = 60f;
+
+    [Header("Ingrediente Objetivo")]
+    public float intervaloNuevoObjetivo = 8f;
+    [HideInInspector] public float tiempoSiguienteObjetivo;
 
     [Header("Condición de Victoria")]
     [SerializeField] private float tiempoEsperaVictoria = 2f;
     [SerializeField] private string[] escenasAleatorias;
 
     private bool juegoTerminado = false;
+    private float tiempoRestante;
+    private List<SpriteCesta> cestas = new(); //lista para meter las cesta y al acabar el minijuego mirar puntuacion
+
+    public TipoIngrediente IngredienteObjetivo { get; private set; }
 
     private void Awake()
     {
@@ -34,95 +48,66 @@ public class CalderoManager : MonoBehaviour
 
     private void Start()
     {
-        PersistentPlayer[] jugadores = FindObjectsByType<PersistentPlayer>(FindObjectsSortMode.None);
+        tiempoRestante = duracionPartida;
+        ElegirNuevoObjetivo();
+        tiempoSiguienteObjetivo = intervaloNuevoObjetivo;
 
-        if (jugadores.Length == 0)
-        {
-            Debug.LogWarning("[CalderoManager] No hay jugadores. ¿Has pasado por el lobby?");
-            return;
-        }
+        PersistentPlayer[] jugadores = FindObjectsByType<PersistentPlayer>(FindObjectsSortMode.None);
+        if (jugadores.Length == 0) { Debug.LogWarning("[CalderoManager] No hay jugadores."); return; }
 
         foreach (PersistentPlayer pp in jugadores)
         {
             PlayerInputHandler mando = pp.GetComponent<PlayerInputHandler>();
-            int slotId = pp.playerIndex;  // 1-6, asignado en la lobby
-            int equipo = pp.teamIndex;    // 0-2, (slotId-1)/2
-
-            // Dentro de cada equipo: slot impar → Cesta, slot par → Mano
-            // Slot 1,3,5 (impares) → Cesta  |  Slot 2,4,6 (pares) → Mano
-            bool esCesta = (slotId % 2 != 0);
-
-            if (esCesta)
-                SpawnearCesta(slotId, equipo, mando);
-            else
-                SpawnearMano(slotId, equipo, mando);
+            int slotId = pp.playerIndex;
+            int equipo = pp.teamIndex;
+            if (slotId % 2 != 0) SpawnearCesta(slotId, equipo, mando);
+            else SpawnearMano(slotId, equipo, mando);
         }
     }
 
-    
-
-    private void SpawnearCesta(int slotId, int equipo, PlayerInputHandler mando)
+    private void Update()
     {
-        if (equipo >= spawnPointsCestas.Length)
+        if (juegoTerminado) return;
+
+        tiempoRestante -= Time.deltaTime;
+        if (textoTimer != null) textoTimer.text = Mathf.CeilToInt(Mathf.Max(tiempoRestante, 0f)).ToString();
+
+        tiempoSiguienteObjetivo -= Time.deltaTime;
+        if (tiempoSiguienteObjetivo <= 0f)
         {
-            Debug.LogError($"[CalderoManager] No hay spawnPoint de cesta para equipo {equipo}");
-            return;
+            ElegirNuevoObjetivo();
+            tiempoSiguienteObjetivo = intervaloNuevoObjetivo;
         }
 
-        GameObject sprite = Instantiate(prefabCesta, spawnPointsCestas[equipo].position, Quaternion.identity);
-
-        if (sprite.TryGetComponent(out SpriteCesta scriptCesta))
-        {
-            scriptCesta.ConectarMando(mando);
-
-            if (panelesUIParejas.Length > equipo && panelesUIParejas[equipo] != null)
-            {
-                scriptCesta.miUI = panelesUIParejas[equipo];
-                scriptCesta.IniciarUI();
-            }
-        }
-
-        AsignarAnimator(sprite, slotId);
-        Debug.Log($"[CalderoManager] Cesta spawneada → Slot {slotId} | Equipo {equipo}");
+        if (tiempoRestante <= 0f) TerminarPorTimer();
     }
 
-    private void SpawnearMano(int slotId, int equipo, PlayerInputHandler mando)
+    public void ElegirNuevoObjetivo()
     {
-        if (equipo >= spawnPointsManos.Length)
-        {
-            Debug.LogError($"[CalderoManager] No hay spawnPoint de mano para equipo {equipo}");
-            return;
-        }
+        var valores = System.Enum.GetValues(typeof(TipoIngrediente));
+        IngredienteObjetivo = (TipoIngrediente)valores.GetValue(Random.Range(0, valores.Length));
+        Debug.Log($"[CalderoManager] Nuevo objetivo: {IngredienteObjetivo}");
 
-        GameObject avatar = Instantiate(prefabMano, spawnPointsManos[equipo].position, Quaternion.identity);
-
-        if (avatar.TryGetComponent(out SpriteMano scriptMano))
-            scriptMano.ConectarMando(mando);
-
-        AsignarAnimator(avatar, slotId);
-        Debug.Log($"[CalderoManager] Mano spawneada → Slot {slotId} | Equipo {equipo}");
+        foreach (UIReceta ui in panelesUIParejas)
+            if (ui != null) ui.MostrarIngredienteObjetivo(IngredienteObjetivo);
     }
 
-    /// <summary>Asigna el animator según slotId (1-6 → índice 0-5 del array).</summary>
-    private void AsignarAnimator(GameObject obj, int slotId)
+    private void TerminarPorTimer()
     {
-        int animIndex = slotId - 1; // slot 1 → índice 0
-        if (obj.TryGetComponent(out Animator animator))
-        {
-            if (animators.Length > animIndex && animators[animIndex] != null)
-                animator.runtimeAnimatorController = animators[animIndex];
-            else
-                Debug.LogWarning($"[CalderoManager] No hay animator para slot {slotId} (índice {animIndex})");
-        }
-    }
+        juegoTerminado = true;
+        SpriteCesta ganadora = null;
+        int maxPuntos = int.MinValue;
+        foreach (SpriteCesta c in cestas) //mete las cesras en la lista de la puntuaCION
+            if (c.puntos > maxPuntos) { maxPuntos = c.puntos; ganadora = c; }
 
-    // ── Victoria ────────────────────────────────────────────────────────────
+        Debug.Log($"[CalderoManager] Tiempo acabado. Ganador: {(ganadora != null ? ganadora.gameObject.name : "empate")} con {maxPuntos} puntos.");
+        StartCoroutine(EsperarYCargarEscena());
+    }
 
     public void DeclararVictoria(GameObject ganador)
     {
         if (juegoTerminado) return;
         juegoTerminado = true;
-        Debug.Log($"[CalderoManager] ¡VICTORIA! Ganador: {ganador.name}");
         StartCoroutine(EsperarYCargarEscena());
     }
 
@@ -134,22 +119,41 @@ public class CalderoManager : MonoBehaviour
 
     private void CargarEscenaAleatoria()
     {
-        if (escenasAleatorias == null || escenasAleatorias.Length == 0)
-        {
-            Debug.LogError("[CalderoManager] ERROR: No hay escenas configuradas.");
-            return;
-        }
-
-        int idx = Random.Range(0, escenasAleatorias.Length);
-        string escena = escenasAleatorias[idx];
-
-        if (string.IsNullOrEmpty(escena))
-        {
-            Debug.LogError($"[CalderoManager] ERROR: Hueco {idx} del array vacío.");
-            return;
-        }
-
-        Debug.Log($"[CalderoManager] Cargando escena: {escena}");
+        if (escenasAleatorias == null || escenasAleatorias.Length == 0) { Debug.LogError("[CalderoManager] No hay escenas."); return; }
+        string escena = escenasAleatorias[Random.Range(0, escenasAleatorias.Length)];
+        if (string.IsNullOrEmpty(escena)) { Debug.LogError("[CalderoManager] Escena vacía."); return; }
         SceneManager.LoadScene(escena);
+    }
+
+    private void SpawnearCesta(int slotId, int equipo, PlayerInputHandler mando)
+    {
+        if (equipo >= spawnPointsCestas.Length) { Debug.LogError($"[CalderoManager] Falta spawn cesta {equipo}"); return; }
+        GameObject sprite = Instantiate(prefabCesta, spawnPointsCestas[equipo].position, Quaternion.identity);
+        if (sprite.TryGetComponent(out SpriteCesta sc))
+        {
+            sc.ConectarMando(mando);
+            cestas.Add(sc);
+            if (panelesUIParejas.Length > equipo && panelesUIParejas[equipo] != null)
+            {
+                sc.miUI = panelesUIParejas[equipo];
+                sc.IniciarUI();
+            }
+        }
+        AsignarAnimator(sprite, slotId);
+    }
+
+    private void SpawnearMano(int slotId, int equipo, PlayerInputHandler mando)
+    {
+        if (equipo >= spawnPointsManos.Length) { Debug.LogError($"[CalderoManager] Falta spawn mano {equipo}"); return; }
+        GameObject avatar = Instantiate(prefabMano, spawnPointsManos[equipo].position, Quaternion.identity);
+        if (avatar.TryGetComponent(out SpriteMano sm)) sm.ConectarMando(mando);
+        AsignarAnimator(avatar, slotId);
+    }
+
+    private void AsignarAnimator(GameObject obj, int slotId)
+    {
+        int idx = slotId - 1;
+        if (obj.TryGetComponent(out Animator animator) && animators.Length > idx && animators[idx] != null)
+            animator.runtimeAnimatorController = animators[idx];
     }
 }

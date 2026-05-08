@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9139569052629054739}
   - component: {fileID: -1215206722092747444}
   - component: {fileID: -7428743201246872803}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ManoWii
   m_TagString: Untagged
   m_Icon: {fileID: 0}
