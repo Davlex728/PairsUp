@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpritePlatformero
   moveSpeed: 5
-  jumpForce: 10
+  jumpForce: 5
   rangoAccion: 3
   fuerzaEmpujon: 10
   cooldownEmpujon: 2

@@ -27,6 +27,7 @@ public class SpritePlatformero : MonoBehaviour
 
     private bool tieneBandera = false;
     private GameObject banderaObj;
+    private GameObject banderaOrigen;
 
     private float tiempoUltimoEmpujon = -99f;
     private float knockbackTimer = 0f;
@@ -90,6 +91,9 @@ public class SpritePlatformero : MonoBehaviour
     private void IntentarRecogerBandera()
     {
         if (tieneBandera) return;
+
+        if (banderaOrigen == null)
+            banderaOrigen = GameObject.FindWithTag("BanderaOrigen");
 
         foreach (Collider2D col in GetCercanos())
         {
@@ -163,12 +167,14 @@ public class SpritePlatformero : MonoBehaviour
         {
             Collider2D c = banderaObj.GetComponent<Collider2D>();
             if (c != null) c.enabled = true;
+            if (banderaOrigen != null)
+                banderaObj.transform.position = banderaOrigen.transform.position;
             banderaObj = null;
         }
         Debug.Log($"[Platformero] {gameObject.name} soltó la bandera.");
     }
 
-    private Collider2D[] GetCercanos()
+    private Collider2D[] GetCercanos()    //youtube es la mejor invencion del ser humano no preguteis que es ni yo lo se
     {
         ContactFilter2D filtro = new ContactFilter2D();
         filtro.NoFilter();
