@@ -20,11 +20,11 @@ public class PuntuacionManager : MonoBehaviour
     }
 
     // Método para sumar puntos a un índice específico
-    public void SumarPuntuacion(int index, int puntos)
+    public void SumarPuntuacion(int index)
     {
         if (index >= 0 && index < puntuacion.Length)
         {
-            puntuacion[index] += puntos;
+            puntuacion[index] ++;
         }
     }
 

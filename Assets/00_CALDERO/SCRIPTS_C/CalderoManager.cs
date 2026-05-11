@@ -7,20 +7,6 @@ using UnityEngine.UI;
 
 public class CalderoManager : MonoBehaviour
 {
-    /*
-    Plan (pseudocódigo detallado):
-    - Objetivo: asegurar que el reloj (imagen UI) mantiene el mismo tamaño
-      desde el principio hasta el final de la partida.
-    - No ajustar propiedades de layout cada frame (evitar efectos inesperados).
-    - Configurar la imagen del reloj una única vez en Start():
-      - type = Filled
-      - fillMethod = Radial360
-      - fillClockwise = false (para la dirección deseada)
-      - preserveAspect = true (mantener proporciones/tamaño)
-    - En Update() solo actualizar el fillAmount con Clamp01(tiempoRestante / duracionPartida).
-    - Proteger contra división por cero.
-    - Mantener el resto de la lógica intacta.
-    */
 
     public static CalderoManager Instance { get; private set; }
 
@@ -56,6 +42,7 @@ public class CalderoManager : MonoBehaviour
     private List<SpriteCesta> cestas = new(); //lista para meter las cesta y al acabar el minijuego mirar puntuacion
 
     PuntuacionManager puntuacionManager;
+    private int equipoGanador;
 
     public TipoIngrediente IngredienteObjetivo { get; private set; }
 
@@ -151,13 +138,35 @@ public class CalderoManager : MonoBehaviour
         StartCoroutine(EsperarYCargarEscena());
     }
 
+    void SacarCampeon()
+    {
+        SpriteCesta[] cestas = FindObjectsOfType<SpriteCesta>();
+        int[] puntosYindex = new int[2];
+        puntosYindex[0] = 0;
+        puntosYindex[1] = 0;
+        for (int i = 0; i < cestas.Length; i++)
+            {
+            SpriteCesta c = cestas[i];
+            if (c.puntos > puntosYindex[0]) // umbral de victoria, ajustar según necesidad
+            {
+                puntosYindex[0] = c.puntos;
+                puntosYindex[1] = c.miMando.teamIndex;
+                return;
+            }
+        }
+        equipoGanador = puntosYindex[1];
+
+    }
     private IEnumerator EsperarYCargarEscena()
     {
         yield return new WaitForSeconds(tiempoEsperaVictoria);
         if(puntuacionManager != null)
         {
-
+            SacarCampeon();
+            puntuacionManager.SumarPuntuacion(equipoGanador);
         }
+        Debug.Log(equipoGanador);
+        Debug.Log(puntuacionManager.ObtenerPuntuacion(equipoGanador));
         CargarEscenaAleatoria();
     }
 
