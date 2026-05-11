@@ -38,6 +38,8 @@ public class CalderoManager : MonoBehaviour
     private float tiempoRestante;
     private List<SpriteCesta> cestas = new(); //lista para meter las cesta y al acabar el minijuego mirar puntuacion
 
+    PuntuacionManager puntuacionManager;
+
     public TipoIngrediente IngredienteObjetivo { get; private set; }
 
     private void Awake()
@@ -63,6 +65,8 @@ public class CalderoManager : MonoBehaviour
             if (slotId % 2 != 0) SpawnearCesta(slotId, equipo, mando);
             else SpawnearMano(slotId, equipo, mando);
         }
+
+        puntuacionManager = FindObjectOfType<PuntuacionManager>();
     }
 
     private void Update()
@@ -114,6 +118,10 @@ public class CalderoManager : MonoBehaviour
     private IEnumerator EsperarYCargarEscena()
     {
         yield return new WaitForSeconds(tiempoEsperaVictoria);
+        if(puntuacionManager != null)
+        {
+
+        }
         CargarEscenaAleatoria();
     }
 
