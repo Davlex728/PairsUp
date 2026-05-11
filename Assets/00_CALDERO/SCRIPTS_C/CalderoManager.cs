@@ -3,9 +3,25 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CalderoManager : MonoBehaviour
 {
+    /*
+    Plan (pseudocódigo detallado):
+    - Objetivo: asegurar que el reloj (imagen UI) mantiene el mismo tamaño
+      desde el principio hasta el final de la partida.
+    - No ajustar propiedades de layout cada frame (evitar efectos inesperados).
+    - Configurar la imagen del reloj una única vez en Start():
+      - type = Filled
+      - fillMethod = Radial360
+      - fillClockwise = false (para la dirección deseada)
+      - preserveAspect = true (mantener proporciones/tamaño)
+    - En Update() solo actualizar el fillAmount con Clamp01(tiempoRestante / duracionPartida).
+    - Proteger contra división por cero.
+    - Mantener el resto de la lógica intacta.
+    */
+
     public static CalderoManager Instance { get; private set; }
 
     [Header("Prefabs Sprites")]
@@ -36,6 +52,7 @@ public class CalderoManager : MonoBehaviour
 
     private bool juegoTerminado = false;
     private float tiempoRestante;
+    [SerializeField] private Image relojTimer;
     private List<SpriteCesta> cestas = new(); //lista para meter las cesta y al acabar el minijuego mirar puntuacion
 
     PuntuacionManager puntuacionManager;
@@ -53,6 +70,15 @@ public class CalderoManager : MonoBehaviour
         tiempoRestante = duracionPartida;
         ElegirNuevoObjetivo();
         tiempoSiguienteObjetivo = intervaloNuevoObjetivo;
+
+        // Configurar la imagen del reloj una sola vez para que mantenga tamaño y propiedades constantes
+        if (relojTimer != null)
+        {
+            relojTimer.type = Image.Type.Filled;
+            relojTimer.fillMethod = Image.FillMethod.Radial360;
+            relojTimer.fillClockwise = false;
+            relojTimer.preserveAspect = true;
+        }
 
         PersistentPlayer[] jugadores = FindObjectsByType<PersistentPlayer>(FindObjectsSortMode.None);
         if (jugadores.Length == 0) { Debug.LogWarning("[CalderoManager] No hay jugadores."); return; }
@@ -75,6 +101,16 @@ public class CalderoManager : MonoBehaviour
 
         tiempoRestante -= Time.deltaTime;
         if (textoTimer != null) textoTimer.text = Mathf.CeilToInt(Mathf.Max(tiempoRestante, 0f)).ToString();
+
+        if (relojTimer != null)
+        {
+            // Solo actualizar el fillAmount en runtime; la configuración está en Start()
+            float fillAmount = duracionPartida > 0f ? Mathf.Clamp01(tiempoRestante / duracionPartida) : 0f;
+            relojTimer.fillAmount = fillAmount;
+            if (tiempoRestante <= 5f) relojTimer.color = Color.red * new Color(1f, 1f, 1f, 0.5f);  // Cambia a rojo en los últimos 5 segundos
+            else if (tiempoRestante <= duracionPartida/3) relojTimer.color = Color.yellow *new Color(1f, 1f, 1f, 0.5f); // Cambia a amarillo cuando queda un tercio del tiempo
+            else relojTimer.color = Color.green * new Color(1f, 1f, 1f, 0.5f); // Verde el resto del tiempo
+        }
 
         tiempoSiguienteObjetivo -= Time.deltaTime;
         if (tiempoSiguienteObjetivo <= 0f)
