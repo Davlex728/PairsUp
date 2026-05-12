@@ -109,8 +109,8 @@ public class PongGameManager : MonoBehaviour
                 if (inputA != 0 && inputB != 0 && (Mathf.Sign(inputA) != Mathf.Sign(inputB) || Mathf.Sign(inputA) == Mathf.Sign(inputB)))
                 { 
                  
-                    jugA.inputEfectivo = Mathf.Clamp(inputA + inputB, -1f, 1f);
-                    jugB.inputEfectivo = Mathf.Clamp(inputA + inputB,-1,1);
+                    jugA.inputEfectivo = inputA + inputB;
+                    jugB.inputEfectivo = inputA + inputB;
 
                 }
                 else

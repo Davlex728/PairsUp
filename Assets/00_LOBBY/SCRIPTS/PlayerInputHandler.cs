@@ -14,9 +14,20 @@ public class PlayerInputHandler : MonoBehaviour
     public bool isWestZone;
     public bool isEastZone;
     public Vector2 lookInput;
-
+    PersistentPlayer persistentPlayer;
+    public int teamIndex;
     //platformer
     public bool isSwitchingTool;
+
+    public void LastBullet()
+    {
+        persistentPlayer = GetComponent<PersistentPlayer>();
+        if (persistentPlayer == null)
+            Debug.LogError("No se encontró PersistentPlayer en el mismo GameObject.");
+        else
+            teamIndex = persistentPlayer.teamIndex;
+    }
+
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();

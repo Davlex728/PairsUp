@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CalderoManager : MonoBehaviour
 {
+
     public static CalderoManager Instance { get; private set; }
 
     [Header("Prefabs Sprites")]
@@ -36,7 +38,11 @@ public class CalderoManager : MonoBehaviour
 
     private bool juegoTerminado = false;
     private float tiempoRestante;
+    [SerializeField] private Image relojTimer;
     private List<SpriteCesta> cestas = new(); //lista para meter las cesta y al acabar el minijuego mirar puntuacion
+
+    PuntuacionManager puntuacionManager;
+    private int equipoGanador;
 
     public TipoIngrediente IngredienteObjetivo { get; private set; }
 
@@ -52,6 +58,15 @@ public class CalderoManager : MonoBehaviour
         ElegirNuevoObjetivo();
         tiempoSiguienteObjetivo = intervaloNuevoObjetivo;
 
+        // Configurar la imagen del reloj una sola vez para que mantenga tamaño y propiedades constantes
+        if (relojTimer != null)
+        {
+            relojTimer.type = Image.Type.Filled;
+            relojTimer.fillMethod = Image.FillMethod.Radial360;
+            relojTimer.fillClockwise = false;
+            relojTimer.preserveAspect = true;
+        }
+
         PersistentPlayer[] jugadores = FindObjectsByType<PersistentPlayer>(FindObjectsSortMode.None);
         if (jugadores.Length == 0) { Debug.LogWarning("[CalderoManager] No hay jugadores."); return; }
 
@@ -63,6 +78,8 @@ public class CalderoManager : MonoBehaviour
             if (slotId % 2 != 0) SpawnearCesta(slotId, equipo, mando);
             else SpawnearMano(slotId, equipo, mando);
         }
+
+        puntuacionManager = FindObjectOfType<PuntuacionManager>();
     }
 
     private void Update()
@@ -71,6 +88,16 @@ public class CalderoManager : MonoBehaviour
 
         tiempoRestante -= Time.deltaTime;
         if (textoTimer != null) textoTimer.text = Mathf.CeilToInt(Mathf.Max(tiempoRestante, 0f)).ToString();
+
+        if (relojTimer != null)
+        {
+            // Solo actualizar el fillAmount en runtime; la configuración está en Start()
+            float fillAmount = duracionPartida > 0f ? Mathf.Clamp01(tiempoRestante / duracionPartida) : 0f;
+            relojTimer.fillAmount = fillAmount;
+            if (tiempoRestante <= 5f) relojTimer.color = Color.red * new Color(1f, 1f, 1f, 0.5f);  // Cambia a rojo en los últimos 5 segundos
+            else if (tiempoRestante <= duracionPartida/3) relojTimer.color = Color.yellow *new Color(1f, 1f, 1f, 0.5f); // Cambia a amarillo cuando queda un tercio del tiempo
+            else relojTimer.color = Color.green * new Color(1f, 1f, 1f, 0.5f); // Verde el resto del tiempo
+        }
 
         tiempoSiguienteObjetivo -= Time.deltaTime;
         if (tiempoSiguienteObjetivo <= 0f)
@@ -111,9 +138,35 @@ public class CalderoManager : MonoBehaviour
         StartCoroutine(EsperarYCargarEscena());
     }
 
+    void SacarCampeon()
+    {
+        SpriteCesta[] cestas = FindObjectsOfType<SpriteCesta>();
+        int[] puntosYindex = new int[2];
+        puntosYindex[0] = 0;
+        puntosYindex[1] = 0;
+        for (int i = 0; i < cestas.Length; i++)
+            {
+            SpriteCesta c = cestas[i];
+            if (c.puntos > puntosYindex[0]) // umbral de victoria, ajustar según necesidad
+            {
+                puntosYindex[0] = c.puntos;
+                puntosYindex[1] = c.miMando.teamIndex;
+                return;
+            }
+        }
+        equipoGanador = puntosYindex[1];
+
+    }
     private IEnumerator EsperarYCargarEscena()
     {
         yield return new WaitForSeconds(tiempoEsperaVictoria);
+        if(puntuacionManager != null)
+        {
+            SacarCampeon();
+            puntuacionManager.SumarPuntuacion(equipoGanador);
+        }
+        Debug.Log(equipoGanador);
+        Debug.Log(puntuacionManager.ObtenerPuntuacion(equipoGanador));
         CargarEscenaAleatoria();
     }
 

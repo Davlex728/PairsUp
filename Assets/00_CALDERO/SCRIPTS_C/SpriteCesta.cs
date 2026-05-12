@@ -88,6 +88,8 @@ public class SpriteCesta : MonoBehaviour
             if (esObjetivo)
             {
                 puntos++;
+         
+                
                 Debug.Log($"[Cesta] ¡Correcto! {ingrediente.miTipo}. Puntos: {puntos}");
                 if (corrutinaEfecto != null) StopCoroutine(corrutinaEfecto);
                 sr.color = Color.white;
@@ -99,6 +101,9 @@ public class SpriteCesta : MonoBehaviour
             else
             {
                 puntos = Mathf.Max(0, puntos - 1);
+               
+                
+                
                 Debug.Log($"[Cesta] ¡Incorrecto! {ingrediente.miTipo}. Puntos: {puntos}");
                 if (corrutinaEfecto != null) StopCoroutine(corrutinaEfecto);
                 sr.color = Color.white;
@@ -162,5 +167,10 @@ public class SpriteCesta : MonoBehaviour
             yield return null;
         }
         transform.localScale = original;
+    }
+    private void Start()
+    {
+        miMando.LastBullet();
+        Debug.Log(miMando.teamIndex);
     }
 }
