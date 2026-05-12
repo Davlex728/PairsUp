@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PuntuacionManager : MonoBehaviour
 {
+    PuntuacionManager instance;
     private int[] puntuacion = new int[3];
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
