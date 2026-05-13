@@ -1,4 +1,4 @@
-Shader "Custom/DarknessShader"
+﻿Shader "Custom/DarknessShader"
 {
     Properties
     {
@@ -24,8 +24,8 @@ Shader "Custom/DarknessShader"
             #pragma fragment frag
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            float4 _PlayerPositions[6];
-            float _PlayerRadii[6];
+            float4 _PlayerPositions[7];  // ← CAMBIO: de 6 a 7
+            float _PlayerRadii[7];        // ← CAMBIO: de 6 a 7
             float4 _Color;
 
             struct Attributes
@@ -52,7 +52,7 @@ Shader "Custom/DarknessShader"
                 float minDist = 999999;
                 int closestIndex = 0;
                 
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 7; i++)  // ← CAMBIO: de 6 a 7
                 {
                     float dist = distance(IN.worldPos.xy, _PlayerPositions[i].xy);
                     if (dist < minDist)

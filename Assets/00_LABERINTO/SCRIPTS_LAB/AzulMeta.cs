@@ -11,28 +11,27 @@ public class AzulMeta : MonoBehaviour
         instance = this;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Azul")
         {
-            Debug.Log(other.name);
-            other.TryGetComponent<MazeMovement>(out MazeMovement mazeMovement);
-            mazeMovement.rb.constraints = RigidbodyConstraints2D.FreezeAll;
-
-            mazeMovement.transform.position = new Vector3(0,-0.404f,0);
+            if (other.TryGetComponent<MazeMovement>(out MazeMovement mazeMovement))
+            {
+                Debug.Log($"Jugador Azul congelado: {other.name}");
+                mazeMovement.rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                mazeMovement.transform.position = new Vector3(0, -0.404f, 0);
+                jugadoresAzules += 1;
+            }
         }
-         jugadoresAzules+= 1;  
     }
 }

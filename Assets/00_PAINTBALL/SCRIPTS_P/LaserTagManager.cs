@@ -35,6 +35,8 @@ public class LaserTagManager : MonoBehaviour
     
     List<List<GameObject>> parejas = new List<List<GameObject>>();
     public Transform puntoSpawn;
+
+    PuntuacionManager puntuacionManager;
     private void Awake()
     {
         Instance = this;
@@ -76,6 +78,8 @@ public class LaserTagManager : MonoBehaviour
             }
             contadorJugadores++;
         }
+
+        puntuacionManager = FindObjectOfType<PuntuacionManager>();
     }
     private void Update()
     {
@@ -90,6 +94,7 @@ public class LaserTagManager : MonoBehaviour
 
         if (padresVivos.Count == 1)
         {
+            //DarPuntos(padresVivos[0].GetComponent<Movement>().slotId);
 
             partidaTerminada = true;
             // Comprobación de seguridad
@@ -189,9 +194,15 @@ public class LaserTagManager : MonoBehaviour
                 childAnimator.runtimeAnimatorController = animators[animIndex];
         }
 
-        
-        
-       
-        
+    }
+    void DarPuntos(int slotId)
+    {
+        if (puntuacionManager == null)
+        {
+            Debug.LogError("[LaserTagManager] No se encontró PuntuacionManager en la escena.");
+            return;
+        }
+        puntuacionManager.SumarPuntuacion(slotId);
+        Debug.Log($"[LaserTagManager] Jugador {slotId} ha sumado un punto. Total: {puntuacionManager.ObtenerPuntuacion(slotId)}");
     }
 }

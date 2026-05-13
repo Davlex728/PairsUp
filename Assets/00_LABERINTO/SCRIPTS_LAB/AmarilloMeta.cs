@@ -20,15 +20,17 @@ public class AmarilloMeta : MonoBehaviour
     {
         
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Amarillo")
         {
-            other.TryGetComponent<MazeMovement>(out MazeMovement mazeMovement);
-            mazeMovement.rb.constraints = RigidbodyConstraints2D.FreezeAll;
-            mazeMovement.transform.position = new Vector3(0,-0.104f,0);
+            if (other.TryGetComponent<MazeMovement>(out MazeMovement mazeMovement))
+            {
+                mazeMovement.rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                mazeMovement.transform.position = new Vector3(0, -0.104f, 0);
+                jugadoresAmarillos += 1;
+            }
         }
-        jugadoresAmarillos+= 1;
     }
 }
