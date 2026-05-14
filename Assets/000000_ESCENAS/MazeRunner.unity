@@ -923,7 +923,8 @@ MonoBehaviour:
   - {fileID: 1198211950}
   - {fileID: 48031708}
   - {fileID: 1509382977}
-  escenasAleatorias: []
+  escenasAleatorias:
+  - Puntuation
   animators:
   - {fileID: 9100000, guid: 0d0e6d4ef9ba1f74097641954a8bf8da, type: 2}
   - {fileID: 9100000, guid: 9e81dad06b64e414692c5bf6c038438f, type: 2}

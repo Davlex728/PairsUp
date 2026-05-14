@@ -1474,7 +1474,8 @@ MonoBehaviour:
   - {fileID: 590897951}
   - {fileID: 2021377019}
   - {fileID: 1032062945}
-  escenasAleatorias: []
+  escenasAleatorias:
+  - Puntuation
   jugadoresVivos: []
   puntoSpawn: {fileID: 0}
 --- !u!114 &827207762

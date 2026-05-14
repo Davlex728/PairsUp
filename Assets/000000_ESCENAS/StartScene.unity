@@ -4963,9 +4963,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5dc4bfafec3455409671b31bacb2c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LobbyManager
-  requiredPlayers: 6
+  requiredPlayers: 4
   randomSceneNames:
-  - MazeRunner
+  - Puntuation
   cursorPrefab: {fileID: 8173966651450092360, guid: 0971c4aba8ddb4f44bc5a9ccf875255a, type: 3}
   lobbyCanvasRect: {fileID: 257770779}
   countdownText: {fileID: 691256646}
@@ -5372,6 +5372,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57fd6c0f43702b48a8fd09fbcc884d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuntuacionManager
+  puntuacion: 000000000000000000000000
+  escenasNombres:
+  - Caldero
+  - Pong
+  - MazeRunner
+  - PaintBall
 --- !u!4 &1738944962
 Transform:
   m_ObjectHideFlags: 0
