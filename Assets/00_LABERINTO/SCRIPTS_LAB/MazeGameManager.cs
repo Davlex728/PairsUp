@@ -1,7 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine.SceneManagement;
+using Unity.UI;
+using Image = UnityEngine.UI.Image;
 
 public class MazeGameManager : MonoBehaviour
 {
@@ -31,6 +34,11 @@ public class MazeGameManager : MonoBehaviour
     public List<GameObject> jugadoresVivos = new List<GameObject>();
     private GameObject jugadorUno;
     private GameObject jugadorDos;
+
+    [Header("Canvas Botones")] 
+    public List<GameObject> canvasBotones;
+
+    public List<Image> imagenesBotones;
 
     List<List<GameObject>> parejas = new List<List<GameObject>>();
     public Transform puntoSpawn;
@@ -202,21 +210,38 @@ public class MazeGameManager : MonoBehaviour
         Debug.Log("Spawneando jugador padre");
 
         jugadorUno = Instantiate(prefabPlayerUno, spawnPointsPlayers[slotId - 1].position, Quaternion.identity);
+        
 
         jugadoresVivos.Add(jugadorUno);
         if (slotId == 1)
-        {
+        { 
             jugadorUno.gameObject.tag = "Azul";
+
+            if (jugadorUno.TryGetComponent<ButtonLogic>(out var scriptBotones))
+            {
+                scriptBotones.imagen = canvasBotones[0];
+                scriptBotones.imagenSimbolo = imagenesBotones[0];
+            }
         }
 
         if (slotId == 3)
         {
             jugadorUno.gameObject.tag = "Rojo";
+            if (jugadorUno.TryGetComponent<ButtonLogic>(out var scriptBotones))
+            {
+                scriptBotones.imagen = canvasBotones[1];
+                scriptBotones.imagenSimbolo = imagenesBotones[1];
+            }
         }
 
         if (slotId == 5)
         {
             jugadorUno.gameObject.tag = "Amarillo";
+            if (jugadorUno.TryGetComponent<ButtonLogic>(out var scriptBotones))
+            {
+                scriptBotones.imagen = canvasBotones[2];
+                scriptBotones.imagenSimbolo = imagenesBotones[2];
+            }
         }
 
         if (jugadorUno.TryGetComponent<MazeMovement>(out var scriptMovimiento))
