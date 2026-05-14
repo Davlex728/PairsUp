@@ -16,11 +16,9 @@ public class DarknessController : MonoBehaviour
         {
             posiciones[index] = new Vector4(centro.transform.position.x, centro.transform.position.y, 0, 0);
             radios[index] = centro.shaderRadius;
-            Debug.Log($"[Shader] Index {index}: Centro en ({centro.transform.position.x}, {centro.transform.position.y}) - Radio: {centro.shaderRadius}");
             index++;
         }
 
-        Debug.Log($"[Shader] Jugadores vivos antes del loop: {mazeGameManager.jugadoresVivos.Count}");
         for (int i = 0; i < mazeGameManager.jugadoresVivos.Count; i++)
         {
             if (mazeGameManager.jugadoresVivos[i] != null && index < 7)
@@ -35,12 +33,10 @@ public class DarknessController : MonoBehaviour
                 }
                 radios[index] = radio;
 
-                Debug.Log($"[Shader] Index {index}: {mazeGameManager.jugadoresVivos[i].name} ({mazeGameManager.jugadoresVivos[i].tag}) en ({pos.x}, {pos.y}) - Radio: {radio}");
                 index++;
             }
         }
 
-        Debug.Log($"[Shader] Total enviado al shader: {index} elementos");
 
         darknessMaterial.SetVectorArray("_PlayerPositions", posiciones);
         darknessMaterial.SetFloatArray("_PlayerRadii", radios);

@@ -6,104 +6,113 @@ using UnityEngine.UI;
 
 public class ButtonLogic : MonoBehaviour
 {
-    public static ButtonLogic instance;
-    public InputBoton botonEsperado; // Lo asignas al spawnear cada símbolo
-    public InputBoton[] secuencia ;
+    [Header("Secuencia")]
+    public InputBoton[] secuencia;
     private int posicionSecuencia = 0;
+    private InputBoton botonEsperado;
+ 
+    [Header("UI")]
     public Image imagenSimbolo;
     public Sprite[] imagenSecuencia;
-
-    private bool esperando;
-
     public GameObject imagen;
+ 
+    [Header("Estado")]
+    private bool esperando = false;
+    private bool bloqueado = false;      
+    private bool secuenciaCompletada = false;
+ 
     
+    public Action<ButtonLogic> OnSecuenciaCompletada;
+ 
+    
+    [HideInInspector] public List<GameObject> pareja;
+ 
     private void Start()
     {
-        instance = this;
         imagen.SetActive(false);
-        Invoke("GenerarSecuencia", 20);
-        //GenerarSecuencia(4);
-        
+        Invoke(nameof(GenerarSecuencia), 20f);
     }
-
-    public void ComprobarInput(InputBoton botonPulsado, string equipo, List<GameObject> pareja)
+ 
+    
+    public void Bloquear()
     {
-        if (esperando)
-        {
-            return;
-        }
-        
+        bloqueado = true;
+        imagen.SetActive(false);
+    }
+ 
+    public void ComprobarInput(InputBoton botonPulsado)
+    {
+        if (esperando || bloqueado || secuenciaCompletada) return;
+ 
         if (botonPulsado == botonEsperado)
         {
             imagen.SetActive(false);
-            StartCoroutine(Time(1));   
-            Debug.Log("Hola");
-            imagen.SetActive(true);
-            posicionSecuencia += 1;
+            posicionSecuencia++;
+ 
             if (posicionSecuencia == secuencia.Length)
             {
-                Debug.Log("Secuencia terminada");
+                secuenciaCompletada = true;
                 imagen.SetActive(false);
                 posicionSecuencia = 0;
-                StartCoroutine(Time(1));
-                if (equipo == "Azul")
-                {
-                    StartCoroutine(TimeShader(3,pareja));
-                }
-                else if (equipo == "Rojo")
-                {
-                    StartCoroutine(TimeShader(3,pareja));
-                }
-                else if (equipo == "Amarillo")
-                {
-                   
-                    StartCoroutine(TimeShader(3,pareja));
-                  
-                }
+                StartCoroutine(TimeShader(3f, pareja));
+                OnSecuenciaCompletada?.Invoke(this);
                 return;
             }
+ 
+            
             botonEsperado = secuencia[posicionSecuencia];
             imagenSimbolo.sprite = imagenSecuencia[(int)botonEsperado - 1];
+            StartCoroutine(MostrarSiguiente(1f));
         }
         else
         {
+            
             imagen.SetActive(false);
-            posicionSecuencia = 3;
-            return;
-            // Penalización, etc.
+            posicionSecuencia = 0;
+            botonEsperado = secuencia[0];
+            StartCoroutine(MostrarSiguiente(0.5f)); 
         }
     }
-
-    IEnumerator Time(float segundos)
-    {
-        esperando = true;
-        yield return new WaitForSeconds(segundos);
-        esperando = false;
-
-    }
-    IEnumerator TimeShader(float segundos, List<GameObject> pareja)
-    {
-        pareja[0].TryGetComponent<MazeMovement>(out var mov1);
-        pareja[1].TryGetComponent<MazeMovement>(out var mov2);
-        mov1.shaderRadius = 1;
-        mov2.shaderRadius = 1;
-        yield return new WaitForSeconds(segundos);
-        mov1.shaderRadius = 0.4f;
-        mov2.shaderRadius = 0.4f;
-    }
-
+ 
     public void GenerarSecuencia()
     {
-        Debug.Log("Generando secuencia de botones");
+        if (bloqueado) return;
+ 
         posicionSecuencia = 0;
-        imagen.SetActive(true);
+        secuenciaCompletada = false;
         secuencia = new InputBoton[4];
-        for(int i = 0; i < 4; i++)
+ 
+        for (int i = 0; i < 4; i++)
         {
-            InputBoton botonAleatorio = (InputBoton)UnityEngine.Random.Range(1, Enum.GetValues(typeof(InputBoton)).Length);
-            secuencia[i] = botonAleatorio;
+            secuencia[i] = (InputBoton)UnityEngine.Random.Range(1, Enum.GetValues(typeof(InputBoton)).Length);
         }
+ 
         botonEsperado = secuencia[0];
         imagenSimbolo.sprite = imagenSecuencia[(int)botonEsperado - 1];
+        imagen.SetActive(true);
+    }
+ 
+    IEnumerator MostrarSiguiente(float delay)
+    {
+        esperando = true;
+        yield return new WaitForSeconds(delay);
+        imagen.SetActive(true);
+        esperando = false;
+    }
+ 
+    IEnumerator TimeShader(float segundos, List<GameObject> objetivos)
+    {
+        if (objetivos == null || objetivos.Count < 2) yield break;
+ 
+        objetivos[0].TryGetComponent<MazeMovement>(out var mov1);
+        objetivos[1].TryGetComponent<MazeMovement>(out var mov2);
+ 
+        if (mov1 != null) mov1.shaderRadius = 1f;
+        if (mov2 != null) mov2.shaderRadius = 1f;
+ 
+        yield return new WaitForSeconds(segundos);
+ 
+        if (mov1 != null) mov1.shaderRadius = 0.4f;
+        if (mov2 != null) mov2.shaderRadius = 0.4f;
     }
 }
