@@ -1,8 +1,12 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PuntuacionManager : MonoBehaviour
 {
-    private int[] puntuacion = new int[3];
+    [SerializeField] private int[] puntuacion = new int[3];
+    [SerializeField] private string[] escenasNombres;
+    private Stack<string> escenas = new Stack<string>();
+    private string[] escenasArray;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -11,6 +15,12 @@ public class PuntuacionManager : MonoBehaviour
         {
             puntuacion[i] = 0;
         }
+        foreach (string escena in escenasNombres)
+        {
+            escenas.Push(escena);
+        }
+        RandomPila(escenas);
+        escenasArray = escenas.ToArray();
     }
 
     // Update is called once per frame
@@ -36,5 +46,30 @@ public class PuntuacionManager : MonoBehaviour
             return puntuacion[index];
         }
         return 0;
+    }
+
+
+    Stack<string> RandomPila(Stack<string> pila)
+    {
+        List<string> escenasList = new List<string>(pila);
+        for (int i = escenasList.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            string temp = escenasList[i];
+            escenasList[i] = escenasList[j];
+            escenasList[j] = temp;
+        }
+        return new Stack<string>(escenasList);
+    }
+
+    public string SiguienteEscena()
+    {
+        if (escenas.Count > 0)
+        {
+            return escenas.Pop();
+        }
+        escenas = escenasArray.Length > 0 ? new Stack<string>(escenasArray) : new Stack<string>();
+        escenas = RandomPila(escenas);
+        return SiguienteEscena();
     }
 }
