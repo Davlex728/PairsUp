@@ -12,7 +12,6 @@ public class ButtonLogic : MonoBehaviour
     private int posicionSecuencia = 0;
     public Image imagenSimbolo;
     public Sprite[] imagenSecuencia;
-    
 
     private bool esperando;
 

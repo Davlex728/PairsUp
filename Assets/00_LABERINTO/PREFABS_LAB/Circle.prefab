@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1699261110058897472}
   - component: {fileID: -6854545676864644554}
   - component: {fileID: -3909792399561741758}
-  - component: {fileID: 3793271977878435486}
   m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
@@ -145,7 +144,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.0254469
+  m_Mass: 0.013273225
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -200,27 +199,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3793271977878435486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1474952472672340436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a676d5a6e5c1ea14b9d7530f33e4fd36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ButtonLogic
-  botonEsperado: 0
-  secuencia: 
-  imagenSimbolo: {fileID: 0}
-  imagenSecuencia:
-  - {fileID: 4719481425051112512, guid: 8a4e75419312bc547bc4979dea9a7182, type: 3}
-  - {fileID: -8717722167071574574, guid: 863a3d70427d0fd4e8fa92cdfeeed62e, type: 3}
-  - {fileID: 3472407063169838841, guid: 3dcdcefd442470942905af1013873663, type: 3}
-  - {fileID: 8332113285691663785, guid: 2f2bb1a1f1d88a3408eca54ef585ba64, type: 3}
-  imagen: {fileID: 0}
 --- !u!1 &2578393143610768770
 GameObject:
   m_ObjectHideFlags: 0
