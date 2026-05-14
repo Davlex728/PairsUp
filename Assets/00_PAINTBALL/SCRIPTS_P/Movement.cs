@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] private float speed;
     private Rigidbody2D rb;
-    private PlayerInputHandler mandoMovimiento;
+    public PlayerInputHandler mandoMovimiento;
     
     [SerializeField]private int health = 3; // Vida del jugador
     private List<GameObject> misCorazones;

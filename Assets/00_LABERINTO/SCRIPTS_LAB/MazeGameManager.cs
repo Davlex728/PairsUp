@@ -36,6 +36,8 @@ public class MazeGameManager : MonoBehaviour
     public Transform puntoSpawn;
     int pare;
 
+    PuntuacionManager puntuacionManager;
+
 
     private void Awake()
     {
@@ -85,6 +87,7 @@ public class MazeGameManager : MonoBehaviour
             i = i + 1;
             contadorJugadores++;
         }
+        puntuacionManager = FindObjectOfType<PuntuacionManager>();
     }
     private void Update()
     {
@@ -153,6 +156,18 @@ public class MazeGameManager : MonoBehaviour
 
         if (AzulMeta.instance.jugadoresAzules == 2 || RojoMeta.instance.jugadoresRojos == 2 || AmarilloMeta.instance.jugadoresAmarillos == 2)
         {
+            if (AzulMeta.instance.jugadoresAzules == 2)
+            {
+                puntuacionManager.SumarPuntuacion(0);
+            }
+            else if (RojoMeta.instance.jugadoresRojos == 2)
+            {
+                puntuacionManager.SumarPuntuacion(1);
+            }
+            else if (AmarilloMeta.instance.jugadoresAmarillos == 2)
+            {
+                puntuacionManager.SumarPuntuacion(2);
+            }
             partidaTerminada = true;
             // Comprobación de seguridad
             if (escenasAleatorias == null || escenasAleatorias.Length == 0)

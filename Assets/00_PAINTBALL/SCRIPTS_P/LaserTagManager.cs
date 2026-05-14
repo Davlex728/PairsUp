@@ -94,6 +94,9 @@ public class LaserTagManager : MonoBehaviour
 
         if (padresVivos.Count == 1)
         {
+            int index = padresVivos[0].GetComponent<Movement>().mandoMovimiento.teamIndex;
+            DarPuntos(index);
+
             //DarPuntos(padresVivos[0].GetComponent<Movement>().slotId);
 
             partidaTerminada = true;
