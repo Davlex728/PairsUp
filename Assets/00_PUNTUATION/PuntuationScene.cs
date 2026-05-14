@@ -73,13 +73,14 @@ public class PuntuationScene : MonoBehaviour
             panelesVictoria[2].SetActive(true);
         }
         yield return new WaitForSeconds(5f);
+        animadorPalanca.SetTrigger("Pressed");
+        yield return new WaitForSeconds(0.3f);
         pantalla.GetComponent<Animator>().SetBool("FinishRodando", false);
         pantalla.GetComponent<Animator>().SetBool("Rodando", true);
         for (int i = 0; i < animadoresEstrellas.Length; i++)
         {
             animadoresEstrellas[i].SetBool("Ap", false);
         }
-        animadorPalanca.SetTrigger("Pressed");
         yield return new WaitForSeconds(1f);
         string next = puntuacionManager.SiguienteEscena();
         UnityEngine.SceneManagement.SceneManager.LoadScene(next);
