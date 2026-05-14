@@ -4,7 +4,8 @@ using System.Collections.Generic;
 public class PuntuacionManager : MonoBehaviour
 {
     [SerializeField] private int[] puntuacion = new int[3];
-    [SerializeField] private Stack<string> escenas = new Stack<string>();
+    [SerializeField] private string[] escenasNombres;
+    private Stack<string> escenas = new Stack<string>();
     private string[] escenasArray;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,9 +15,12 @@ public class PuntuacionManager : MonoBehaviour
         {
             puntuacion[i] = 0;
         }
+        foreach (string escena in escenasNombres)
+        {
+            escenas.Push(escena);
+        }
         RandomPila(escenas);
         escenasArray = escenas.ToArray();
-
     }
 
     // Update is called once per frame

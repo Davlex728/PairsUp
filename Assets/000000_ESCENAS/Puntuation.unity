@@ -258,6 +258,7 @@ MonoBehaviour:
   - {fileID: 625067143}
   - {fileID: 559721830}
   panelesVictoria: []
+  palanca: {fileID: 726206688}
 --- !u!4 &436483207
 Transform:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class PuntuationScene : MonoBehaviour
     private Animator[] animadoresEstrellas;
     [SerializeField] GameObject[] panelesVictoria;
     [SerializeField] private GameObject palanca;
-    [SerializeField] private Animator animadorPalanca;
+    private Animator animadorPalanca;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -75,9 +75,14 @@ public class PuntuationScene : MonoBehaviour
         yield return new WaitForSeconds(5f);
         pantalla.GetComponent<Animator>().SetBool("FinishRodando", false);
         pantalla.GetComponent<Animator>().SetBool("Rodando", true);
+        for (int i = 0; i < animadoresEstrellas.Length; i++)
+        {
+            animadoresEstrellas[i].SetBool("Ap", false);
+        }
         animadorPalanca.SetTrigger("Pressed");
-        yield return new WaitForSeconds(2f);
-
+        yield return new WaitForSeconds(1f);
+        string next = puntuacionManager.SiguienteEscena();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(next);
         yield return null;
     }
     // Update is called once per frame
