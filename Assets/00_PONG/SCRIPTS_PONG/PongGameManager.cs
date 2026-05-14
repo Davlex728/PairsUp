@@ -41,7 +41,8 @@ public class PongGameManager : MonoBehaviour
     public int slotId;
     public int equipo;
 
-     private void Awake()
+    PuntuacionManager puntuacionManager;
+    private void Awake()
     {
         Instance = this;
     }
@@ -88,6 +89,7 @@ public class PongGameManager : MonoBehaviour
             
             contadorJugadores++;
         }
+        puntuacionManager = FindObjectOfType<PuntuacionManager>();
     }
 
     // Update is called once per frame
@@ -131,6 +133,8 @@ public class PongGameManager : MonoBehaviour
 
         if (jugadoresVivos.Count == 1)
         {
+            int index = jugadoresVivos[0].GetComponent<PongMovement>().mandoMovimiento.teamIndex;
+            puntuacionManager.SumarPuntuacion(index);
             partidaTerminada = true;
             // Comprobación de seguridad
             if (escenasAleatorias == null || escenasAleatorias.Length == 0)
