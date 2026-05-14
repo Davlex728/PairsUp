@@ -9,16 +9,20 @@ public class PuntuationScene : MonoBehaviour
     [SerializeField] GameObject[] estrellas;
     private Animator[] animadoresEstrellas;
     [SerializeField] GameObject[] panelesVictoria;
+    [SerializeField] private GameObject palanca;
+    [SerializeField] private Animator animadorPalanca;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         animator = pantalla.GetComponent<Animator>();
-        StartCoroutine(Empezar());
-        puntuacionManager = FindObjectOfType<PuntuacionManager>();
+        animadoresEstrellas = new Animator[estrellas.Length];
         for (int i = 0; i < estrellas.Length; i++)
         {
             animadoresEstrellas[i] = estrellas[i].GetComponent<Animator>();
         }
+        StartCoroutine(Empezar());
+        puntuacionManager = FindObjectOfType<PuntuacionManager>();
+        animadorPalanca = palanca.GetComponent<Animator>();
     }
     private IEnumerator Empezar()
     {
@@ -29,7 +33,8 @@ public class PuntuationScene : MonoBehaviour
         int a = puntuacionManager.ObtenerPuntuacion(0);
         int b = puntuacionManager.ObtenerPuntuacion(1);
         int c = puntuacionManager.ObtenerPuntuacion(2);
-        if (a == 1) animadoresEstrellas[0].SetBool("Ap", true);
+        if (a == 1) 
+            animadoresEstrellas[0].SetBool("Ap", true);
         if (a == 2)
         {
             animadoresEstrellas[1].SetBool("Ap", true);
@@ -67,6 +72,11 @@ public class PuntuationScene : MonoBehaviour
             animadoresEstrellas[6].SetBool("Ap", true);
             panelesVictoria[2].SetActive(true);
         }
+        yield return new WaitForSeconds(5f);
+        pantalla.GetComponent<Animator>().SetBool("FinishRodando", false);
+        pantalla.GetComponent<Animator>().SetBool("Rodando", true);
+        animadorPalanca.SetTrigger("Pressed");
+        yield return new WaitForSeconds(2f);
 
         yield return null;
     }
