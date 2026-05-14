@@ -35,6 +35,7 @@ public class SpriteCesta : MonoBehaviour
 
     [HideInInspector] public UIReceta miUI;
     [HideInInspector] public int puntos = 0;
+    [HideInInspector] public TipoIngrediente IngredienteObjetivo { get; private set; }
 
     private bool juegoTerminado = false;
 
@@ -46,6 +47,12 @@ public class SpriteCesta : MonoBehaviour
     }
 
     public void ConectarMando(PlayerInputHandler mando) => miMando = mando;
+
+    public void AsignarObjetivo(TipoIngrediente tipo)
+    {
+        IngredienteObjetivo = tipo;
+        if (miUI != null) miUI.MostrarIngredienteObjetivo(tipo);
+    }
 
     public void IniciarUI()
     {
@@ -83,30 +90,30 @@ public class SpriteCesta : MonoBehaviour
 
         if (collision.TryGetComponent(out Ingrediente ingrediente))
         {
-            bool esObjetivo = ingrediente.miTipo == CalderoManager.Instance.IngredienteObjetivo;
+            bool esObjetivo = ingrediente.miTipo == IngredienteObjetivo;
 
             if (esObjetivo)
             {
                 puntos++;
-         
-                
+
+
                 Debug.Log($"[Cesta] ¡Correcto! {ingrediente.miTipo}. Puntos: {puntos}");
                 if (corrutinaEfecto != null) StopCoroutine(corrutinaEfecto);
-                sr.color = Color.white;
+                sr.enabled = true;
                 corrutinaEfecto = StartCoroutine(Flash(new Color(0.3f, 1f, 0.3f)));
 
-                CalderoManager.Instance.ElegirNuevoObjetivo();
+                CalderoManager.Instance.ElegirNuevoObjetivoParaCesta(this);
                 CalderoManager.Instance.tiempoSiguienteObjetivo = CalderoManager.Instance.intervaloNuevoObjetivo;
             }
             else
             {
                 puntos = Mathf.Max(0, puntos - 1);
-               
-                
-                
+
+
+
                 Debug.Log($"[Cesta] ¡Incorrecto! {ingrediente.miTipo}. Puntos: {puntos}");
                 if (corrutinaEfecto != null) StopCoroutine(corrutinaEfecto);
-                sr.color = Color.white;
+                sr.enabled = true;
                 corrutinaEfecto = StartCoroutine(Parpadear());
             }
 
@@ -130,13 +137,15 @@ public class SpriteCesta : MonoBehaviour
 
     private IEnumerator Flash(Color color)
     {
+        Color colorAnterior = sr.color;
         sr.color = color;
         yield return new WaitForSeconds(flashDuration);
-        sr.color = Color.white;
+        sr.color = colorAnterior;
     }
 
     private IEnumerator Parpadear()
     {
+        Color colorAnterior = sr.color;
         float timer = 0f;
         while (timer < blinkDuration)
         {
@@ -145,7 +154,7 @@ public class SpriteCesta : MonoBehaviour
             timer += blinkRate;
         }
         sr.enabled = true;
-        sr.color = Color.white;
+        sr.color = colorAnterior;
     }
 
     private IEnumerator TemporizadorRebote()

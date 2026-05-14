@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class UIReceta : MonoBehaviour
 {
     public TextMeshProUGUI textoPuntos;
-    [SerializeField] private GameObject[] ingredientesUI;
+    [SerializeField] private Image imagenIngrediente;
     [SerializeField] private Sprite[] spritesIngredientes;
 
     public void ActualizarPuntos(int puntos)
@@ -16,12 +16,7 @@ public class UIReceta : MonoBehaviour
 
     public void MostrarIngredienteObjetivo(TipoIngrediente tipo)
     {
-        for (int i = 0; i < ingredientesUI.Length; i++)
-        {
-            bool esElActivo = i == (int)tipo;
-            ingredientesUI[i].SetActive(esElActivo);
-            if (esElActivo)
-                ingredientesUI[i].GetComponent<Image>().sprite = spritesIngredientes[(int)tipo];
-        }
+        if (imagenIngrediente != null && spritesIngredientes.Length > (int)tipo)
+            imagenIngrediente.sprite = spritesIngredientes[(int)tipo];
     }
 }

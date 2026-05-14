@@ -44,8 +44,6 @@ public class CalderoManager : MonoBehaviour
     PuntuacionManager puntuacionManager;
     private int equipoGanador;
 
-    public TipoIngrediente IngredienteObjetivo { get; private set; }
-
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
@@ -55,7 +53,6 @@ public class CalderoManager : MonoBehaviour
     private void Start()
     {
         tiempoRestante = duracionPartida;
-        ElegirNuevoObjetivo();
         tiempoSiguienteObjetivo = intervaloNuevoObjetivo;
 
         // Configurar la imagen del reloj una sola vez para que mantenga tamaño y propiedades constantes
@@ -79,6 +76,10 @@ public class CalderoManager : MonoBehaviour
             else SpawnearMano(slotId, equipo, mando);
         }
 
+        // Asignar objetivo inicial a cada cesta
+        foreach (SpriteCesta cesta in cestas)
+            ElegirNuevoObjetivoParaCesta(cesta);
+
         puntuacionManager = FindObjectOfType<PuntuacionManager>();
     }
 
@@ -95,28 +96,27 @@ public class CalderoManager : MonoBehaviour
             float fillAmount = duracionPartida > 0f ? Mathf.Clamp01(tiempoRestante / duracionPartida) : 0f;
             relojTimer.fillAmount = fillAmount;
             if (tiempoRestante <= 5f) relojTimer.color = Color.red * new Color(1f, 1f, 1f, 0.5f);  // Cambia a rojo en los últimos 5 segundos
-            else if (tiempoRestante <= duracionPartida/3) relojTimer.color = Color.yellow *new Color(1f, 1f, 1f, 0.5f); // Cambia a amarillo cuando queda un tercio del tiempo
+            else if (tiempoRestante <= duracionPartida / 3) relojTimer.color = Color.yellow * new Color(1f, 1f, 1f, 0.5f); // Cambia a amarillo cuando queda un tercio del tiempo
             else relojTimer.color = Color.green * new Color(1f, 1f, 1f, 0.5f); // Verde el resto del tiempo
         }
 
         tiempoSiguienteObjetivo -= Time.deltaTime;
         if (tiempoSiguienteObjetivo <= 0f)
         {
-            ElegirNuevoObjetivo();
+            foreach (SpriteCesta cesta in cestas)
+                ElegirNuevoObjetivoParaCesta(cesta);
             tiempoSiguienteObjetivo = intervaloNuevoObjetivo;
         }
 
         if (tiempoRestante <= 0f) TerminarPorTimer();
     }
 
-    public void ElegirNuevoObjetivo()
+    public void ElegirNuevoObjetivoParaCesta(SpriteCesta cesta)
     {
         var valores = System.Enum.GetValues(typeof(TipoIngrediente));
-        IngredienteObjetivo = (TipoIngrediente)valores.GetValue(Random.Range(0, valores.Length));
-        Debug.Log($"[CalderoManager] Nuevo objetivo: {IngredienteObjetivo}");
-
-        foreach (UIReceta ui in panelesUIParejas)
-            if (ui != null) ui.MostrarIngredienteObjetivo(IngredienteObjetivo);
+        TipoIngrediente nuevoObjetivo = (TipoIngrediente)valores.GetValue(Random.Range(0, valores.Length));
+        cesta.AsignarObjetivo(nuevoObjetivo);
+        Debug.Log($"[CalderoManager] Nuevo objetivo para {cesta.gameObject.name}: {nuevoObjetivo}");
     }
 
     private void TerminarPorTimer()
@@ -145,9 +145,9 @@ public class CalderoManager : MonoBehaviour
         puntosYindex[0] = 0;
         puntosYindex[1] = 0;
         for (int i = 0; i < cestas.Length; i++)
-            {
+        {
             SpriteCesta c = cestas[i];
-            if (c.puntos > puntosYindex[0]) // umbral de victoria, ajustar según necesidad
+            if (c.puntos > puntosYindex[0]) // umbral de victoria, ajustar según necesidad(ya no se usa va por tiempo)
             {
                 puntosYindex[0] = c.puntos;
                 puntosYindex[1] = c.miMando.teamIndex;
@@ -160,7 +160,7 @@ public class CalderoManager : MonoBehaviour
     private IEnumerator EsperarYCargarEscena()
     {
         yield return new WaitForSeconds(tiempoEsperaVictoria);
-        if(puntuacionManager != null)
+        if (puntuacionManager != null)
         {
             SacarCampeon();
             puntuacionManager.SumarPuntuacion(equipoGanador);
