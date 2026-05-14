@@ -1022,9 +1022,7 @@ MonoBehaviour:
   tiempoSiguienteObjetivo: 0
   tiempoEsperaVictoria: 2
   escenasAleatorias:
-  - Pong
-  - MazeRunner
-  - PaintBall
+  - Puntuation
   relojTimer: {fileID: 655382749}
 --- !u!4 &434736100
 Transform:

@@ -1082,7 +1082,8 @@ MonoBehaviour:
   - 342
   - 343
   jugadoresVivos: []
-  escenasAleatorias: []
+  escenasAleatorias:
+  - Puntuation
   slotId: 0
   equipo: 0
 --- !u!1 &1436176971
