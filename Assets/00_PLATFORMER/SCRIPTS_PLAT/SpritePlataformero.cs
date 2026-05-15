@@ -18,6 +18,8 @@ public class SpritePlatformero : MonoBehaviour
     [Header("Referencias")]
     public PlayerInputHandler miMando;
     private Rigidbody2D rb;
+    private Animator animator;
+    private SpriteRenderer sr;
 
     [Header("Suelo Salto")]
     public Transform groundCheck;
@@ -35,7 +37,12 @@ public class SpritePlatformero : MonoBehaviour
     private bool grabWasPressed = false;
     private bool juegoTerminado = false;
 
-    private void Awake() => rb = GetComponent<Rigidbody2D>();
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+    }
 
     public void ConectarMando(PlayerInputHandler mando) => miMando = mando;
 
@@ -48,15 +55,24 @@ public class SpritePlatformero : MonoBehaviour
 
     private void Update()
     {
-        if (miMando == null || juegoTerminado) return;
+        if (miMando == null || juegoTerminado)
+        {
+            if (animator != null && juegoTerminado)
+            {
+                animator.SetFloat("speedAnim", 0f);
+            }
+            return;
+        }
 
         if (groundCheck != null)
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
 
+        // 
         if (miMando.isJumping && isGrounded && rb.linearVelocity.y <= 0.1f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             miMando.isJumping = false;
+            isGrounded = false; // se fuerza un poco antes para el animator
         }
 
         if (tieneBandera && banderaObj != null)
@@ -68,7 +84,10 @@ public class SpritePlatformero : MonoBehaviour
 
         bool grabDown = miMando.isGrabbing && !grabWasPressed;
         grabWasPressed = miMando.isGrabbing;
+
         if (grabDown) Empujar();
+
+        UpdateAnimator();
     }
 
     private void FixedUpdate()
@@ -86,6 +105,29 @@ public class SpritePlatformero : MonoBehaviour
         }
 
         rb.linearVelocity = new Vector2(miMando.moveInput.x * moveSpeed, rb.linearVelocity.y);
+    }
+
+    private void UpdateAnimator()
+    {
+        if (animator == null) return;
+
+
+        animator.SetBool("isGroundedAnim", isGrounded);
+
+        // Float velocidad horizontal (abs es para que no importe la direccion (anula +-))
+        animator.SetFloat("speedAnim", Mathf.Abs(miMando.moveInput.x));
+
+        // Float  velocidad vertical
+        animator.SetFloat("ySpeedAnim", rb.linearVelocity.y);
+
+        // flip de sprite no nse si hace falta por que no he mirado
+        if (sr != null)
+        {
+            if (miMando.moveInput.x > 0.1f)
+                sr.flipX = false;
+            else if (miMando.moveInput.x < -0.1f)
+                sr.flipX = true;
+        }
     }
 
     private void IntentarRecogerBandera()
@@ -116,6 +158,11 @@ public class SpritePlatformero : MonoBehaviour
         {
             Debug.Log("[Platformero] Empujón en cooldown.");
             return;
+        }
+
+        if (animator != null)
+        {
+            animator.SetTrigger("pushAnim");
         }
 
         Rigidbody2D objetivoRb = null;
@@ -174,7 +221,7 @@ public class SpritePlatformero : MonoBehaviour
         Debug.Log($"[Platformero] {gameObject.name} soltó la bandera.");
     }
 
-    private Collider2D[] GetCercanos()    //youtube es la mejor invencion del ser humano no preguteis que es ni yo lo se
+    private Collider2D[] GetCercanos()
     {
         ContactFilter2D filtro = new ContactFilter2D();
         filtro.NoFilter();

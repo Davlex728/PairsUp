@@ -49,6 +49,10 @@ public class StartSceneButton : MonoBehaviour
     {
         WaitForSeconds wait = new WaitForSeconds(0.5f);
         //smoothly move the camera to the new position
+        for (int i = 0; i < LobbyMangers.Length; i++)
+        {
+            LobbyMangers[i].SetActive(false);
+        }
         for (float t = 0; t < 1; t += Time.deltaTime * smoothVelocityCamera)
         {
             cameraStartScene.transform.position = Vector3.Lerp(cameraStartScene.transform.position, new Vector3(0, 0, 0), t);
@@ -59,10 +63,6 @@ public class StartSceneButton : MonoBehaviour
         rojo.SetBool("Ap", false);
         amarillo.SetBool("Ap", false);
         animator.SetBool("FinishRodando", false);
-        for (int i = 0; i < LobbyMangers.Length; i++)
-        {
-            LobbyMangers[i].SetActive(false);
-        }
     }
 
     public void Debugeo()
