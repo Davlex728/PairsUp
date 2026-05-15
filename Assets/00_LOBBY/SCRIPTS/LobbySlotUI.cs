@@ -53,9 +53,6 @@ public class LobbySlotUI : MonoBehaviour
         if (hoverPanel)
         {
             var img = hoverPanel.GetComponentInChildren<Image>();
-            int colorIndex = playerSlotId - 1; // slots 1-6 → índice 0-5
-            if (img && colorIndex >= 0 && colorIndex < colors.Length)
-                img.color = colors[colorIndex];
         }
         ShowOnly(hoverPanel);
     }
