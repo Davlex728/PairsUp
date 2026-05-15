@@ -15,6 +15,7 @@ public class ButtonLogic : MonoBehaviour
     public Image imagenSimbolo;
     public Sprite[] imagenSecuencia;
     public GameObject imagen;
+    public GameObject equipo;
  
     [Header("Estado")]
     private bool esperando = false;
@@ -30,6 +31,7 @@ public class ButtonLogic : MonoBehaviour
     private void Start()
     {
         imagen.SetActive(false);
+        equipo.SetActive(false);
         Invoke(nameof(GenerarSecuencia), 20f);
     }
  
@@ -38,6 +40,7 @@ public class ButtonLogic : MonoBehaviour
     {
         bloqueado = true;
         imagen.SetActive(false);
+        equipo.SetActive(false);
     }
  
     public void ComprobarInput(InputBoton botonPulsado)
@@ -47,14 +50,16 @@ public class ButtonLogic : MonoBehaviour
         if (botonPulsado == botonEsperado)
         {
             imagen.SetActive(false);
+            equipo.SetActive(false);
             posicionSecuencia++;
  
             if (posicionSecuencia == secuencia.Length)
             {
                 secuenciaCompletada = true;
                 imagen.SetActive(false);
+                equipo.SetActive(false);
                 posicionSecuencia = 0;
-                StartCoroutine(TimeShader(3f, pareja));
+                StartCoroutine(TimeShader(7f, pareja));
                 OnSecuenciaCompletada?.Invoke(this);
                 return;
             }
@@ -68,6 +73,7 @@ public class ButtonLogic : MonoBehaviour
         {
             
             imagen.SetActive(false);
+            equipo.SetActive(false);
             posicionSecuencia = 0;
             botonEsperado = secuencia[0];
             StartCoroutine(MostrarSiguiente(0.5f)); 
@@ -90,6 +96,7 @@ public class ButtonLogic : MonoBehaviour
         botonEsperado = secuencia[0];
         imagenSimbolo.sprite = imagenSecuencia[(int)botonEsperado - 1];
         imagen.SetActive(true);
+        equipo.SetActive(true);
     }
  
     IEnumerator MostrarSiguiente(float delay)
@@ -97,6 +104,7 @@ public class ButtonLogic : MonoBehaviour
         esperando = true;
         yield return new WaitForSeconds(delay);
         imagen.SetActive(true);
+        equipo.SetActive(true);
         esperando = false;
     }
  

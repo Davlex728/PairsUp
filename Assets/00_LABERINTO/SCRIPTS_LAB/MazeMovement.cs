@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class MazeMovement : MonoBehaviour
@@ -16,10 +17,12 @@ public class MazeMovement : MonoBehaviour
     public InputBoton inputEfectivo = InputBoton.Ninguno;
 
     public float shaderRadius = 0.4f;
+    private Animator anim; 
     
     private void Awake()
     {
         instance = this;
+        anim = GetComponent<Animator>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -61,6 +64,21 @@ public class MazeMovement : MonoBehaviour
         if (other.gameObject.layer == 8)
         {
             transform.position = spawnPoint.position;
+            anim.SetBool("Parpadeo", true);
+            
         }
     }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        StartCoroutine(Parpadeo());
+    }
+
+    IEnumerator Parpadeo()
+    {
+        yield return new WaitForSeconds(2f);
+        anim.SetBool("Parpadeo", false);
+    }
+    
+    
 }
