@@ -16,7 +16,6 @@ public class LobbyManager : MonoBehaviour
 
     [Header("Configuración de partida")]
     [SerializeField] private int requiredPlayers = 6;
-    [SerializeField] private string[] randomSceneNames;
 
     [Header("Prefab del cursor (UI RectTransform)")]
     [SerializeField] private GameObject cursorPrefab;
@@ -37,6 +36,7 @@ public class LobbyManager : MonoBehaviour
     private readonly Dictionary<int, int> confirmedSlots = new(); // playerIndex → slotId (1-6)
     private Coroutine countdownCoroutine;
 
+    PuntuacionManager puntuacionManager;
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
@@ -50,6 +50,7 @@ public class LobbyManager : MonoBehaviour
         inputManager.EnableJoining();
         if (countdownText) countdownText.gameObject.SetActive(false);
         RefreshCounterUI();
+        puntuacionManager = FindObjectOfType<PuntuacionManager>();
     }
 
     // ── Callbacks PlayerInputManager ───────────────────────────────────────
@@ -171,9 +172,9 @@ public class LobbyManager : MonoBehaviour
         if (countdownText) countdownText.text = "¡Cargando mapa!";
         yield return null;
 
-        if (randomSceneNames != null && randomSceneNames.Length > 0)
+        if (puntuacionManager != null)
         {
-            string scene = randomSceneNames[Random.Range(0, randomSceneNames.Length)];
+            string scene = puntuacionManager.SiguienteEscena();
             if (!string.IsNullOrEmpty(scene))
                 SceneManager.LoadScene(scene);
             else
