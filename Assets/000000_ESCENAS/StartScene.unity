@@ -5258,7 +5258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5dc4bfafec3455409671b31bacb2c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LobbyManager
-  requiredPlayers: 4
+  requiredPlayers: 2
   randomSceneNames:
   - Puntuation
   cursorPrefab: {fileID: 8173966651450092360, guid: 0971c4aba8ddb4f44bc5a9ccf875255a, type: 3}
