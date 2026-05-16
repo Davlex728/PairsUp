@@ -10,11 +10,18 @@ public class PlataformeoManager : MonoBehaviour
     public GameObject prefabPlatformero;
     public GameObject prefabMano;
 
+    [Header("Prefabs Bloques por Equipo")]
+    public GameObject[] prefabSueloPorEquipo;
+    public GameObject[] prefabParedPorEquipo;
+
     [Header("Animators Platformero")]
     public RuntimeAnimatorController[] animatorsPlatformero;
 
     [Header("Animators Mano")]
     public RuntimeAnimatorController[] animatorsMano;
+
+    [Header("Preview Sprites Mano")]
+    public Sprite[] previewSpritesMano;
 
     [Header("Spawn Points")]
     public Transform[] spawnPointsPlatformero;
@@ -116,7 +123,24 @@ public class PlataformeoManager : MonoBehaviour
 
         GameObject avatar = Instantiate(prefabMano, spawnPointsMano[indice].position, Quaternion.identity);
 
-        if (avatar.TryGetComponent(out SpriteManoBob s)) s.ConectarMando(mando);
+        if (avatar.TryGetComponent(out SpriteManoBob s))
+        {
+            s.ConectarMando(mando);
+
+            // Asignar sprite de preview según el ÍNDICE de la mano
+            if (s.spritePreview != null && previewSpritesMano.Length > indice && previewSpritesMano[indice] != null)
+                s.spritePreview.sprite = previewSpritesMano[indice];
+
+            // Asignar prefabs de bloques según el ÍNDICE de la mano
+            if (prefabSueloPorEquipo.Length > indice && prefabSueloPorEquipo[indice] != null)
+                s.prefabSuelo = prefabSueloPorEquipo[indice];
+
+            if (prefabParedPorEquipo.Length > indice && prefabParedPorEquipo[indice] != null)
+                s.prefabPared = prefabParedPorEquipo[indice];
+
+            // Inicializar preview DESPUÉS de asignar si no no va
+            s.InicializarPreview();
+        }
 
         if (avatar.TryGetComponent(out Animator anim) && animatorsMano.Length > indice && animatorsMano[indice] != null)
             anim.runtimeAnimatorController = animatorsMano[indice];

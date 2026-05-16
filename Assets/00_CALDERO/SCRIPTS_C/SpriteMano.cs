@@ -24,7 +24,7 @@ public class SpriteMano : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         animator = GetComponent<Animator>();
-        animator.SetBool("Caldero", true);
+        //animator.SetBool("Caldero", true);
     }
 
     public void ConectarMando(PlayerInputHandler mando)
