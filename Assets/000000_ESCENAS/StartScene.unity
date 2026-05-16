@@ -5259,8 +5259,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LobbyManager
   requiredPlayers: 2
-  randomSceneNames:
-  - Puntuation
   cursorPrefab: {fileID: 8173966651450092360, guid: 0971c4aba8ddb4f44bc5a9ccf875255a, type: 3}
   lobbyCanvasRect: {fileID: 257770779}
   countdownText: {fileID: 691256646}
