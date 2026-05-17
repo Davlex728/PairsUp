@@ -32,7 +32,7 @@ public class PlataformeoManager : MonoBehaviour
     [SerializeField] private string[] escenasAleatorias;
 
     private bool juegoTerminado = false;
-
+    PuntuacionManager puntuacionManager;
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
@@ -65,12 +65,15 @@ public class PlataformeoManager : MonoBehaviour
             else
                 SpawnearMano(contadorManos++, mando);
         }
+        puntuacionManager = FindObjectOfType<PuntuacionManager>();
     }
 
     public void DeclararVictoria(GameObject ganador)
     {
         if (juegoTerminado) return;
         juegoTerminado = true;
+        int indexxxx = ganador.GetComponent<SpritePlatformero>().miMando.teamIndex;
+        puntuacionManager.SumarPuntuacion(indexxxx);
         Debug.Log($"[PlataformeoManager] ¡VICTORIA! Ganador: {ganador.name}");
         StartCoroutine(EsperarYCargarEscena());
     }

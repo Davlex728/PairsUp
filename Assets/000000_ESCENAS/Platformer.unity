@@ -877,7 +877,8 @@ MonoBehaviour:
   - {fileID: 951093044}
   - {fileID: 231493723}
   tiempoEsperaVictoria: 2
-  escenasAleatorias: []
+  escenasAleatorias:
+  - Puntuation
 --- !u!4 &719677345
 Transform:
   m_ObjectHideFlags: 0

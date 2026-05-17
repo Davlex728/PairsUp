@@ -96,6 +96,8 @@ public class PuntuationScene : MonoBehaviour
     }
     void Ganador(int index)
     {
+        pantalla.GetComponent<Animator>().SetBool("FinishRodando", true);
+        pantalla.GetComponent<Animator>().SetBool("Rodando", false);
         if (index == 1) panelesVictoria[0].SetActive(true);
         if (index == 2) panelesVictoria[1].SetActive(true);
         if (index == 3) panelesVictoria[2].SetActive(true);

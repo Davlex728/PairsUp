@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 09fa7c49fbcd0e6489689738b049ee23
+guid: 6695971a7b5e4054fb6e5f729473408f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1218772914682941604
-    second: Blue_Boy_Goofy _0
+      213: 3953539787004737337
+    second: red_2_0
+  - first:
+      213: -8291697884209119459
+    second: red_2_1
+  - first:
+      213: -7576439568400807887
+    second: red_2_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blue_Boy_Goofy _0
+      name: red_2_0
       rect:
         serializedVersion: 2
-        x: 555
-        y: 157
-        width: 155
-        height: 196
+        x: 854
+        y: 739
+        width: 211
+        height: 187
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4a05b813283f9e010800000000000000
-      internalID: 1218772914682941604
+      spriteID: 9377ac15d7bcdd630800000000000000
+      internalID: 3953539787004737337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_2_1
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 440
+        width: 80
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1f7bd2a4b8fdec80800000000000000
+      internalID: -8291697884209119459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_2_2
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 147
+        width: 249
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 138814faa541bd690800000000000000
+      internalID: -7576439568400807887
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Blue_Boy_Goofy _0: 1218772914682941604
+      red_2_0: 3953539787004737337
+      red_2_1: -8291697884209119459
+      red_2_2: -7576439568400807887
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
