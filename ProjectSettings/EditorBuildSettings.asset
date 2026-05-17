@@ -26,6 +26,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/000000_ESCENAS/Puntuation.unity
     guid: ded8e2d61fc3f8a45b7786bc1a9c0861
+  - enabled: 1
+    path: Assets/0_PantallasEntreRondas/TutorialPong.unity
+    guid: 63b07654fd8c0d54085458db091bf6f9
+  - enabled: 1
+    path: Assets/0_PantallasEntreRondas/TutorialCaldero.unity
+    guid: fe20ccd129173f7429b4a4775bcde795
+  - enabled: 1
+    path: Assets/0_PantallasEntreRondas/TutorialMaze.unity
+    guid: 175e508b745d84b408935f63bec9abe1
+  - enabled: 1
+    path: Assets/0_PantallasEntreRondas/TutorialPaintball.unity
+    guid: c5fe23e4e64c0254da88cd06461ef076
+  - enabled: 1
+    path: Assets/0_PantallasEntreRondas/TutorialPlatformer.unity
+    guid: 377c300e0972378449b4a5eaab827ad8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
