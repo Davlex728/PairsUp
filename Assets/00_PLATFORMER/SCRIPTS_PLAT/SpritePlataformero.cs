@@ -37,6 +37,7 @@ public class SpritePlatformero : MonoBehaviour
     private bool grabWasPressed = false;
     private bool juegoTerminado = false;
 
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
