@@ -22,7 +22,7 @@ public class LobbyManager : MonoBehaviour
 
 
     [Header("Transición escena")]
-    public TransitionSettings transition;// podriasmos llmar varias y luego hace run random para que varien entre partidas
+    [SerializeField] private TransitionSettings transition;// podriasmos llmar varias y luego hace run random para que varien entre partidas
     [Header("Canvas raíz")]
     [SerializeField] private RectTransform lobbyCanvasRect;
 

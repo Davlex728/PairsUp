@@ -1,6 +1,6 @@
+using EasyTransition;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 public class PuntuationScene : MonoBehaviour
 {
     private Animator animator;
@@ -12,6 +12,8 @@ public class PuntuationScene : MonoBehaviour
     [SerializeField] private GameObject palanca;
     private Animator animadorPalanca;
     int Gabador = 0;
+    [SerializeField] private TransitionSettings transition;
+    [SerializeField] private float startDelay;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,7 +36,7 @@ public class PuntuationScene : MonoBehaviour
         int a = puntuacionManager.ObtenerPuntuacion(0);
         int b = puntuacionManager.ObtenerPuntuacion(1);
         int c = puntuacionManager.ObtenerPuntuacion(2);
-        if (a == 1) 
+        if (a == 1)
             animadoresEstrellas[0].SetBool("Ap", true);
         if (a == 2)
         {
@@ -67,7 +69,8 @@ public class PuntuationScene : MonoBehaviour
             animadoresEstrellas[7].SetBool("Ap", true);
             animadoresEstrellas[6].SetBool("Ap", true);
         }
-        if (c == 3) {
+        if (c == 3)
+        {
             animadoresEstrellas[8].SetBool("Ap", true);
             animadoresEstrellas[7].SetBool("Ap", true);
             animadoresEstrellas[6].SetBool("Ap", true);
@@ -86,7 +89,7 @@ public class PuntuationScene : MonoBehaviour
         if (Gabador == 0)
         {
             string next = puntuacionManager.SiguienteEscena();
-            UnityEngine.SceneManagement.SceneManager.LoadScene(next);
+            TransitionManager.Instance().Transition(next, transition, startDelay);
             yield return null;
         }
         else
@@ -105,6 +108,6 @@ public class PuntuationScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

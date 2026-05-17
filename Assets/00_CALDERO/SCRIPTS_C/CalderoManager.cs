@@ -1,8 +1,8 @@
+using EasyTransition;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CalderoManager : MonoBehaviour
@@ -35,6 +35,9 @@ public class CalderoManager : MonoBehaviour
     [Header("Condición de Victoria")]
     [SerializeField] private float tiempoEsperaVictoria = 2f;
     [SerializeField] private string[] escenasAleatorias;
+
+    [SerializeField] private TransitionSettings transition;
+    [SerializeField] private float startDelay;
 
     private bool juegoTerminado = false;
     private float tiempoRestante;
@@ -175,7 +178,7 @@ public class CalderoManager : MonoBehaviour
         if (escenasAleatorias == null || escenasAleatorias.Length == 0) { Debug.LogError("[CalderoManager] No hay escenas."); return; }
         string escena = escenasAleatorias[Random.Range(0, escenasAleatorias.Length)];
         if (string.IsNullOrEmpty(escena)) { Debug.LogError("[CalderoManager] Escena vacía."); return; }
-        SceneManager.LoadScene(escena);
+        TransitionManager.Instance().Transition(escena, transition, startDelay);
     }
 
     private void SpawnearCesta(int slotId, int equipo, PlayerInputHandler mando)

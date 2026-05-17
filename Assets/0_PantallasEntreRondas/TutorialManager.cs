@@ -1,8 +1,8 @@
+using EasyTransition;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -13,6 +13,8 @@ public class TutorialManager : MonoBehaviour
     private PersistentPlayer[] jugadores;
     private HashSet<int> jugadoresListos = new HashSet<int>();
     private bool cargando = false;
+    [SerializeField] private TransitionSettings transition;
+    [SerializeField] private float startDelay;
 
     private void Start()
     {
@@ -58,6 +60,6 @@ public class TutorialManager : MonoBehaviour
     {
         cargando = true;
         yield return new WaitForSeconds(0.8f);
-        SceneManager.LoadScene(escenaMinijuego);
+        TransitionManager.Instance().Transition(escenaMinijuego, transition, startDelay);
     }
 }

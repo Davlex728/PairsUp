@@ -5595,6 +5595,10 @@ MonoBehaviour:
   puntuacion: 000000000000000000000000
   escenasNombres:
   - TutorialPaintball
+  - TutorialPong
+  - TutorialCaldero
+  - TutorialPlatformer
+  - TutorialMaze
 --- !u!4 &1738944962
 Transform:
   m_ObjectHideFlags: 0

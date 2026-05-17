@@ -1,6 +1,6 @@
+using EasyTransition;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlataformeoManager : MonoBehaviour
 {
@@ -30,6 +30,9 @@ public class PlataformeoManager : MonoBehaviour
     [Header("Condicion de Victoria")]
     [SerializeField] private float tiempoEsperaVictoria = 2f;
     [SerializeField] private string[] escenasAleatorias;
+
+    [SerializeField] private TransitionSettings transition;
+    [SerializeField] private float startDelay;
 
     private bool juegoTerminado = false;
     PuntuacionManager puntuacionManager;
@@ -98,7 +101,7 @@ public class PlataformeoManager : MonoBehaviour
             Debug.LogError("[PlataformeoManager] Escena vacía.");
             return;
         }
-        SceneManager.LoadScene(escena);
+        TransitionManager.Instance().Transition(escena, transition, startDelay);
     }
 
     private void SpawnearPlatformero(int indice, PlayerInputHandler mando)
