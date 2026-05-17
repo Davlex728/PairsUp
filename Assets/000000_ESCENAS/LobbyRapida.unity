@@ -2295,6 +2295,7 @@ GameObject:
   - component: {fileID: 1728664031}
   - component: {fileID: 1728664030}
   - component: {fileID: 1728664029}
+  - component: {fileID: 1728664032}
   m_Layer: 0
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -2314,10 +2315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5dc4bfafec3455409671b31bacb2c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LobbyManager
-  requiredPlayers: 1
-  randomSceneNames:
-  - Platformer
+  requiredPlayers: 2
   cursorPrefab: {fileID: 8173966651450092360, guid: 0971c4aba8ddb4f44bc5a9ccf875255a, type: 3}
+  transition: {fileID: 11400000, guid: 2eec88d4ca6df24419aab2fd6b04c543, type: 2}
   lobbyCanvasRect: {fileID: 965560789}
   countdownText: {fileID: 935118941}
   playersCountText: {fileID: 1809591027}
@@ -2405,6 +2405,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1728664032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728664028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57fd6c0f43702b48a8fd09fbcc884d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PuntuacionManager
+  puntuacion: 000000000000000000000000
+  escenasNombres:
+  - PaintBall
 --- !u!1 &1809591026
 GameObject:
   m_ObjectHideFlags: 0

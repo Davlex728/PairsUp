@@ -108,7 +108,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
   speed: 6.5
+  mandoMovimiento: {fileID: 0}
   health: 3
+  prefabSangre: {fileID: 2961787347593602294, guid: 8556e1689c859be4cbc24b2811df7349, type: 3}
 --- !u!58 &1091646210195138892
 CircleCollider2D:
   m_ObjectHideFlags: 0

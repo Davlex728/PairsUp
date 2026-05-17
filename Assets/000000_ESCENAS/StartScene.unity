@@ -5594,7 +5594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PuntuacionManager
   puntuacion: 000000000000000000000000
   escenasNombres:
-  - TutorialPlatformer
+  - TutorialPaintball
 --- !u!4 &1738944962
 Transform:
   m_ObjectHideFlags: 0

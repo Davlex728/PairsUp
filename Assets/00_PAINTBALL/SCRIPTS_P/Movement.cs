@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     
     [SerializeField]private int health = 3; // Vida del jugador
     private List<GameObject> misCorazones;
+    public GameObject prefabSangre;
 
     void Awake()
     {
@@ -52,6 +53,7 @@ public class Movement : MonoBehaviour
             if (health == 0)
             {
                 Destroy(gameObject);
+                Instantiate(prefabSangre, transform.position, Quaternion.identity);
             }
             
             
