@@ -1,14 +1,14 @@
+using EasyTransition;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
-/// <summary>
+
 /// Gestiona la lobby con selección manual de slot mediante cursor libre.
 /// Slots del 1 al 6. Equipos por columna: 1-2→eq0, 3-4→eq1, 5-6→eq2.
-/// </summary>
+
 [RequireComponent(typeof(PlayerInputManager))]
 public class LobbyManager : MonoBehaviour
 {
@@ -20,6 +20,9 @@ public class LobbyManager : MonoBehaviour
     [Header("Prefab del cursor (UI RectTransform)")]
     [SerializeField] private GameObject cursorPrefab;
 
+
+    [Header("Transición escena")]
+    public TransitionSettings transition;// podriasmos llmar varias y luego hace run random para que varien entre partidas
     [Header("Canvas raíz")]
     [SerializeField] private RectTransform lobbyCanvasRect;
 
@@ -53,7 +56,7 @@ public class LobbyManager : MonoBehaviour
         puntuacionManager = FindObjectOfType<PuntuacionManager>();
     }
 
-    // ── Callbacks PlayerInputManager ───────────────────────────────────────
+
 
     public void HandlePlayerJoined(PlayerInput player)
     {
@@ -108,7 +111,7 @@ public class LobbyManager : MonoBehaviour
         RefreshCounterUI();
     }
 
-    // ── Llamado por LobbyCursor cuando un jugador confirma slot ────────────
+
 
     public void OnPlayerConfirmedSlot(int playerIndex, int slotId)
     {
@@ -145,7 +148,7 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    // ── Lógica de inicio ───────────────────────────────────────────────────
+
 
     private void CheckAllConfirmed()
     {
@@ -176,7 +179,7 @@ public class LobbyManager : MonoBehaviour
         {
             string scene = puntuacionManager.SiguienteEscena();
             if (!string.IsNullOrEmpty(scene))
-                SceneManager.LoadScene(scene);
+                TransitionManager.Instance().Transition(scene, transition, 0);
             else
                 Debug.LogError("[Lobby] Escena vacía en el array.");
         }
@@ -185,7 +188,7 @@ public class LobbyManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // ── Helpers ────────────────────────────────────────────────────────────
+
 
     private PlayerInput GetPlayerInput(int index)
     {
