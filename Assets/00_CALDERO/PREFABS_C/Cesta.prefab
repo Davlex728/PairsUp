@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 68716862077897078}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.407, z: 0}
+  m_LocalPosition: {x: 0, y: -0.358, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -171,21 +171,19 @@ MonoBehaviour:
   jumpForce: 5
   miMando: {fileID: 0}
   groundCheck: {fileID: 9183026249944285059}
-  groundRadius: 0.5
+  groundRadius: 0.3
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   blinkDuration: 1
   blinkRate: 0.1
-  flashVerdeDuration: 0.4
+  flashDuration: 0.4
   bounceForce: 5
   bounceDuration: 0.5
   escalaRebote: 1.3
   duracionEscalaRebote: 0.2
-  recetaObjetivo: 0000000003000000010000000200000003000000
-  recetasCompletadas: 0
-  recetasParaGanar: 1
   miUI: {fileID: 0}
+  puntos: 0
 --- !u!95 &8276738108940847764
 Animator:
   serializedVersion: 7

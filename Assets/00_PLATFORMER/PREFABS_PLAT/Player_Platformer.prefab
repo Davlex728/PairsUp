@@ -133,7 +133,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3a7aae000b370ba4d8568e9d6edba36a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -157,8 +157,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.02840553}
-  m_Size: {x: 0.99999994, y: 1.0239064}
+  m_Offset: {x: 0, y: 0.04}
+  m_Size: {x: 1.25, y: 1.3}
   m_Direction: 0
 --- !u!114 &2230690310806888506
 MonoBehaviour:
@@ -174,8 +174,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpritePlatformero
   moveSpeed: 5
   jumpForce: 5
-  rangoAccion: 3
-  fuerzaEmpujon: 10
+  rangoAccion: 1
+  fuerzaEmpujon: 5
   cooldownEmpujon: 2
   duracionKnockback: 0.3
   miMando: {fileID: 0}
@@ -184,6 +184,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  buildLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!95 &-6323295931886676922
 Animator:
   serializedVersion: 7

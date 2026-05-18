@@ -25,6 +25,7 @@ public class SpritePlatformero : MonoBehaviour
     public Transform groundCheck;
     public float groundRadius = 0.2f;
     public LayerMask groundLayer;
+    public LayerMask buildLayer;
     private bool isGrounded;
 
     private bool tieneBandera = false;
@@ -66,7 +67,7 @@ public class SpritePlatformero : MonoBehaviour
         }
 
         if (groundCheck != null)
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundRadius, buildLayer);
 
         // 
         if (miMando.isJumping && isGrounded && rb.linearVelocity.y <= 0.1f)
