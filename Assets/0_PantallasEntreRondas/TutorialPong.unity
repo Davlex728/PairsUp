@@ -1328,7 +1328,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pong-Ker
+  m_text: 'BLUNT N'' CHIPS '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 51c4a7346f89ff74a830f06f9ba24b0c, type: 2}
   m_sharedMaterial: {fileID: 4611305117694259330, guid: 51c4a7346f89ff74a830f06f9ba24b0c, type: 2}
@@ -1394,7 +1394,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -147.08136, w: 0}
+  m_margin: {x: 0, y: 0, z: -635.4072, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
