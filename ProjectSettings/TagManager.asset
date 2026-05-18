@@ -15,6 +15,7 @@ TagManager:
   - Base
   - Wall
   - BanderaOrigen
+  - hover
   layers:
   - Default
   - TransparentFX
