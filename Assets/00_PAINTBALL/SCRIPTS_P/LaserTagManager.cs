@@ -98,6 +98,8 @@ public class LaserTagManager : MonoBehaviour
         {
             int index = padresVivos[0].GetComponent<Movement>().mandoMovimiento.teamIndex;
             DarPuntos(index);
+            Debug.Log($"[LaserTagManager] ¡Ha ganado la pareja: {padresVivos[0].name}!");
+            Debug.Log(padresVivos[0].GetComponent<Movement>().mandoMovimiento.teamIndex);
 
             //DarPuntos(padresVivos[0].GetComponent<Movement>().slotId);
 

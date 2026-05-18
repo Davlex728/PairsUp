@@ -26,6 +26,7 @@ public class PlayerInputHandler : MonoBehaviour
             Debug.LogError("No se encontró PersistentPlayer en el mismo GameObject.");
         else
             teamIndex = persistentPlayer.teamIndex;
+        Debug.Log($"[PlayerInputHandler] LastBullet llamado! teamIndex={teamIndex}");
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)

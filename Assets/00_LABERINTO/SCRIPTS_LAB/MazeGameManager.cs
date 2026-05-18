@@ -151,11 +151,14 @@ public class MazeGameManager : MonoBehaviour
         if (AzulMeta.instance.jugadoresAzules == 2 || RojoMeta.instance.jugadoresRojos == 2 || AmarilloMeta.instance.jugadoresAmarillos == 2)
         {
             if (AzulMeta.instance.jugadoresAzules == 2)
+            { 
                 puntuacionManager.SumarPuntuacion(0);
-            else if (RojoMeta.instance.jugadoresRojos == 2)
-                puntuacionManager.SumarPuntuacion(1);
-            else if (AmarilloMeta.instance.jugadoresAmarillos == 2)
-                puntuacionManager.SumarPuntuacion(2);
+            Debug.Log($"[MazeGameManager] Jugadores azules en meta: {AzulMeta.instance.jugadoresAzules}");
+        }
+        else if (RojoMeta.instance.jugadoresRojos == 2)
+            puntuacionManager.SumarPuntuacion(1);
+        else if (AmarilloMeta.instance.jugadoresAmarillos == 2)
+            puntuacionManager.SumarPuntuacion(2);
 
             partidaTerminada = true;
 

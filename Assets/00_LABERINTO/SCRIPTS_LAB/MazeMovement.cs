@@ -29,8 +29,8 @@ public class MazeMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        mandoMovimiento.LastBullet();
 
-        
     }
     
     public void RecibirInput(InputBoton boton)

@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     private List<GameObject> misCorazones;
     public GameObject prefabSangre;
 
+    int tamu = 0;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -58,5 +59,11 @@ public class Movement : MonoBehaviour
             
             
         }
+    }
+    private void Start()
+    {
+        mandoMovimiento.LastBullet();
+        tamu = mandoMovimiento.teamIndex;
+        Debug.Log($"[Movement] Team Index: {tamu}");
     }
 }

@@ -16,6 +16,7 @@ public class PongMovement : MonoBehaviour
     private void Start()
     {
         instance = this;
+        mandoMovimiento.LastBullet();
     }
 
     public void ConectarMando(PlayerInputHandler mando)
