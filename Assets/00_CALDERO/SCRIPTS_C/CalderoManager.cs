@@ -84,6 +84,7 @@ public class CalderoManager : MonoBehaviour
             ElegirNuevoObjetivoParaCesta(cesta);
 
         puntuacionManager = FindObjectOfType<PuntuacionManager>();
+        if (puntuacionManager == null) Debug.LogWarning("[CalderoManager] No se encontró PuntuacionManager en la escena.");
     }
 
     private void Update()
@@ -143,7 +144,9 @@ public class CalderoManager : MonoBehaviour
 
     void SacarCampeon()
     {
+        Debug.Log("[CalderoManager] Sacando campeón...");
         SpriteCesta[] cestas = FindObjectsOfType<SpriteCesta>();
+        Debug.Log($"[CalderoManager] Encontradas {cestas.Length} cestas para evaluar.");
         int[] puntosYindex = new int[2];
         puntosYindex[0] = 0;
         puntosYindex[1] = 0;
@@ -154,8 +157,8 @@ public class CalderoManager : MonoBehaviour
             {
                 puntosYindex[0] = c.puntos;
                 puntosYindex[1] = c.miMando.teamIndex;
-                return;
             }
+            Debug.Log($"[CalderoManager] {c.gameObject.name} tiene {c.puntos} puntos.");
         }
         equipoGanador = puntosYindex[1];
 
