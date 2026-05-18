@@ -1888,7 +1888,8 @@ MonoBehaviour:
   - {fileID: 590897951}
   - {fileID: 2021377019}
   - {fileID: 1032062945}
-  escenasAleatorias: []
+  escenasAleatorias:
+  - Puntuation
   jugadoresVivos: []
   puntoSpawn: {fileID: 0}
   transition: {fileID: 11400000, guid: 057babd6f13132c449650d99e3c4e99c, type: 2}
