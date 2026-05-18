@@ -19,7 +19,7 @@ public class AmarrilloLogic : MonoBehaviour
        
             
             collider.isTrigger = false;
-            
+            other.gameObject.layer = 0;
             Debug.Log(other.gameObject.tag);
             
         
@@ -32,6 +32,7 @@ public class AmarrilloLogic : MonoBehaviour
         {
              
             collider.isTrigger = false;
+            
         }
 
         if (other.gameObject.tag == "Rojo")

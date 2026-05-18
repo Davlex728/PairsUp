@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BombMovement : MonoBehaviour
 {
@@ -19,8 +22,9 @@ public class BombMovement : MonoBehaviour
     [SerializeField] private float maxSpeed;
 
     public Transform spawnPoint;
+
+    public float contador;
     
-// Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentSpeed = speed;
@@ -31,53 +35,52 @@ public class BombMovement : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, angle);
         rb = GetComponent<Rigidbody2D>();
 
-//Como lo has rotado, ahora hay que ir a la derecha
         direction = transform.right;
-//Acuerdate de asignarle una velocidad inicial en el editor.
-//Esto hace que empiece moviéndose
-        rb.linearVelocity = direction * currentSpeed; // Initial velocity of the ball
+        
+            rb.linearVelocity = direction * currentSpeed; 
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       /* Debug.Log("Colisión detectada con: " + collision.gameObject.name);
-        var firstContact = collision.contacts[0];
-        // Rebota usando la velocidad real actual (no una dirección "vieja").
-        var currentVelocity = rb.linearVelocity;
-        if (currentVelocity.sqrMagnitude < 0.0001f)
-        {
-            // Fallback por si justo coincide con reposo.
-            currentVelocity = direction.sqrMagnitude > 0.0001f
-                ? direction * currentSpeed
-                : transform.right * currentSpeed;
-        }
-
-        newVelocity = Vector2.Reflect(currentVelocity.normalized, firstContact.normal);
-        direction = rb.linearVelocity.normalized;*/
+       
     
         currentSpeed *= (1 + speedIncreasePerHit);
         
         currentSpeed = Mathf.Min(currentSpeed, maxSpeed);
+        
+            rb.linearVelocity = currentSpeed * direction;
+        
 
-        //newVelocity = newVelocity.normalized * currentSpeed;
-        rb.linearVelocity = currentSpeed * direction;
+    }
 
-        // Mantén 'direction' coherente si lo usas en otros sitios/debug.
+    private void FixedUpdate()
+    {
+        contador += Time.fixedDeltaTime;
+        
     }
 
     public void RespawnBomb()
     {
         transform.position = spawnPoint.position;
-
-        currentSpeed = speed;
         
+        Debug.Log(currentSpeed);
+        rb.linearVelocity = new Vector2(0,0);
+        if (contador >= 2f)
+        {
+            StartCoroutine(Timer(2));
+        }
+        
+    }
+    
+    IEnumerator Timer(float time)
+    {
+        yield return new WaitForSeconds(time);
         angle = Random.Range(0, 361);
-        Debug.Log(angle);
         angle = Mathf.Abs(angle);
         transform.eulerAngles = new Vector3(0, 0, angle);
-        
+        currentSpeed = speed;
         direction = transform.right;
-
         rb.linearVelocity = direction * currentSpeed;
     }
 }

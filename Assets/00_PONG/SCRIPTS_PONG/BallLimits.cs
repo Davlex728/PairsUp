@@ -30,8 +30,7 @@ public class BallLimits : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        //Destroy(collision.gameObject);
-        //bomb.RespawnBomb();
+        
         RestarVida();
     }
 

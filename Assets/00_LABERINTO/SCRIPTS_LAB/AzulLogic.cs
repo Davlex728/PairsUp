@@ -18,7 +18,7 @@ public class AzulLogic : MonoBehaviour
     {
             
             collider.isTrigger = false;
-        
+            other.gameObject.layer = 0;
             Debug.Log(other.gameObject.tag);
         
     }
