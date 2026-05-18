@@ -53,7 +53,7 @@ public class TutorialManager : MonoBehaviour
     private void ActualizarTexto()
     {
         if (textoListo != null)
-            textoListo.text = $"{jugadoresListos.Count}/{jugadores.Length} listos";
+            textoListo.text = $"Press     to continue ({jugadoresListos.Count}/{jugadores.Length}) Ready";
     }
 
     private IEnumerator Cargar()
