@@ -13,6 +13,7 @@ public class SpriteCesta : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sr;
+    private Color originalColor;
 
     [Header("Suelo Salto")]
     public Transform groundCheck;
@@ -29,7 +30,7 @@ public class SpriteCesta : MonoBehaviour
     [Header("Rebote")]
     public float bounceForce = 5f;
     public float bounceDuration = 0.5f;
-    public float escalaRebote = 1.3f;
+    public float escalaRebote = 1.3f;           
     public float duracionEscalaRebote = 0.2f;
     private bool isBouncing = false;
 
@@ -44,6 +45,7 @@ public class SpriteCesta : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        originalColor = sr != null ? sr.color : Color.white;
     }
 
     public void ConectarMando(PlayerInputHandler mando) => miMando = mando;
@@ -96,9 +98,13 @@ public class SpriteCesta : MonoBehaviour
             {
                 puntos++;
 
-
                 Debug.Log($"[Cesta] ¡Correcto! {ingrediente.miTipo}. Puntos: {puntos}");
-                if (corrutinaEfecto != null) StopCoroutine(corrutinaEfecto);
+                if (corrutinaEfecto != null)
+                {
+                    StopCoroutine(corrutinaEfecto);
+                    corrutinaEfecto = null;
+                    ResetEfectoVisual();
+                }
                 sr.enabled = true;
                 corrutinaEfecto = StartCoroutine(Flash(new Color(0.3f, 1f, 0.3f)));
 
@@ -109,10 +115,13 @@ public class SpriteCesta : MonoBehaviour
             {
                 puntos = Mathf.Max(0, puntos - 1);
 
-
-
                 Debug.Log($"[Cesta] ¡Incorrecto! {ingrediente.miTipo}. Puntos: {puntos}");
-                if (corrutinaEfecto != null) StopCoroutine(corrutinaEfecto);
+                if (corrutinaEfecto != null)
+                {
+                    StopCoroutine(corrutinaEfecto);
+                    corrutinaEfecto = null;
+                    ResetEfectoVisual();
+                }
                 sr.enabled = true;
                 corrutinaEfecto = StartCoroutine(Parpadear());
             }
@@ -137,15 +146,16 @@ public class SpriteCesta : MonoBehaviour
 
     private IEnumerator Flash(Color color)
     {
-        Color colorAnterior = sr.color;
+        // Usar el color original guardado para restaurar siempre el estado correcto
         sr.color = color;
         yield return new WaitForSeconds(flashDuration);
-        sr.color = colorAnterior;
+        sr.color = originalColor;
+        corrutinaEfecto = null;
     }
 
     private IEnumerator Parpadear()
     {
-        Color colorAnterior = sr.color;
+        // No cambiar permanentemente el color; restaurar al original al final
         float timer = 0f;
         while (timer < blinkDuration)
         {
@@ -154,7 +164,8 @@ public class SpriteCesta : MonoBehaviour
             timer += blinkRate;
         }
         sr.enabled = true;
-        sr.color = colorAnterior;
+        sr.color = originalColor;
+        corrutinaEfecto = null;
     }
 
     private IEnumerator TemporizadorRebote()
@@ -177,6 +188,14 @@ public class SpriteCesta : MonoBehaviour
         }
         transform.localScale = original;
     }
+
+    private void ResetEfectoVisual()
+    {
+        if (sr == null) return;
+        sr.color = originalColor;
+        sr.enabled = true;
+    }
+
     private void Start()
     {
         miMando.LastBullet();

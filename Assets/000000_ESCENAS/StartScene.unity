@@ -5258,7 +5258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5dc4bfafec3455409671b31bacb2c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LobbyManager
-  requiredPlayers: 6
+  requiredPlayers: 4
   cursorPrefab: {fileID: 4089145412866758342, guid: cdad0b428d0cca54c83da0664ed287ee, type: 3}
   transition: {fileID: 11400000, guid: c9f7b34f761c5c342ada8a4b2ab7a716, type: 2}
   lobbyCanvasRect: {fileID: 257770779}
@@ -5594,11 +5594,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PuntuacionManager
   puntuacion: 000000000000000000000000
   escenasNombres:
-  - TutorialPaintball
-  - TutorialPong
-  - TutorialCaldero
-  - TutorialPlatformer
   - TutorialMaze
+  - TutorialPlatformer
 --- !u!4 &1738944962
 Transform:
   m_ObjectHideFlags: 0

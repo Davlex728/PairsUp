@@ -1,5 +1,7 @@
 using EasyTransition;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlataformeoManager : MonoBehaviour
@@ -51,9 +53,10 @@ public class PlataformeoManager : MonoBehaviour
             Debug.LogWarning("[PlataformeoManager] No hay jugadores. ¿Has pasado por el lobby?");
             return;
         }
-
+       
         int contadorPlatformeros = 0;
         int contadorManos = 0;
+        Array.Sort(jugadoresConectados, (a, b) => a.playerIndex.CompareTo(b.playerIndex));
 
         foreach (PersistentPlayer pp in jugadoresConectados)
         {
@@ -64,7 +67,9 @@ public class PlataformeoManager : MonoBehaviour
             bool esPlatformero = slotId % 2 != 0;
 
             if (esPlatformero)
-                SpawnearPlatformero(contadorPlatformeros++, mando);
+            { SpawnearPlatformero(contadorPlatformeros++, mando);
+                 Debug.Log($"[PlataformeoManager] Jugador {pp.name} con slot {slotId} asignado a {(esPlatformero ? "Platformero" : "Mano")}");
+            }
             else
                 SpawnearMano(contadorManos++, mando);
         }
@@ -94,7 +99,7 @@ public class PlataformeoManager : MonoBehaviour
             Debug.LogError("[PlataformeoManager] No hay escenas configuradas.");
             return;
         }
-        string escena = escenasAleatorias[Random.Range(0, escenasAleatorias.Length)];
+        string escena = escenasAleatorias[UnityEngine.Random.Range(0, escenasAleatorias.Length)];
 
         if (string.IsNullOrEmpty(escena))
         {
