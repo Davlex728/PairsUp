@@ -72,4 +72,11 @@ public class PuntuacionManager : MonoBehaviour
         escenas = RandomPila(escenas);
         return SiguienteEscena();
     }
+    public void ResetPuntuacion()
+    {
+        for (int i = 0; i < puntuacion.Length; i++)
+        {
+            puntuacion[i] = 0;
+        }
+    }
 }
