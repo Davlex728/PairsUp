@@ -1328,7 +1328,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'BLUNT N'' CHIPS '
+  m_text: PONKER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 51c4a7346f89ff74a830f06f9ba24b0c, type: 2}
   m_sharedMaterial: {fileID: 4611305117694259330, guid: 51c4a7346f89ff74a830f06f9ba24b0c, type: 2}
@@ -1635,7 +1635,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976035755}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: b56bbef337467ca46bd1b4a5567af000, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: a6bc97aef81371c42af300750c84c749, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
