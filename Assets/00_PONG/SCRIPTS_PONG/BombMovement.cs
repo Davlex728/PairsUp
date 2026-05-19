@@ -66,10 +66,9 @@ public class BombMovement : MonoBehaviour
         
         Debug.Log(currentSpeed);
         rb.linearVelocity = new Vector2(0,0);
-        if (contador >= 2f)
-        {
-            StartCoroutine(Timer(2));
-        }
+        currentSpeed = 0;
+        StartCoroutine(Timer(2));
+        
         
     }
     
