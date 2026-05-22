@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -250,5 +251,10 @@ public class SpritePlatformero : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, rangoAccion);
+    }
+
+    private void Start()
+    {
+        miMando.LastBullet();
     }
 }
